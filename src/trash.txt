@@ -1,0 +1,1310 @@
+    /*
+    public static String primeMODP1536String = "2410312426921032588552076022197566074856950548502459942654116941958108831682612228890093858261341614673227141477904012196503648957050582631942730706805009223062734745341073406696246014589361659774041027169249453200378729434170325843778659198143763193776859869524088940195577346119843545301547043747207749969763750084308926339295559968882457872412993810129130294592999947926365264059284647209730384947211681434464714438488520940127459844288859336526896320919633919";
+    public static byte[] primeMODP1536 =
+            {
+                (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xC9, (byte)0x0F, (byte)0xDA, (byte)0xA2, (byte)0x21, (byte)0x68, (byte)0xC2, (byte)0x34, (byte)0xC4, (byte)0xC6, (byte)0x62, (byte)0x8B, (byte)0x80, (byte)0xDC, (byte)0x1C, (byte)0xD1,
+                (byte)0x29, (byte)0x02, (byte)0x4E, (byte)0x08, (byte)0x8A, (byte)0x67, (byte)0xCC, (byte)0x74, (byte)0x02, (byte)0x0B, (byte)0xBE, (byte)0xA6, (byte)0x3B, (byte)0x13, (byte)0x9B, (byte)0x22, (byte)0x51, (byte)0x4A, (byte)0x08, (byte)0x79, (byte)0x8E, (byte)0x34, (byte)0x04, (byte)0xDD,
+                (byte)0xEF, (byte)0x95, (byte)0x19, (byte)0xB3, (byte)0xCD, (byte)0x3A, (byte)0x43, (byte)0x1B, (byte)0x30, (byte)0x2B, (byte)0x0A, (byte)0x6D, (byte)0xF2, (byte)0x5F, (byte)0x14, (byte)0x37, (byte)0x4F, (byte)0xE1, (byte)0x35, (byte)0x6D, (byte)0x6D, (byte)0x51, (byte)0xC2, (byte)0x45,
+                (byte)0xE4, (byte)0x85, (byte)0xB5, (byte)0x76, (byte)0x62, (byte)0x5E, (byte)0x7E, (byte)0xC6, (byte)0xF4, (byte)0x4C, (byte)0x42, (byte)0xE9, (byte)0xA6, (byte)0x37, (byte)0xED, (byte)0x6B, (byte)0x0B, (byte)0xFF, (byte)0x5C, (byte)0xB6, (byte)0xF4, (byte)0x06, (byte)0xB7, (byte)0xED,
+                (byte)0xEE, (byte)0x38, (byte)0x6B, (byte)0xFB, (byte)0x5A, (byte)0x89, (byte)0x9F, (byte)0xA5, (byte)0xAE, (byte)0x9F, (byte)0x24, (byte)0x11, (byte)0x7C, (byte)0x4B, (byte)0x1F, (byte)0xE6, (byte)0x49, (byte)0x28, (byte)0x66, (byte)0x51, (byte)0xEC, (byte)0xE4, (byte)0x5B, (byte)0x3D,
+                (byte)0xC2, (byte)0x00, (byte)0x7C, (byte)0xB8, (byte)0xA1, (byte)0x63, (byte)0xBF, (byte)0x05, (byte)0x98, (byte)0xDA, (byte)0x48, (byte)0x36, (byte)0x1C, (byte)0x55, (byte)0xD3, (byte)0x9A, (byte)0x69, (byte)0x16, (byte)0x3F, (byte)0xA8, (byte)0xFD, (byte)0x24, (byte)0xCF, (byte)0x5F,
+                (byte)0x83, (byte)0x65, (byte)0x5D, (byte)0x23, (byte)0xDC, (byte)0xA3, (byte)0xAD, (byte)0x96, (byte)0x1C, (byte)0x62, (byte)0xF3, (byte)0x56, (byte)0x20, (byte)0x85, (byte)0x52, (byte)0xBB, (byte)0x9E, (byte)0xD5, (byte)0x29, (byte)0x07, (byte)0x70, (byte)0x96, (byte)0x96, (byte)0x6D,
+                (byte)0x67, (byte)0x0C, (byte)0x35, (byte)0x4E, (byte)0x4A, (byte)0xBC, (byte)0x98, (byte)0x04, (byte)0xF1, (byte)0x74, (byte)0x6C, (byte)0x08, (byte)0xCA, (byte)0x23, (byte)0x73, (byte)0x27, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF, (byte)0xFF
+            };
+
+    public static byte[] getBytes(BigInteger big) 
+    {
+        byte[] bigBytes = big.toByteArray();
+        if ((big.bitLength() % 8) != 0)
+        {
+            return bigBytes;
+        }
+        else
+        {
+            byte[] smallerBytes = new byte[big.bitLength() / 8];
+            System.arraycopy(bigBytes, 1, smallerBytes, 0, smallerBytes.length);
+            return smallerBytes;
+        }
+    }
+
+    public static void test()
+    {
+        BigInteger n = new BigInteger (1, primeMODP1536); //subtract(BigInteger.ONE).negate();
+        BigInteger m = new BigInteger (primeMODP1536String);
+
+        System.out.println (n.toByteArray().length);
+
+        if (m.compareTo(n) == 0)
+        {
+            System.out.println ("EQ!!!");
+        }
+        else
+        {
+            System.out.println ("NOT EQ!!!");
+            System.exit(0);
+        }
+
+        System.out.println (n);
+        byte[] b = getBytes (m);
+
+        for (int s=0; s<b.length; s++)
+            System.out.println (b[s]);
+    }
+
+    public static byte[] SHA256 (byte[] in)
+    {
+        MessageDigest md;
+        try
+        {
+            md = MessageDigest.getInstance ("SHA-256");
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            return null;
+        }
+
+        md.update(in);
+        return md.digest();
+    }
+
+    public static byte[] SHA256Vector (byte[][] in)
+    {
+        MessageDigest md;
+        try
+        {
+            md = MessageDigest.getInstance ("SHA-256");
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            return null;
+        }
+
+        for (int s=0; s< in.length; s++)
+            md.update(in[s]);
+        return md.digest();
+    }
+    */
+
+    /*
+    static long[] count (int len)
+    {
+        long arr[] = new long[len];
+        long sqr = (long)Math.sqrt(len);
+
+        for (int s=0; s<len; s++)
+        {
+            for (int i=2; i<sqr; i++)
+            {
+                
+            }
+        }
+        return arr;
+    }
+
+    public static void main (String[] args) throws Exception
+    {
+
+        //NumberField n = NumberFieldFactory.circle(100);
+        //MatrixPanel m = new MatrixPanel (n);
+
+        // ListPermutator.test();
+
+        long[] arr = count(200);
+        System.out.println (Arrays.toString(arr));
+    }
+    */
+    /*
+    public static void main (String[] args) throws Exception
+    {
+        long arr[] = new long[1000];
+        for (int i=0; i<1000; i++)
+        {
+            BigInteger num = BigInteger.valueOf(1).shiftLeft(i);
+            arr[i] = CryptMath.numberStringQS (num, 10);
+        }
+        Arrays.sort(arr);
+        System.out.println (Arrays.toString(arr));
+    }
+    */
+    /*
+    public static void main (String[] args) throws Exception
+    {
+        BigInteger a = CryptMath.stringNumber ("deutsches");
+        BigInteger b = CryptMath.stringNumber ("reich");
+        BigInteger c = a.subtract(b);
+        System.out.println (a);
+        System.out.println (b);
+        System.out.println (c);
+        String numstr = CryptMath.numberString (c, 36);
+
+        System.out.println(CryptMath.numberString (a, 36));
+        System.out.println(CryptMath.numberString (b, 36));
+        System.out.println(numstr);
+    }
+    */
+
+    /*
+    public static void main (String[] args) throws Exception
+    {
+        CharNumbers cn = new CharNumbers ("abcdefghijklmnopqrstuvwxyz");
+        BigInteger a = cn.stringNumber ("deutsches");
+        BigInteger b = cn.stringNumber ("reich");
+        BigInteger c = a.multiply(b);
+        System.out.println (a);
+        System.out.println (b);
+        System.out.println (c);
+        String numstr = cn.numberString (c);
+
+        System.out.println(cn.numberString (a));
+        System.out.println(cn.numberString (b));
+        System.out.println(numstr);
+    }
+    */
+
+    /*
+    // monty example
+    public static void main (String[] args) throws Exception
+    {
+        BigInteger mod = new BigInteger ("E59BDBE780B", 16);
+        BigInteger a = new BigInteger ("a42e52ae4c", 16);
+        BigInteger b = new BigInteger ("12C987", 16);
+        
+        BigInteger res = a.modPow (b, mod);  // Must give: 0x182161e207a
+
+        System.out.println (mod.toString(16));
+        System.out.println (a.toString(16));
+        System.out.println (b.toString(16));
+        System.out.println (res.toString(16));
+    }
+    */
+
+    /*
+    public static void main (String[] args) throws Exception
+    {
+        BigInteger mod = new BigInteger ("E59BDBE780B", 16);
+        BigInteger r = new BigInteger ("462deaf3ebd", 16);
+        BigInteger rsq;
+
+        //rsq = r.modPow (new BigInteger("2", 10), mod); // must give 0x5bfe01cc0df
+        rsq = r.multiply(r);
+        rsq = rsq.mod(mod);
+
+        System.out.println (mod.toString(16));
+        System.out.println (r.toString(16));
+        System.out.println (rsq.toString(16));
+    }
+    */
+
+    /*
+    public static void main (String[] args) throws Exception
+    {
+        BigInteger mod = new BigInteger ("E59BDBE780B", 16);
+        BigInteger two = new BigInteger ("2", 10);
+        BigInteger r_mont = new BigInteger ("462deaf3ebd", 16);
+
+        for (int s=0; s<2000; s++)
+        {
+            BigInteger r = two.modPow (BigInteger.valueOf(s), mod);
+            System.out.println (r.toString(16));
+            if (r.equals(r_mont))
+            {
+                System.out.println ("---------------------- hit");
+                System.out.println ("exponent == " + s);
+                System.exit(0);
+            }
+        }
+    }
+    */
+
+    // (2^n mod p)^2 = (2^(2n) mod p)
+    public static void calc_R (BigInteger mod, BigInteger bitsize)
+    {
+        BigInteger two = BigInteger.valueOf(2);
+        BigInteger R = two.modPow (bitsize, mod);
+        BigInteger R_sq = R.modPow(two, mod);
+
+        System.out.println (R.toString(16));
+        System.out.println (R_sq.toString(16));
+    }
+
+/////////////////////////////////////////////////////////////////////////////////
+
+//        System.out.println(NumberField.genTriangleLeftBottom(3, 3));
+//        System.out.println(NumberField.genTriangleLeftTop(3, 3));
+//        System.out.println(NumberField.genTriangleRightBottom(3, 3));
+//        System.out.println(NumberField.genTriangleRightTop(3, 3));
+//        System.out.println(NumberField.genDiagsBoth(7, 1));
+//        System.out.println(NumberField.genFrame(8, 1));
+//        System.out.println(NumberField.genCross(7, 1));
+//
+//        NumberField m1 = NumberField.genFrame (9,1);
+//        NumberField m2 = NumberField.genCross (9,1);
+//        NumberField m3 = m1.combine (m2, 0);
+//        System.out.println (m3);
+
+//        System.out.println(NumberFieldFactory.diagLRIncrementing(4));
+//        System.out.println(NumberFieldFactory.incrementingRows(4, 4));
+//
+//        System.out.println(NumberFieldFactory.additionTable(4));
+//        System.out.println(NumberFieldFactory.multiplicationTable(4));
+//        System.out.println(NumberFieldFactory.incrementingColumns(10, 4));
+
+//        int p = 18;
+//        NumberField a = NumberFieldFactory.moduloAdditionTable(p);
+//        System.out.println(a);
+//
+//        NumberField b = NumberFieldFactory.moduloMultiplicationTable(p);
+//        System.out.println(b);
+
+        //NumberField a = NumberFieldFactory.counted(10,5);
+
+        //System.out.println (Arrays.toString(NumberFieldFactory.__countedArrayUpDown(10,1)));
+
+        //int p = 10; //(int)CryptMath.getNextPrimeAbove(20); //(int)CryptMath.getNextPrimeAbove(100);
+
+//        int off1 = 0;
+//        int off2 = 0;
+//        int[] arr1 = NumberFieldFactory.__countedArray (1000, off1);
+//        int[] arr2 = NumberFieldFactory.__countedArray (1000, off2);
+//        NumberField n = NumberFieldFactory.orTable(arr1,arr2);
+//        //System.out.println(n);
+//        MatrixPanel pan = new MatrixPanel (n);
+//
+//        for (;;)
+//        {
+//            Thread.sleep(100);
+//            off2++;
+//            off1--;
+//            arr2 = NumberFieldFactory.__countedArray(128, off2);
+//            arr1 = NumberFieldFactory.__countedArray(128, off1);
+//            n = NumberFieldFactory.orTable(arr1, arr2);
+//            pan.newField(n);
+//            if (!pan.isVisible())
+//                break;
+//        }
+
+//        int p = 1;
+//        MatrixPanel pan = null;
+//        for (;;)
+//        {
+//            Thread.sleep(100);
+//            p++;
+//            NumberField m = NumberFieldFactory.countedSnakeReverse(p, p);
+//            NumberField n = NumberFieldFactory.countedSnake(p, p);
+//            NumberField o = m.add(n.transpose()); //.rotateRight().mult(n.rotateLeft());
+//            if (pan == null)
+//                pan = new MatrixPanel(o);
+//            else
+//                pan.newField(o);
+//            //System.out.println(p);
+//            if (!pan.isVisible())
+//                break;
+//        }
+
+//        Map map = n.calcStats();
+//        Integer maxvalue = (Integer) Collections.max(map.keySet());
+//        Integer minvalue = (Integer)Collections.min(map.keySet());
+//        float div = ((float)maxvalue - (float)minvalue)/ 1791.0f;
+//        float min = (float)minvalue/div;
+//        System.out.println (div+" | "+min);
+//
+//        for (int a = 0; a < n.getHeight(); a++)
+//        {
+//            for (int b = 0; b < n.getWidth(); b++)
+//            {
+//                int xx = (int)((float)n.values[a][b] / div - min);
+//                int idx = xx/256;
+//                int off = xx%256;
+//                System.out.println (xx + " | " + idx + " | " + off);
+//            }
+//        }
+
+//        m = NumberFieldFactory.counted(3,3);
+//        System.out.println(m);
+
+
+        //m = m.rotateLeft();
+        //System.out.println(m);
+
+//        for (int s=1; s<101; s++)
+//        {
+//            m = NumberFieldFactory.moduloMultiplicationTable(s);
+//            System.out.println(m.getStats());
+//        }
+    }
+}
+
+//        NumberField m1 = new NumberField (4, 4);
+//        System.out.println(m1);
+//
+//        NumberField m2 = NumberField.counted (3,3,1);
+//        System.out.println(m2);
+//
+//        int[] flat = m2.asFlatArray();
+//        System.out.println(Arrays.toString(flat));
+//
+//        NumberField m3 = m1.appendTop (m2).substitute(0, 9);
+//        System.out.println(m3);
+//
+//        NumberField m4 = NumberField.genRandom(5,5,5); //sequence (new int[]{1,2,3},11,11).shuffle();
+//        System.out.println(m4);
+
+//m=NumberFieldFactory.counted(6,6);
+//System.out.println(m);
+//
+//m=m.rotateLeft();
+//System.out.println(m);
+//
+//m=m.rotateLeft();
+//System.out.println(m);
+//
+//m=m.rotateLeft();
+//System.out.println(m);
+//
+//m=NumberFieldFactory.moduloMultiplicationTable(new int[]{1,2,3,4},new int[]{1,2,3,4,5,6,7,8,9,10},2);
+//System.out.println(m);
+
+
+
+
+
+    //    public static void testStatOps (byte[] arr)
+//    {
+//        int sb[];
+//        int l;
+//
+//        System.out.println("entropy: " + Statistics.entropy(arr));
+//        System.out.println("average: " + Statistics.average(arr));
+//        System.out.println("diffs: " + Statistics.differentValues(arr));
+//        System.out.println("ones: " + BitAnalytics.ones(arr));
+//        System.out.println("zeros: " + BitAnalytics.zeros(arr));
+//        System.out.println("monobit: " + BitAnalytics.monobit(arr));
+//        System.out.println("flips: " + BitAnalytics.flips(arr));
+//
+//        l = BitAnalytics.largestZeroString(arr);
+//        System.out.println("largestZeroString: " + l);
+//        sb = BitAnalytics.sameZeroBitSequenceHistogram(arr, l);
+//        //System.out.println(Arrays.toString(sb));
+//        IO.printAsVector(sb, System.out);
+//
+//        l = BitAnalytics.largestOneString(arr);
+//        System.out.println("largestOneString: " + l);
+//        sb = BitAnalytics.sameOneBitSequenceHistogram(arr, l);
+//        //System.out.println(Arrays.toString(sb));
+//        IO.printAsVector(sb, System.out);
+//
+//        System.out.println ("histogram: "+ Arrays.toString(Statistics.histogram(arr)));
+//        System.out.println("-------------------------");
+//    }
+
+
+//        IntField m;
+//        int[] arr;
+//
+//        m = IntField.counted(3,5,1);
+//        System.out.println (m);
+//
+//        m = m.rotateRight();
+//        System.out.println(m);
+
+
+//        arr = m.getColumn(0);
+//        System.out.println (Arrays.toString(arr));
+//        arr = m.getRow(0);
+//        System.out.println(Arrays.toString(arr));
+
+
+
+//        m = new IntField (5,8);
+//        m = m.setRow(0, 1);
+//        System.out.println (m);
+//        m = m.transpose();
+//        System.out.println(m);
+//        m = m.transpose();
+//        System.out.println(m);
+
+//        IntField m = new IntField(1,1,1);
+//        System.out.println (m);
+//        m = m.appendFrame(2);
+//        System.out.println(m);
+//        m = m.appendFrame(3);
+//        System.out.println(m);
+//        m = m.appendFrame(4);
+//        System.out.println(m);
+//        m = m.appendFrame(5);
+//        System.out.println(m);
+
+//        m = IntField.triangleLeftBottom(5, 1);
+//        System.out.println(m);
+//        m = IntField.triangleRightTop(5, 1);
+//        System.out.println(m);
+//        m = IntField.triangleRightBottom(5, 1);
+//        System.out.println(m);
+//        m = IntField.triangleLeftTop(5,1);
+//        System.out.println(m);
+
+//        IntField m = new IntField(4,6);
+//        System.out.println (m);
+//        IntField mm = m.setColumn(2,new double[]{1,2,3,4,5,6}).setRow(2,new double[]{1,2,3,4});
+//        System.out.println(mm);
+//        IntField mm2 = mm.transpose();
+//        System.out.println(mm2);
+//        IntField mm3 = mm2.rotateLeft();
+//        System.out.println(mm3);
+//        IntField mm4 = mm3.rotateDown();
+//        System.out.println(mm4);
+//        IntField mm5 = mm4.mult(3);
+//        System.out.println(mm5);
+//        IntField mm6 = IntField.diagLR(5,1);
+//        System.out.println(mm6);
+//        IntField mm7 = IntField.diagRL(5, 1);
+//        System.out.println(mm7);
+//        IntField mm8 = IntField.moduloMultiplicationTable(10);
+//        IntField mm9 = IntField.moduloAdditionTable(10);
+//        System.out.println (mm8);
+//        System.out.println (mm9);
+//        IntField mm10 = mm9.getSubField(3,4,3,4);
+//        System.out.println (mm10);
+//        IntField mm11 = mm9.setSubField(3,4,3,4,0);
+//        System.out.println(mm11);
+//        IntField mm12 = mm11.appendFrame();
+//        System.out.println(mm12);
+
+//        ModTable m = new ModTable(10);
+//        int[][] mult = m.multiplicationTable();
+//        int[][] add = m.additionTable();
+//        m.print(mult,System.out, 1);
+//        System.out.println ("------------------");
+//        m.print(add,System.out, 1);
+
+//        long n = 20;
+//        BigInteger v = CryptMath.loopFibonacci(n);
+//        double d = CryptMath.squareFibonacci(n);
+//        double e = Math.exp(n);
+//        System.out.println (v + " " + d + " " + e + " " + d/e);
+
+        //ListPermutator.test();
+        //PermutationArrayList.test();
+//        BigInteger b = BigInteger.valueOf(20);
+//        b = CryptMath.faculty(b);
+//        System.out.println (b);
+//        BigInteger[] div = CryptMath.divisors(b);
+//        Arrays.sort(div);
+//        System.out.println(Arrays.toString(div));
+
+//        final int zeros = 3;
+//        String n;
+//
+//        for (int s=0; s<= 600; s++)
+//        {
+//            ArrayList<String> al = new ArrayList<String>();
+//            for (int b=2; b<37; b++)
+//            {
+//                n = ""+CryptMath.numberStringQS(s,b);
+//                while (n.length() != zeros)
+//                    n = "0"+n;
+//                al.add (n);
+//            }
+//            n = ""+s;
+//            while (n.length() != zeros)
+//                n= "0"+n;
+//            System.out.println (n + " --> " + al);
+//        }
+
+//        for (int s=1; s<=100; s++)
+//        {
+//            for (int l=1; l<=100; l++)
+//            {
+//                long g = CryptMath.gcd(s,l);
+//                long lc = CryptMath.lcm(s,l);
+//                System.out.println (s+" "+l+": "+g+" "+lc);
+//            }
+//        }
+//        BigInteger ba = BigInteger.valueOf(123456);
+//        String str = CryptMath.numberString(ba, 29);
+//        System.out.println (str);
+
+//        long a = 11*120;
+//        long b = 13*120;
+//        long x = CryptMath.gcd (a, b);
+//        long z = CryptMath.lcm (a,b);
+//        System.out.println(x);
+//        System.out.println(z);
+
+//        BigInteger a = CryptMath.faculty(BigInteger.valueOf(16));
+//        System.out.println (a);
+//        BigInteger sqr = CryptMath.sqrt(a);
+//        System.out.println(sqr);
+//        BigInteger d[] = CryptMath.divisors(a);
+//        Arrays.sort(d);
+//        System.out.println (Arrays.toString(d));
+
+
+//        for (long a=1; a<=100000; a++)
+//        {
+////            long b[] = CryptMath.bestTwoDivisors(a);
+////            long sum = b[0] + b[1];
+////            long diff = b[1] - b[0];
+////            long x = (long)Math.sqrt(diff*sum);
+////            System.out.printf ("%s %d %d\n", Arrays.toString(b), a, a-x);
+//            long[] d = CryptMath.divisors(a);
+//            long sum = CryptMath.sumArray(d);
+//            //System.out.printf ("%s %d\n", Arrays.toString(d), sum/a);
+//            System.out.print ((sum-1)/a);
+//        }
+
+//        long x = 1;
+//        long a = (long)Math.sqrt(x);
+//        System.out.println (x);
+//        System.out.println (a);
+//        //System.out.println (x%a);
+//
+////        long d[] = CryptMath.divisors(x);
+////        System.out.println (Arrays.toString(d));
+//
+//        long b[] = CryptMath.bestTwoDivisors(x);
+//        System.out.println (Arrays.toString(b));
+//        System.out.println (b[0]*b[1]);
+
+
+
+//        FileCrypt.encryptFilePeter4("hello",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\test.txt",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter4.bin");
+//
+//        FileCrypt.decryptFilePeter4("hello",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter4.bin",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter4.txt");
+
+
+//        FileCrypt.encryptFilePeter3("hello",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\test.txt",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter3.bin");
+//
+//        FileCrypt.decryptFilePeter3("hello",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter3.bin",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter3.txt");
+//
+//        FileCrypt.encryptFilePeter2("hello",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\test.txt",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter2.bin");
+//
+//        FileCrypt.decryptFilePeter2("hello",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter2.bin",
+//                                    "C:\\Users\\Administrator\\Desktop\\CryptTest\\testpeter2.txt");
+
+
+//        for (int s=1234567; s<1235567; s++)
+//        {
+//            boolean prime1 = CryptMath.millerRabinPrimeTest(s);
+//            boolean prime2 = CryptMath.fermatPrimeTest(BigInteger.valueOf(s), 100);
+//            System.out.println (s+":"+prime1+":"+prime2);
+//        }
+
+//        byte a[] = null;
+//        byte b[] = null;
+//        byte c[] = null;
+//        byte d[] = null;
+//        byte e[] = null;
+//        byte f[] = null;
+//        byte g[] = null;
+//        byte h[] = null;
+//        byte i[] = null;
+//        byte j[] = null;
+//        byte k[] = null;
+//        byte l[] = null;
+//        byte m[] = null;
+//        byte n[] = null;
+//        byte o[] = null;
+//        byte p[] = null;
+//        byte[] key = new byte[]{100, (byte)200, 77};
+//
+//        a = new byte[]{(byte)200,2,3,4,5};
+//
+//        b = CryptTools.xor(a, key);
+//        c = CryptTools.addChain(b,key);
+//        d = CryptTools.xorChain(c, key);
+//        e = CryptTools.unxorChain(d, key);
+//        f = CryptTools.unaddChain(e, key);
+//        g = CryptTools.xor(f, key);
+
+//        // umkehrung !!!
+//        b = CryptTools.addChain(a,a);
+//        c = CryptTools.unaddChain(b, a);
+
+        //d = CryptTools.unaddChain (b,b);
+//        d = CryptTools.unxorChain(c,b);
+//        e = CryptTools.xorChain(d,d);
+//        f = CryptTools.xorChain(e,d);
+//        g = CryptTools.xorChain(f,e);
+//        h = CryptTools.xorChain(g,f);
+//
+//        i = CryptTools.unxorChain (h,f);
+//        j = CryptTools.unxorChain(i,i);
+        //k = CryptTools.unxorChain(f,j);
+
+//        b = CryptTools.xorChain(a, key[0]);
+//        b = CryptTools.xorChain(b, key[1]);
+//
+//        c = CryptTools.unxorChain(b, key[1]);
+//        c = CryptTools.unxorChain(c, key[0]);
+
+//        a = new byte[]{(byte)12, (byte)31};
+//        b = CryptTools.xorChain(a, key);
+//        c = CryptTools.Xor(b, a);
+//        d = CryptTools.xorChain(c, key);
+//        //-------------------------------------
+//        e = CryptTools.unxorChain(d, key);
+//        f = CryptTools.Xor(e,d);
+//        g = CryptTools.unxorChain(f, key);
+//        h = CryptTools.Xor(g,f);
+
+//        System.out.println (Arrays.toString(a));
+//        System.out.println (Arrays.toString(b));
+//        System.out.println (Arrays.toString(c));
+//        System.out.println (Arrays.toString(d));
+//        System.out.println (Arrays.toString(e));
+//        System.out.println (Arrays.toString(f));
+//        System.out.println (Arrays.toString(g));
+//        System.out.println (Arrays.toString(h));
+//        System.out.println ("------------------");
+//        System.out.println (Arrays.toString(i));
+//        System.out.println (Arrays.toString(j));
+//        System.out.println (Arrays.toString(k));
+//        System.out.println (Arrays.toString(l));
+//        System.out.println (Arrays.toString(m));
+//        System.out.println (Arrays.toString(n));
+//        System.out.println (Arrays.toString(o));
+//        System.out.println (Arrays.toString(p));
+
+
+        //a = new byte[]{0, 0, 2, 3, 6, 6, 0, 1, 8, 8, 2, 3, 14, 14, 0, 1, 16, 16, 2, 3}; //ArrayGenerators.makeCountedValueBytes(1, 20);
+        //a = new byte[]{0, 1, 0, 1, 0};
+//        d = CryptTools.xorChain (a,(byte)1);
+//        e = CryptTools.unxorChain(d, (byte)1);
+//
+//        System.out.println (Arrays.toString(a));
+//        System.out.println (Arrays.toString(d));
+//        System.out.println (Arrays.toString(e));
+
+
+//        /* unresolved problem */
+//        a = new byte[]{(byte)1, (byte)1};
+//        d = x_enc(a);
+//        System.out.println ("/////////////////////////////////////////////////");
+//        d = x_dec(d);
+
+        /*
+        b = CryptTools.xorChain(a, start);
+        System.out.println (Arrays.toString(b));
+        c = CryptTools.unxorChain(a, start);
+        System.out.println (Arrays.toString(c));
+        d = CryptTools.Xor(b,c);
+        System.out.println (Arrays.toString(d));
+
+        e = CryptTools.Xor(b,c);
+        f = CryptTools.xorChain(e, start);
+        g = CryptTools.xorChain(e, start);
+        */
+
+//        System.out.println (Arrays.toString(a));
+//        for (int s=0; s<loops; s++)
+//        {
+//            b = CryptTools.xorChain(a, start);
+//            a = CryptTools.Xor(a,b);
+//            System.out.println (Arrays.toString(a));
+//        }
+
+//        System.out.println ("------------------------");
+//        for (int s=0; s<loops; s++)
+//        {
+//            a = CryptTools.Xor(a,b);
+//            b = CryptTools.unxorChain(a, start);
+//            System.out.println (Arrays.toString(b));
+//        }
+
+//        BigInteger b = new BigInteger ("1000");
+//        System.out.println (CryptMath.totient(b));
+
+//        for (long s = 0; s<100; s++)
+//        {
+//            for (long t=100; t<200; t++)
+//            {
+//                BigInteger a = BigInteger.valueOf(s);
+//                BigInteger b = BigInteger.valueOf(t);
+//                BigInteger n = BigInteger.valueOf(50);
+//                if (CryptMath.congruence(a, b, n))
+//                {
+//                    System.out.println(a.toString() + "|" + b.toString());
+//                }
+//            }
+//        }
+
+//        BigInteger b = BigInteger.valueOf (15);
+//        BigInteger a = BigInteger.valueOf (27);
+//        System.out.println(CryptMath.relativelyPrime(a,b));
+
+//        for (long s=0; s<10; s++)
+//        {
+//            for (long t=1; t<10; t+=2)
+//            {
+//                BigInteger a = BigInteger.valueOf (s);
+//                BigInteger b = BigInteger.valueOf(t);
+//                int j = CryptMath.jacobiSymbol (a,b);
+//                System.out.println("("+ a +"|"+ b + ") --> "+  j);
+//            }
+//        }
+
+//        BigInteger a = BigInteger.valueOf (0);
+//        BigInteger b = BigInteger.valueOf(1);
+//        int j = CryptMath.jacobiSymbol (a,b);
+//        System.out.println("("+ a +"|"+ b + ") --> "+  j);
+//        a = BigInteger.valueOf (1);
+//        b = BigInteger.valueOf(1);
+//        j = CryptMath.jacobiSymbol (a,b);
+//        System.out.println("("+ a +"|"+ b + ") --> "+  j);
+
+//        BigInteger a = BigInteger.valueOf (4);
+//        BigInteger b = BigInteger.valueOf(1);
+//        int j = CryptMath.jacobiSymbol (a,b);
+//        System.out.println("("+ a +"|"+ b + ") --> "+  j);
+
+//        for (long s=0; s<=30; s++)
+//        {
+//            BigInteger b = BigInteger.valueOf(s);
+//            //BigInteger[] div = CryptMath.divisors(b);
+//            //BigInteger[] res = CryptMath.reducedSetOfResidues(b);
+//            //System.out.println (s + " --> " + Arrays.toString(div));
+//            //System.out.println (s + " --> " + Arrays.toString(res));
+//            System.out.println (s + " --> " + CryptMath.totient(b));
+//        }
+
+//        for (long s=0; s<10000; s++)
+//        {
+//            BigInteger b = BigInteger.valueOf(s);
+//            BigInteger div = CryptMath.sumDivisors(b);
+//            System.out.print (s + " --> " + div.toString());
+//            if (BigInteger.valueOf(s).compareTo(div) == 0)
+//                System.out.print ("  **************************************************************************");
+//            System.out.println();
+//        }
+
+//        BigInteger b = CryptMath.positiveAlternatingQSum(new BigInteger("123471023473"), 6);
+//        System.out.println (b.toString());
+//        for (BigInteger s = BigInteger.valueOf(2); s.compareTo(new BigInteger("1000"))< 0; s = s.add(BigInteger.ONE))
+//        {
+//            BigInteger p = CryptMath.getNextPrimeAbove(s);
+//            System.out.print (p.toString()+", ");
+//            s = p;
+//        }
+
+//        BigInteger x = CryptMath.sqrt(new BigInteger("152415787532388367501905199875019052100"));
+//        System.out.println(x);
+
+//        BigInteger x = Factorizer.getTrialDivisor(BigInteger.valueOf(341));
+//        System.out.println(x);
+
+//        BigInteger x = Factorizer.brentFactor(new BigInteger("999228991394539117"));
+//        System.out.println(x);
+
+//        for (long s =1; s<1000; s++)
+//        {
+//            BigInteger n = CryptMath.mersenne((int)s);
+//            System.out.println ("("+s+")"+n.toString());
+//            BigInteger[] y = Factorizer.factByBrent (n);
+//            System.out.println (Arrays.toString(y));
+//        }
+
+//        BigInteger in = new BigInteger("9975");
+//        BigInteger[] y = Factorizer.factByBrent (in);
+//        System.out.println (Arrays.toString(y));
+
+//        BigInteger y = CryptMath.faculty(new BigInteger("2000"));
+//        System.out.println (y);
+
+//          System.out.println (CryptMath.log2(BigInteger.valueOf(0)));
+
+//        for (int s=900; s<1000; s++)
+//        {
+//            BigInteger x = CryptMath.faculty(BigInteger.valueOf(s));
+//            System.out.println (s + ": ("+ CryptMath.log2(x) + ") " + x.toString());
+//            //BigInteger[] y = Factorizer.factByTrialDivision (x);
+//            BigInteger[] y = Factorizer.factByBrent (x);
+//            System.out.println (Arrays.toString(y));
+//        }
+
+//        for (long s=0; s<1000; s++)
+//        {
+//            BigInteger y = Factorizer.pollardRhoFactor(BigInteger.valueOf(s));
+//            System.out.println (s + ":" + y.toString());
+//        }
+
+//        BigInteger[] y = Factorizer.factByTrialDivision(new BigInteger("999228991394539117"));
+//        System.out.println (Arrays.toString(y));
+
+//        BigInteger in = new BigInteger("704");
+//        BigInteger[] y = Factorizer.factByPollardRho (in);
+//        System.out.println (Arrays.toString(y));
+
+//        long[] x = Factorizer.factByTrialDivision(999999457);
+//        System.out.println (Arrays.toString(x));
+
+//        long start = 2000000000;
+//        for (long s=start; s<start+20; s++)
+//        {
+//            long[] x = Factorizer.factByTrialDivision(s);
+//            System.out.println (s+" --> "+Arrays.toString(x));
+//        }
+
+//        System.out.println (CryptMath.pollard_rho(BigInteger.valueOf(455459)));
+//        System.out.println (CryptMath.pollard_rho(BigInteger.valueOf(200)));
+//        System.out.println (CryptMath.fermatPrimeTest(341,40));
+
+//        long start1 = 341;
+//        long start2 = 999;
+//        for (long s=start1; s<start1+2; s++)
+//        {
+//            for (long t=start2; t<start2+2; t++)
+//            {
+//                ExtendedEuclid.test(s,t);
+//                System.out.println ("GCD: "+ CryptMath.gcd(s,t));
+//            }
+//        }
+
+//        byte[] b = new byte[]{(byte)0x80, (byte)0x00, (byte)0x01};
+//        IO.printAsVector(b, System.out);
+
+//        byte[] b;
+//        b = IO.readFile("c:\\Users\\Peter\\Desktop\\main_eth.txt");
+//        testStatOps (b);
+//        b = IO.readFile("c:\\Users\\Peter\\Desktop\\main_eth.aes256");
+//        testStatOps (b);
+
+        //System.out.println (CryptMath.gcd(1356123,23618361));
+        //System.out.println (CryptMath.mersenne(3));
+
+//        BigDecimal a = BigDecimal.valueOf(Math.sqrt(5));
+//        System.out.println (a);
+//        BigDecimal b = BigDecimal.valueOf(1/Math.sqrt(5));
+//        System.out.println (b);
+//        BigInteger bi1 = b.unscaledValue();
+//        BigDecimal c = a.divide(b, new MathContext(100, RoundingMode.HALF_UP));
+//        System.out.println (c);
+//        System.out.println (c.unscaledValue());
+//        System.out.println (bi1);
+
+//        for (int s = 1; s<10000; s++)
+//        {
+//            //long fib = CryptMath.recursiveFibonacci(s);
+//            //long fib2 = (long)CryptMath.squareFibonacci(s);
+//            //System.out.printf ("%d %d %d\n", s, fib, fib2);
+//            System.out.println (CryptMath.loopFibonacci(s));
+//        }
+
+//        System.out.println (CryptMath.millerRabinPrimeTest(997));
+//        System.out.println (CryptMath.fermatPrimeTest(997,50));
+//        System.out.println (CryptMath.millerRabinPrimeTest(341));
+//        System.out.println (CryptMath.fermatPrimeTest(341,50));
+
+//        System.out.println (CryptMath.millerRabinPrimeTest(11));
+//        System.out.println (CryptMath.fermatPrimeTest(11,5000));
+
+        //testStatOps(CryptTools.makeSameValueBytes(1024, 0));
+        //testStatOps(CryptTools.makeSameValueBytes(1024, 1));
+        //testStatOps(CryptTools.makeSameValueBytes(1024, 2));
+        //testStatOps(CryptTools.makeSameValueBytes(1024, 63));
+        //testStatOps(CryptTools.makeSameValueBytes(1024, 64));
+        //testStatOps(CryptTools.makeSameValueBytes(1024, 127));
+        //testStatOps(CryptTools.makeSameValueBytes(1024, 128));
+//        testStatOps(CryptTools.makeSameValueBytes(1024, 0));
+//        testStatOps(CryptTools.makeSameValueBytes(1024, 255));
+        //testStatOps(CryptTools.makeCountedValueBytes(1024, 0, 255));
+        //testStatOps(CryptTools.makeFlipBytes(1024));
+
+//        System.out.println("0STest: " + CryptTools.largestZeroString(new byte[]{0x01, 0x00, (byte)0x80}));
+//        System.out.println("1STest: " + CryptTools.largestOneString(new byte[]{(byte)0xff, (byte)0xff, (byte)0x01}));
+
+//        byte[] b = new byte[]{(byte)0x80, (byte)0x00, (byte)0x01};
+//        System.out.println("0STest: " + BitAnalytics.largestZeroString (b));
+//        System.out.println("SBTest: " + BitAnalytics.sameZeroBitSequences (b,2));
+
+//        int sb[] = BitAnalytics.sameOneBitSequenceHistogram (new byte[]{0x00, 0x00, (byte)0xff}, 9);
+//        System.out.println(Arrays.toString(sb));
+        /*
+        byte[] a = CryptTools.generateSecureRandomBytes(1024);
+        System.out.println(CryptTools.entropy(a));
+        */
+
+        /*
+        byte[] a = {(byte)0x90};
+        String b = new String(a, Charset.forName("UTF-16LE"));
+        byte[] c = b.getBytes();
+        System.out.println (c[0]);
+        */
+
+        /*
+        String a = "o ";
+        System.out.println (a);
+        CryptTools.printAsHex(a.getBytes());
+
+        String b = CryptTools.rotateStringBitsRight(a);
+        System.out.println (b);
+        CryptTools.printAsHex(b.getBytes());
+
+        b = CryptTools.rotateStringBitsLeft(b);
+        System.out.println (b);
+        CryptTools.printAsHex(b.getBytes());
+        */
+
+        /*
+        byte[] a = {(byte)0x6f, 0x20};
+        CryptTools.printAsHex(a);
+        a = CryptTools.rotateArrayBitsRight(a);
+        CryptTools.printAsHex(a);
+
+        String s = "o ";
+        CryptTools.printAsHex(s.getBytes());
+        String r = CryptTools.rotateStringBitsRight(s);
+        CryptTools.printAsHex(r.getBytes());
+        */
+
+        /*
+        a = new byte[]{(byte) 0x80, 1, 1, 1};
+        CryptTools.printAsHex(a);
+        a = CryptTools.rotateArrayBitsLeft(a);
+        CryptTools.printAsHex(a);
+        */
+
+        /*
+        encryptFilePeter1("b",
+                        "c:\\Users\\Peter\\Desktop\\main_eth.txt",
+                        "c:\\Users\\Peter\\Desktop\\main_eth.peter1");
+
+        encryptFilePeter1("b",
+                        "c:\\Users\\Peter\\Desktop\\main_eth.peter1",
+                        "c:\\Users\\Peter\\Desktop\\main_eth.peter1.txt");
+        */
+
+        /*
+        encryptFilePeter2("b",
+                        "c:\\Users\\Peter\\Desktop\\main_eth.txt",
+                        "c:\\Users\\Peter\\Desktop\\main_eth.peter2");
+
+        decryptFilePeter2("b",
+                        "c:\\Users\\Peter\\Desktop\\main_eth.peter2",
+                        "c:\\Users\\Peter\\Desktop\\main_eth.peter2.txt");
+        */
+
+/*********************** Encrypt file with random data ********************************/
+//        encryptFileWithRandomData ("c:\\Users\\Peter\\Desktop\\main_eth.txt",
+//                                   "c:\\Users\\Peter\\Desktop\\main_eth.petercrypt",
+//                                   "hello");
+//
+//        encryptFileWithRandomData ("c:\\Users\\Peter\\Desktop\\main_eth.petercrypt",
+//                                   "c:\\Users\\Peter\\Desktop\\main_eth.petercrypt.txt",
+//                                   "hello");
+
+/*********************** Some test shit ********************************/
+//        int s;
+//        AESEngine.testSpeed(10000);
+//        MyAES256.testSpeed(10000);
+
+//        String a = "hello world";
+//        String b = CryptTools.xorChainString(a, (byte)11);
+//        String c = CryptTools.unxorChainString(b, (byte)11);
+//        System.out.println (a);
+//        System.out.println (b);
+//        System.out.println (c);
+
+//        byte b = 1;
+//        for (int s=0; s<20; s++)
+//        {
+//            System.out.println(b);
+//            b = CryptTools.rotateByteRight(b);
+//        }
+
+//        System.out.println (CryptTools.getNextPrimeAbove(1951979757));
+
+//        byte[] a = {1,2,3,4,5,6,7,8,9,10};
+//        System.out.println (Arrays.toString(a));
+//        a = CryptTools.rotateArrayLeft(a, 1);
+//        System.out.println (Arrays.toString(a));
+
+//        generateRandomFile ("c:\\Users\\Peter\\Desktop\\keyfile", 200000, "hello");
+
+//        MyAES256.test();
+
+//        encryptFileGray ("c:\\Users\\Peter\\Desktop\\main_eth.txt",
+//                         "c:\\Users\\Peter\\Desktop\\main_eth.gray.txt");
+
+//        long s = 1;
+//        for (;;)
+//        {
+//            s = CryptTools.getNextPrimeAbove(s);
+//            System.out.println(s);
+//            s++;
+//            if (s> 1000)
+//                break;
+//        }
+
+/*********************** AES Test with text file ********************************/
+//        encryptAes256AndSave(key,
+//                        "c:\\Users\\Peter\\Desktop\\main_eth.txt",
+//                        "c:\\Users\\Peter\\Desktop\\main_eth.aes256");
+//
+//        decryptAes256AndSave(key,
+//                        "c:\\Users\\Peter\\Desktop\\main_eth.aes256",
+//                        "c:\\Users\\Peter\\Desktop\\main_eth.aes256.txt");
+
+/*********************** AES CBC Test with text file ********************************/
+//        byte[] key = CryptTools.passwordHash("Peter".getBytes());
+//
+//        encryptAes256AndSaveCBCwithFileLength(key, CryptTools.generateSecureRandomBytes(16),
+//                        "c:\\Users\\Peter\\Desktop\\main_eth.txt",
+//                        "c:\\Users\\Peter\\Desktop\\main_eth.aes256");
+//
+//        decryptAes256AndSaveCBCwithFileLength(key,
+//                        "c:\\Users\\Peter\\Desktop\\main_eth.aes256",
+//                        "c:\\Users\\Peter\\Desktop\\main_eth.aes256.txt");
+
+/*********************** AES CBC Test with binary file ********************************/
+//        encryptAes256AndSaveCBCwithFileLength(key,
+//                        "c:\\Users\\Peter\\Desktop\\pte.rar",
+//                        "c:\\Users\\Peter\\Desktop\\pte.rar.aes256");
+//
+//        decryptAes256AndSaveCBCwithFileLength(key,
+//                        "c:\\Users\\Peter\\Desktop\\pte.rar.aes256",
+//                        "c:\\Users\\Peter\\Desktop\\pte.rar.aes256.rar");
+
+
+/*************************** Save file RC5 encrypted ********************************/
+//
+//        encryptRc5andSave (key,
+//                           "c:\\Users\\Peter\\Desktop\\main_eth.txt",
+//                           "c:\\Users\\Peter\\Desktop\\main_eth.rc5");
+    }
+
+/**************************************************************************************************/
+//    public static void main(String[] args) throws IOException, ClassNotFoundException
+//    {
+//        MyAES256 aes = new MyAES256();
+//        System.out.println (aes.rj_sbox((byte)2));
+//        /*
+//        for (int s=0; s<256; s++)
+//        {
+//            System.out.println (s + ": " + aes.rj_sbox((byte)s));
+//        }
+//        */
+//        /*
+//        for (int s=0; s<256; s++)
+//        {
+//            byte b = (byte)s;
+//            System.out.println ((byte)(255-b));
+//        }
+//        */
+//    }
+
+/**************************************************************************************************/
+//    public static void main(String[] args) throws IOException, ClassNotFoundException
+//    {
+//        byte[] content = readFile ("c:\\Users\\Peter\\Desktop\\main_eth.txt");
+//        String st = new String(content);
+//        System.out.println(st);
+//
+//        int[] i1 = CryptTools.toIntArray(content);
+//        MyRC5 rc5 = new MyRC5(11);
+//
+//        byte key[] = new byte[256];
+//        for (int s=0; s<key.length; s++)
+//            key[s] = (byte)(Math.random()*256);
+//
+//        rc5.key(key);
+//        rc5.encrypt(i1);
+//
+//        writeFile ("c:\\Users\\Peter\\Desktop\\main_eth.c.encrypted",
+//                   CryptTools.toByteArray(i1));
+//
+//        rc5.decrypt(i1);
+//
+//        byte[] b1 = CryptTools.toByteArray(i1);
+//        st = new String(b1);
+//        System.out.println(st);
+//
+//        MyRC5.test();
+//    }
+
+/**************************************************************************************************/
+//    public static void main(String[] args)
+//    {
+//        com.peter.crypto.MyRC5 rc5 = new com.peter.crypto.MyRC5(10); // 10 rounds
+//        int[] data = {0, 1, 2, 3, 4, 5, 6, 7};
+//        byte key[] = {'A', 'B', 'C', 'D', 'E'};  //"ABCDE";
+//        int i;
+//
+//        rc5.key(key);
+//        rc5.encrypt(data);
+//
+//        for (i = 0; i < data.length; i++)
+//        {
+//            System.out.printf("%x", data[i]);
+//        }
+//
+//        rc5.decrypt(data);
+//        System.out.println();
+//
+//        for (i = 0; i < data.length; i++)
+//        {
+//            System.out.printf("%x", data[i]);
+//        }
+//    }
+
+//        NumberField n1 = NumberFieldFactory.countedUp (3,3, 1); //fromArray(arr,3,3);
+//        System.out.println(n1);
+//
+//        NumberField m1 = new NumberFieldMath(n1).adjoint();
+//        System.out.println(m1);
+//
+//        NumberField m2 = new NumberFieldMath(n1).upperTriangle();
+//        System.out.println(m2);
+//
+//        NumberField m3 = new NumberFieldMath(n1).inverse();
+//        System.out.println(m3);
+
+        /*
+        System.out.println (new NumberFieldMath(n1).det());
+
+        NumberField n2 = NumberFieldFactory.countedUp (3,3, 1); //fromArray(arr,3,3);
+        System.out.println(n2);
+        */
+
+
+        /*
+        OrderedCombinations oc = new OrderedCombinations();
+        ArrayList<int[]> list = oc.start (26, 9);
+        for (int s=1; s<list.size (); s*=2)
+        {
+            System.out.println (Arrays.toString (list.get (s)));
+        }
+        */
+
+//        NumberField n1 = NumberFieldFactory.logicalXorTable (10);
+//        MatrixPanel p1 = new MatrixPanel (n1);
+//
+//        NumberField n2 = NumberFieldFactory.logicalEquTable (10);
+//        MatrixPanel p2 = new MatrixPanel(n2);
+//
+//        NumberField n3 = NumberFieldFactory.logicalImpTable (10);
+//        MatrixPanel p3 = new MatrixPanel (n3);
+
+//        NumberField n = NumberFieldFactory.counted (3);
+//        n.values[0][0]= 1.0;
+//        System.out.println (n);
+//        NumberFieldMath ma = new NumberFieldMath (n);
+//        double det = ma.det();
+//        System.out.println (det);
+//
+//        NumberField u = ma.getU ();
+//        System.out.println(u);
+//
+//        NumberField l = ma.getL ();
+//        System.out.println (l);
+//        Double[] primes = NumberFieldFactory.__squareSums (100, 1);
+//        NumberField n1 = NumberFieldFactory.additionTable (primes, primes);
+//        NumberField n2 = NumberFieldFactory.multiplicationTable (primes, primes);
+//        NumberField n = n2.mod (n1);
+//        System.out.println (n1);
+//        System.out.println (n2);
+//        System.out.println(n);
+//        MatrixPanel pan = new MatrixPanel(n);
+
+
+        /*
+        BigInteger big = BigInteger.valueOf(98181);
+        BigInteger t = CryptMath.totient(big);
+        System.out.println (t.toString());
+        */
+        /*
+        long p = 1;
+        while (p < 100)
+        {
+            p = CryptMath.getNextPrimeAbove(p);
+            System.out.println (p);
+            p = p+1;
+        }
+        */
+
+        /*
+        int a = 6910;
+        int b = 4113;
+        int c = a + b;
+        int base = 19;
+        String as = CryptMath.numberString(a, base);
+        String bs = CryptMath.numberString(b, base);
+        String cs = CryptMath.numberString(c, base);
+        System.out.println (as + "+" + bs + "=" + cs);
+        */
+
+
+//        int x = 0;
+//
+//        for (;;)
+//        {
+//            x++;
+//            if (x == 0)
+//                break;
+//        }
+
+        //Integer[] a1 = {1,2,3,4,5,6,7,8,9};
+        //NumberField n1 = NumberFieldFactory.fromArray(a1, 3, 3);
+
+        //NumberField n1 = NumberFieldFactory.countedSpiralRightDown(20);
+        //NumberField n1 = NumberFieldFactory.diagRL(10, 3);
+
+/*
+        NumberField n1 = NumberFieldFactory.triangleLeftTop(10,10);
+        n1.print();
+        new MatrixPanel (n1);
+        //System.exit(0);
+
+        NumberField n3 = new NumberFieldMath(n1).adjoint();
+        n3.print();
+        new MatrixPanel (n3);
+
+        NumberField n4 = new NumberFieldMath(n1).inverse();
+        n4.print();
+        new MatrixPanel (n4);
+*/
+
+        /*
+        Double[] a1 = NumberFieldFactory.countedDoubleArray(256, 0);
+        NumberField n1 = NumberFieldFactory.galois256MultiplicationTable(a1, a1);
+        new MatrixPanel (n1);
+        */
+
+        /*
+        Double[] num = NumberFieldFactory.primesDoubleArray(1000, 0);
+        System.out.println (Arrays.toString(num));
+        */
+        //Double[] a1 = NumberFieldFactory.ln_x_div_x(10000, 1000);
+        //NumberField n1 = NumberFieldFactory.fromArray(a1, 100, 100).mult(10000000);
+//        NumberField n1 = NumberFieldFactory.primes(100,100); //counted(100, 100, 1e10); //counted(100); //primes(10, 10); //.lcmTable(100);
+//        n1 = n1.div(2);
+//        n1.print();
+//        new MatrixPanel (n1);
+//
+//        NumberField n3 = n1.onlyPrimes();
+//        new MatrixPanel(n3);
+
+        long v = 123456;
+
+        BigInteger b = BigInteger.valueOf(v);
+        BigInteger[] div = CryptMath.divisors(b);
+        System.out.println (Arrays.toString(div));
+        BigInteger[] primes = CryptMath.primeFilter(div);
+        System.out.println (Arrays.toString(primes));
+
+        BigInteger[] fact1 = Factorizer.factByTrialDivision(b);
+        System.out.println (Arrays.toString(fact1));
+
+        BigInteger[] fact2 = Factorizer.factByBrent(b);
+        System.out.println (Arrays.toString(fact2));
