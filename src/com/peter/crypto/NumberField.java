@@ -3,10 +3,7 @@ package com.peter.crypto;
 import java.util.*;
 
 /**
- * New Class.
- * User: Administrator
- * Date: 19.05.2009
- * Time: 23:26:15
+ * New Class. User: Administrator Date: 19.05.2009 Time: 23:26:15
  */
 public class NumberField
 {
@@ -16,6 +13,7 @@ public class NumberField
 
     /**
      * Constructor that generates an empty Field
+     *
      * @param x width
      * @param y height
      */
@@ -24,20 +22,25 @@ public class NumberField
         values = new Double[y][x];
         width = x;
         height = y;
-        for (int a=0; a<y; a++)
-            for (int b=0; b<x; b++)
+        for (int a = 0; a < y; a++)
+        {
+            for (int b = 0; b < x; b++)
+            {
                 values[a][b] = 0d;
+            }
+        }
     }
 
     /**
-     * Constructs a matrix quickly without checking arguments. Does not
-     * copy array elements into a new array. Rather, the new matrix simply
-     * references the specified array.
+     * Constructs a matrix quickly without checking arguments. Does not copy
+     * array elements into a new array. Rather, the new matrix simply references
+     * the specified array.
+     *
      * @param m the number of rows.
      * @param n the number of columns.
      * @param a the array.
      */
-    public NumberField (int m, int n, Double[][] a)
+    public NumberField(int m, int n, Double[][] a)
     {
         width = m;
         height = n;
@@ -46,11 +49,12 @@ public class NumberField
 
     /**
      * Constructor that create a copy of an existing field
+     *
      * @param src Source field
      */
     private NumberField(NumberField src)
     {
-        values = new Double[src.getHeight ()][src.getWidth ()];
+        values = new Double[src.getHeight()][src.getWidth()];
         width = src.getWidth();
         height = src.getHeight();
         for (int a = 0; a < height; a++)
@@ -61,6 +65,7 @@ public class NumberField
 
     /**
      * Get the width
+     *
      * @return X
      */
     public int getWidth()
@@ -70,6 +75,7 @@ public class NumberField
 
     /**
      * Get the height
+     *
      * @return Y
      */
     public int getHeight()
@@ -79,6 +85,7 @@ public class NumberField
 
     /**
      * Sorts all rows
+     *
      * @return A new field
      */
     public NumberField sortRows()
@@ -93,17 +100,19 @@ public class NumberField
 
     /**
      * Sorts all keeping field dimensions
+     *
      * @return A new field
      */
     public NumberField sort()
     {
         Double[] vals = asFlatArray();
         Arrays.sort(vals);
-        return NumberFieldFactory.fromArray (vals, width, height);
+        return NumberFieldFactory.fromArray(vals, width, height);
     }
 
     /**
      * Shuffles the filed using same algorithm as collections.shuffle
+     *
      * @return The new array
      */
     public NumberField shuffle()
@@ -119,13 +128,13 @@ public class NumberField
             vals[b] = tmp;
         }
 
-        return NumberFieldFactory.fromArray (vals, width, height);
+        return NumberFieldFactory.fromArray(vals, width, height);
     }
 
     public NumberField onlyPrimes()
     {
         Double[] vals = asFlatArray();
-        for (int s=0; s<vals.length; s++)
+        for (int s = 0; s < vals.length; s++)
         {
             if (CryptMath.millerRabinPrimeTest(vals[s].longValue()) == true)
             {
@@ -136,13 +145,13 @@ public class NumberField
                 vals[s] = 0.0;
             }
         }
-        return NumberFieldFactory.fromArray (vals, width, height);
+        return NumberFieldFactory.fromArray(vals, width, height);
     }
 
-    public NumberField onlyPrimes (double replacement)
+    public NumberField onlyPrimes(double replacement)
     {
         Double[] vals = asFlatArray();
-        for (int s=0; s<vals.length; s++)
+        for (int s = 0; s < vals.length; s++)
         {
             if (CryptMath.millerRabinPrimeTest(vals[s].longValue()) == true)
             {
@@ -153,10 +162,12 @@ public class NumberField
                 vals[s] = 0.0;
             }
         }
-        return NumberFieldFactory.fromArray (vals, width, height);
+        return NumberFieldFactory.fromArray(vals, width, height);
     }
+
     /**
      * Substitutes all values v1 with v2
+     *
      * @param v1 Value to search for
      * @param v2 Value to set
      * @return A new Field
@@ -179,11 +190,12 @@ public class NumberField
 
     /**
      * Substitutes all values that are not v1 with v2
+     *
      * @param v1 Value to search for
      * @param v2 Value to set
      * @return A new Field
      */
-    public NumberField substituteNot (double v1, double v2)
+    public NumberField substituteNot(double v1, double v2)
     {
         NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
@@ -201,19 +213,19 @@ public class NumberField
 
     /**
      * Keeps all values x that are a < x > b
-     * Others will be set to zero. e.g. given 3 and 7 on
-     * 0 1 2<br>
+     * Others will be set to zero. e.g. given 3 and 7 on 0 1 2<br>
      * 3 4 5<br>
      * 6 7 8<br>
      * evaluates to</p>
      * 0 0 0<br>
      * 0 4 5<br>
      * 6 0 0<br>
+     *
      * @param low Lower bound
      * @param high Upper bound
      * @return The new Field
      */
-    public NumberField keepValuesBetween (Long low, Long high)
+    public NumberField keepValuesBetween(Long low, Long high)
     {
         NumberField m = new NumberField(width, height);
         for (int a = 0; a < height; a++)
@@ -263,11 +275,12 @@ public class NumberField
 
     /**
      * Sets all elements of a row to a fixed value
+     *
      * @param row The row number
      * @param val The value
      * @return A new field
      */
-    public NumberField setRow (int row, double val)
+    public NumberField setRow(int row, double val)
     {
         NumberField m = new NumberField(this);
         for (int s = 0; s < width; s++)
@@ -279,6 +292,7 @@ public class NumberField
 
     /**
      * Sets all elements of a row to those given by an array
+     *
      * @param row The row number
      * @param val Array containing new values
      * @return A new field
@@ -295,6 +309,7 @@ public class NumberField
 
     /**
      * Returns one row
+     *
      * @param row The row index
      * @return Array containing all values
      */
@@ -307,6 +322,7 @@ public class NumberField
 
     /**
      * Sets all elements of a column to a fixed value
+     *
      * @param col The column number
      * @param val The value
      * @return A new field
@@ -323,6 +339,7 @@ public class NumberField
 
     /**
      * Sets all elements of a column to those given by an array
+     *
      * @param col The column number
      * @param val Array containing new values
      * @return A new field
@@ -339,6 +356,7 @@ public class NumberField
 
     /**
      * Returns array of all values of a column
+     *
      * @param col Column index
      * @return Array containing all values
      */
@@ -354,6 +372,7 @@ public class NumberField
 
     /**
      * Returns the field as one dimensional array
+     *
      * @return Array containing all field elements
      */
     public Double[] asFlatArray()
@@ -366,18 +385,30 @@ public class NumberField
         return ret;
     }
 
+    public String asFlatString()
+    {
+        Double[] dd = asFlatArray();
+        StringBuilder sb = new StringBuilder();
+        for (Double d : dd)
+        {
+            sb.append ((char)(double)d);
+        }
+        return sb.toString();
+    }
+    
     public Double[][] asArray()
     {
         Double[][] arr = new Double[height][width];
         for (int s = 0; s < arr.length; s++)
         {
-            System.arraycopy (values[s], 0, arr[s], 0, arr[s].length);
+            System.arraycopy(values[s], 0, arr[s], 0, arr[s].length);
         }
         return arr;
     }
 
     /**
      * Exchanges rows and columns
+     *
      * @return A new field
      */
     public NumberField transpose()
@@ -395,10 +426,11 @@ public class NumberField
 
     /**
      * Adds a value to all elements of the Field
+     *
      * @param n Value to add
      * @return A new field
      */
-    public NumberField add (double n)
+    public NumberField add(double n)
     {
         NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
@@ -413,6 +445,7 @@ public class NumberField
 
     /**
      * Calculates Locical AND over the integers of the field
+     *
      * @param n Value to combine with
      * @return A new field containing resulting integers
      */
@@ -423,8 +456,8 @@ public class NumberField
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
-                m.values[a][b] = (double)(integer & n);
+                int integer = m.values[a][b].intValue();
+                m.values[a][b] = (double) (integer & n);
             }
         }
         return m;
@@ -432,6 +465,7 @@ public class NumberField
 
     /**
      * Calculates Locical OR over the integers of the field
+     *
      * @param n Value to combine with
      * @return A new field containing resulting integers
      */
@@ -442,8 +476,8 @@ public class NumberField
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
-                m.values[a][b] = (double)(integer | n);
+                int integer = m.values[a][b].intValue();
+                m.values[a][b] = (double) (integer | n);
             }
         }
         return m;
@@ -451,6 +485,7 @@ public class NumberField
 
     /**
      * Calculates Locical XOR over the integers of the field
+     *
      * @param n Value to combine with
      * @return A new field containing resulting integers
      */
@@ -461,8 +496,8 @@ public class NumberField
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
-                m.values[a][b] = (double)(integer ^ n);
+                int integer = m.values[a][b].intValue();
+                m.values[a][b] = (double) (integer ^ n);
             }
         }
         return m;
@@ -470,17 +505,18 @@ public class NumberField
 
     /**
      * Calculates Locical EQUALITY over the integers of the field
+     *
      * @param n Value to combine with
      * @return A new field containing resulting integers
      */
-    public NumberField logicalEqu (int n)
+    public NumberField logicalEqu(int n)
     {
-        NumberField m = new NumberField (this);
+        NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
+                int integer = m.values[a][b].intValue();
                 m.values[a][b] = (double) (~(integer ^ n));
             }
         }
@@ -489,18 +525,19 @@ public class NumberField
 
     /**
      * Calculates Locical IMPLICATION over the integers of the field
+     *
      * @param n Value to combine with
      * @return A new field containing resulting integers
      */
-    public NumberField logicalImp (int n)
+    public NumberField logicalImp(int n)
     {
-        NumberField m = new NumberField (this);
+        NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
-                m.values[a][b] = (double) ((~(integer ^ n))| n);
+                int integer = m.values[a][b].intValue();
+                m.values[a][b] = (double) ((~(integer ^ n)) | n);
             }
         }
         return m;
@@ -560,6 +597,7 @@ public class NumberField
 
     /**
      * Multiplies all elements of the Field
+     *
      * @param n Multiplicator
      * @return A new field
      */
@@ -578,6 +616,7 @@ public class NumberField
 
     /**
      * Applies mod-operator to all elements
+     *
      * @param n the mod value
      * @return A new field
      */
@@ -594,9 +633,9 @@ public class NumberField
         return m;
     }
 
-    public NumberField div (int n)
+    public NumberField div(int n)
     {
-        NumberField m = new NumberField (this);
+        NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
@@ -607,18 +646,22 @@ public class NumberField
         return m;
     }
 
-    public NumberField mod (NumberField n)
+    public NumberField mod(NumberField n)
     {
-        NumberField m = new NumberField (this);
+        NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
             {
                 double x = n.values[a][b];
                 if (x == 0)
+                {
                     m.values[a][b] = 0d; //Integer.MAX_VALUE;
+                }
                 else
+                {
                     m.values[a][b] %= x;
+                }
             }
         }
         return m;
@@ -626,6 +669,7 @@ public class NumberField
 
     /**
      * Negates all elements of the field
+     *
      * @return A new field
      */
     public NumberField negate()
@@ -643,6 +687,7 @@ public class NumberField
 
     /**
      * Adds two fields
+     *
      * @param m2 Field to add to this field
      * @return A new field
      */
@@ -659,9 +704,9 @@ public class NumberField
         return m;
     }
 
-    public NumberField sub (NumberField m2)
+    public NumberField sub(NumberField m2)
     {
-        NumberField m = new NumberField (this);
+        NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
@@ -673,8 +718,9 @@ public class NumberField
     }
 
     /**
-     * Generates logical AND of the integers of two NumberFields
-     * Fields must have same dimensions
+     * Generates logical AND of the integers of two NumberFields Fields must
+     * have same dimensions
+     *
      * @param m2 Second number field
      * @return A new number field containing resulting integers
      */
@@ -685,16 +731,17 @@ public class NumberField
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
-                m.values[a][b] = (double)(integer & m2.values[a][b].intValue ());
+                int integer = m.values[a][b].intValue();
+                m.values[a][b] = (double) (integer & m2.values[a][b].intValue());
             }
         }
         return m;
     }
 
     /**
-     * Generates logical OR of the integers of two NumberFields
-     * Fields must have same dimensions
+     * Generates logical OR of the integers of two NumberFields Fields must have
+     * same dimensions
+     *
      * @param m2 Second number field
      * @return A new number field containing resulting integers
      */
@@ -705,16 +752,17 @@ public class NumberField
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
-                m.values[a][b] = (double)(integer | m2.values[a][b].intValue ());
+                int integer = m.values[a][b].intValue();
+                m.values[a][b] = (double) (integer | m2.values[a][b].intValue());
             }
         }
         return m;
     }
 
     /**
-     * Generates logical XOR of the integers of two NumberFields
-     * Fields must have same dimensions
+     * Generates logical XOR of the integers of two NumberFields Fields must
+     * have same dimensions
+     *
      * @param m2 Second number field
      * @return A new number field containing resulting integers
      */
@@ -726,47 +774,49 @@ public class NumberField
             for (int b = 0; b < width; b++)
             {
                 int integer = m.values[a][b].intValue();
-                m.values[a][b] = (double)(integer ^ m2.values[a][b].intValue ());
+                m.values[a][b] = (double) (integer ^ m2.values[a][b].intValue());
             }
         }
         return m;
     }
 
     /**
-     * Generates logical EQUALITY of the integers of two NumberFields
-     * Fields must have same dimensions
+     * Generates logical EQUALITY of the integers of two NumberFields Fields
+     * must have same dimensions
+     *
      * @param m2 Second number field
      * @return A new number field containing resulting integers
      */
-    public NumberField logicalEqu (NumberField m2)
+    public NumberField logicalEqu(NumberField m2)
     {
-        NumberField m = new NumberField (this);
+        NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
-                m.values[a][b] = (double) (~(integer ^ m2.values[a][b].intValue ()));
+                int integer = m.values[a][b].intValue();
+                m.values[a][b] = (double) (~(integer ^ m2.values[a][b].intValue()));
             }
         }
         return m;
     }
 
     /**
-     * Generates logical IMPLICATION of the integers of two NumberFields
-     * Fields must have same dimensions
+     * Generates logical IMPLICATION of the integers of two NumberFields Fields
+     * must have same dimensions
+     *
      * @param m2 Second number field
      * @return A new number field containing resulting integers
      */
-    public NumberField logicalImp (NumberField m2)
+    public NumberField logicalImp(NumberField m2)
     {
-        NumberField m = new NumberField (this);
+        NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue ();
-                m.values[a][b] = (double) ((~(integer ^ m2.values[a][b].intValue ()))| m2.values[a][b].intValue ());
+                int integer = m.values[a][b].intValue();
+                m.values[a][b] = (double) ((~(integer ^ m2.values[a][b].intValue())) | m2.values[a][b].intValue());
             }
         }
         return m;
@@ -774,6 +824,7 @@ public class NumberField
 
     /**
      * Multiplies two fields
+     *
      * @param m2 Field to multiply with this field
      * @return A new field
      */
@@ -790,7 +841,7 @@ public class NumberField
         return m;
     }
 
-    public NumberField div (NumberField m2)
+    public NumberField div(NumberField m2)
     {
         NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
@@ -799,15 +850,19 @@ public class NumberField
             {
                 double x = m2.values[a][b];
                 if (x == 0)
+                {
                     m.values[a][b] = 0.0;
+                }
                 else
+                {
                     m.values[a][b] /= x;
+                }
             }
         }
         return m;
     }
 
-    public NumberField max (NumberField m2)
+    public NumberField max(NumberField m2)
     {
         NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
@@ -842,6 +897,7 @@ public class NumberField
      * 0 1 0<br>
      * 1 4 1<br>
      * 0 1 0<br>
+     *
      * @return A new field
      */
     public NumberField minSquare()
@@ -872,6 +928,7 @@ public class NumberField
      * 8 7 8<br>
      * 7 4 7<br>
      * 8 7 8<br>
+     *
      * @return A new field
      */
     public NumberField maxSquare()
@@ -889,9 +946,10 @@ public class NumberField
     }
 
     /**
-     * Combines two fields where the placeholder in this field
-     * will be exchanged by the value in m2
-     * @param m2          Other field
+     * Combines two fields where the placeholder in this field will be exchanged
+     * by the value in m2
+     *
+     * @param m2 Other field
      * @param placeholder Placeholder value
      * @return A new field
      */
@@ -913,6 +971,7 @@ public class NumberField
 
     /**
      * Rotates all rows of field left
+     *
      * @return A new field
      */
     public NumberField rotateRowsLeft()
@@ -927,8 +986,8 @@ public class NumberField
     }
 
     /**
-     * Rotates rows left. First row by one, second by two and so on
-     * Thus, given a field:
+     * Rotates rows left. First row by one, second by two and so on Thus, given
+     * a field:
      * <p/>
      * 0 1 2<br>
      * 3 4 5<br>
@@ -957,19 +1016,23 @@ public class NumberField
         return m;
     }
 
-    public NumberField rotateRowsLeftIncremental (int n)
+    public NumberField rotateRowsLeftIncremental(int n)
     {
         if (n < 1)
+        {
             return this;
+        }
         NumberField m = rotateRowsLeftIncremental();
-        for (int s=0; s<n; s++)
+        for (int s = 0; s < n; s++)
+        {
             m = m.rotateRowsLeftIncremental();
+        }
         return m;
     }
 
     /**
-     * Rotates columns up. First row by one, second by two and so on
-     * Thus, given a field:
+     * Rotates columns up. First row by one, second by two and so on Thus, given
+     * a field:
      * <p/>
      * 0 1 2<br>
      * 3 4 5<br>
@@ -990,6 +1053,7 @@ public class NumberField
 
     /**
      * Rotates all rows of field right
+     *
      * @return A new field
      */
     public NumberField rotateRowsRight()
@@ -1004,8 +1068,8 @@ public class NumberField
     }
 
     /**
-     * Rotate rows right.  First row by one, second by two and so on
-     * Thus, given a field:
+     * Rotate rows right. First row by one, second by two and so on Thus, given
+     * a field:
      * <p/>
      * 0 1 2<br>
      * 3 4 5<br>
@@ -1060,7 +1124,7 @@ public class NumberField
         double temp = arr[arr.length - 1];
         System.arraycopy(arr, 0, arr, 1, arr.length - 1);
         arr[0] = temp;
-        return NumberFieldFactory.fromArray (arr, width, height);
+        return NumberFieldFactory.fromArray(arr, width, height);
     }
 
     /**
@@ -1084,7 +1148,7 @@ public class NumberField
         double temp = arr[0];
         System.arraycopy(arr, 1, arr, 0, arr.length - 1);
         arr[arr.length - 1] = temp;
-        return NumberFieldFactory.fromArray (arr, width, height);
+        return NumberFieldFactory.fromArray(arr, width, height);
     }
 
     /**
@@ -1129,6 +1193,7 @@ public class NumberField
 
     /**
      * Rotates all columns of field down
+     *
      * @return A new field
      */
     public NumberField rotateColumnsDown()
@@ -1138,6 +1203,7 @@ public class NumberField
 
     /**
      * Rotates all columns of field Up
+     *
      * @return A new field
      */
     public NumberField rotateColumnsUp()
@@ -1147,6 +1213,7 @@ public class NumberField
 
     /**
      * Reverses one row
+     *
      * @param row Row to reverse
      * @return A new field
      */
@@ -1162,6 +1229,7 @@ public class NumberField
 
     /**
      * Reverses one column
+     *
      * @param col column to reverse
      * @return A new field
      */
@@ -1331,10 +1399,11 @@ public class NumberField
 
     /**
      * Generates a sub field of this field
+     *
      * @param startx Starting X position
-     * @param endx   Last X position
+     * @param endx Last X position
      * @param starty Starting Y position
-     * @param endy   Last Y position
+     * @param endy Last Y position
      * @return A new field
      */
     public NumberField getSubField(int startx, int endx, int starty, int endy)
@@ -1353,11 +1422,12 @@ public class NumberField
 
     /**
      * Sets sub field to a fixed value
+     *
      * @param startx Starting X position
-     * @param endx   Last X position
+     * @param endx Last X position
      * @param starty Starting Y position
-     * @param endy   Last Y position
-     * @param value  The value
+     * @param endy Last Y position
+     * @param value The value
      * @return A new field
      */
     public NumberField setSubField(int startx, int endx, int starty, int endy, double value)
@@ -1379,9 +1449,10 @@ public class NumberField
 
     /**
      * Inserts field f into this field
+     *
      * @param startx X Where to insert
      * @param starty Y Where to insert
-     * @param f      Field to be inserted
+     * @param f Field to be inserted
      * @return A new result field
      */
     public NumberField setSubField(int startx, int starty, NumberField f)
@@ -1398,6 +1469,7 @@ public class NumberField
 
     /**
      * Expands this field by adding another field to the right
+     *
      * @param f Other field
      * @return A new field
      */
@@ -1411,6 +1483,7 @@ public class NumberField
 
     /**
      * Expands this field by adding another field to the left
+     *
      * @param f Other field
      * @return A new field
      */
@@ -1424,6 +1497,7 @@ public class NumberField
 
     /**
      * Expands this field by adding another field to the bottom
+     *
      * @param f Other field
      * @return A new field
      */
@@ -1437,6 +1511,7 @@ public class NumberField
 
     /**
      * Expands this field by adding another field to the top
+     *
      * @param f Other field
      * @return A new field
      */
@@ -1450,6 +1525,7 @@ public class NumberField
 
     /**
      * Appends a column to the right
+     *
      * @return A new value
      */
     public NumberField appendColumnRight()
@@ -1464,6 +1540,7 @@ public class NumberField
 
     /**
      * Appends a column to the right
+     *
      * @param val Value of all elements of that column
      * @return A new value
      */
@@ -1474,6 +1551,7 @@ public class NumberField
 
     /**
      * Appends a column to the left
+     *
      * @return A new value
      */
     public NumberField appendColumnLeft()
@@ -1483,6 +1561,7 @@ public class NumberField
 
     /**
      * Appends a column to the left
+     *
      * @param val Value of all elements of that column
      * @return A new value
      */
@@ -1493,6 +1572,7 @@ public class NumberField
 
     /**
      * Appends a row at the bottom
+     *
      * @return A new value
      */
     public NumberField appendRowBottom()
@@ -1507,6 +1587,7 @@ public class NumberField
 
     /**
      * Appends a row at the bottom
+     *
      * @param val Value of all elements of that row
      * @return A new value
      */
@@ -1517,6 +1598,7 @@ public class NumberField
 
     /**
      * Appends a row at the top
+     *
      * @return A new value
      */
     public NumberField appendRowTop()
@@ -1526,6 +1608,7 @@ public class NumberField
 
     /**
      * Appends a row at the top
+     *
      * @param val Value of all elements of that row
      * @return A new value
      */
@@ -1536,6 +1619,7 @@ public class NumberField
 
     /**
      * Appends columns and rows at either side
+     *
      * @return A new value
      */
     public NumberField appendFrame()
@@ -1545,6 +1629,7 @@ public class NumberField
 
     /**
      * Appends a frame around the field
+     *
      * @param val Value of all frame elements
      * @return The new field
      */
@@ -1554,34 +1639,25 @@ public class NumberField
     }
 
 //////////////////////////////// Informational stuff //////////////////////////////////////////////
-
     @Override
     public boolean equals(Object n)
     {
-        if (!(n instanceof NumberField))
+        return n.hashCode() == this.hashCode();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        Object[] a =
         {
-            return false;
-        }
-        NumberField nn = (NumberField) n;
-        if (nn.getWidth() != width || nn.getHeight() != height)
-        {
-            return false;
-        }
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                if (!values[a][b].equals(nn.values[a][b]))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
+            this
+        };
+        return Arrays.deepHashCode(a);
     }
 
     /**
      * Returns string representation
+     *
      * @return String describing this field
      */
     @Override
@@ -1599,6 +1675,22 @@ public class NumberField
         return s.toString();
     }
 
+    public String toCharString()
+    {
+        StringBuilder s = new StringBuilder();
+        for (int a = 0; a < height; a++)
+        {
+            for (int b = 0; b < width; b++)
+            {
+                s.append((char)(double)values[a][b]);
+                s.append (" ");
+            }
+            s.append("\n");
+        }
+        return s.toString();
+    }
+    
+    
     public void print()
     {
         System.out.println(toString());
@@ -1611,12 +1703,16 @@ public class NumberField
         double[] rowSums = rowSums();
         double[] colSums = colSums();
         double[] diffs = new double[Math.max(rowSums.length, colSums.length)];
-        for (int n=0; n<diffs.length; n++)
+        for (int n = 0; n < diffs.length; n++)
         {
             if (n >= rowSums.length || n >= colSums.length)
+            {
                 diffs[n] = 0;
+            }
             else
-                diffs[n] = Math.abs(rowSums[n]-colSums[n]);
+            {
+                diffs[n] = Math.abs(rowSums[n] - colSums[n]);
+            }
         }
 
         for (int a = 0; a < height; a++)
@@ -1740,7 +1836,7 @@ public class NumberField
         return sum;
     }
 
-    private double arraySum (double[] arr)
+    private double arraySum(double[] arr)
     {
         int sum = 0;
         for (double anArr : arr)
@@ -1758,7 +1854,9 @@ public class NumberField
             for (int b = 0; b < width; b++)
             {
                 if (values[a][b] < ret)
+                {
                     ret = values[a][b];
+                }
             }
         }
         return ret;
@@ -1772,10 +1870,11 @@ public class NumberField
             for (int b = 0; b < width; b++)
             {
                 if (values[a][b] > ret)
+                {
                     ret = values[a][b];
+                }
             }
         }
         return ret;
     }
 }
-

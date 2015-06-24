@@ -265,6 +265,11 @@ public class CryptMath implements BigIntValues
         return arr;
     }
 
+    public static long nextSquare (long x)
+    {
+        return (long)Math.ceil(Math.sqrt(x));
+    }
+    
     /**
      * Returns list of best two divisors
      * @param x Input value

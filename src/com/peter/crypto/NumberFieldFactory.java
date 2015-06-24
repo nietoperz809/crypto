@@ -1322,6 +1322,20 @@ class NumberFieldFactory
         return m;
     }
 
+    public static NumberField squareFromString (String in)
+    {
+        int sq = (int)CryptMath.nextSquare(in.length());
+        Double[] d = new Double[sq*sq];
+        for (int s=0; s<d.length; s++)
+        {
+            if (s < in.length())
+                d[s] = (double)in.charAt(s);
+            else
+                d[s] = (double)" ".charAt(0);
+        }
+        return fromArray (d, sq, sq);
+    }
+    
     public static NumberField fromArray (Integer[] arr, int x, int y)
     {
         Double[] d = fromIntArray (arr);
