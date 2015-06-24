@@ -222,7 +222,7 @@ public class CryptMath implements BigIntValues
      */
     public static BigInteger[] divisors(BigInteger x)
     {
-        ArrayList<BigInteger> list = new ArrayList<BigInteger>();
+        ArrayList<BigInteger> list = new ArrayList<>();
         BigInteger sqrt = sqrt(x);
         for (BigInteger n = ONE; n.compareTo(sqrt) <= 0; n = n.add(ONE))
         {

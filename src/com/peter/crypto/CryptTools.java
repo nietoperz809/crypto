@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Converts various array types
  */
-class CryptTools
+public class CryptTools
 {
     /**
      * Converts a byte- to an integer array
@@ -203,6 +203,22 @@ class CryptTools
         return res;
     }
 
+    public static byte inv (byte in)
+    {
+        return (byte)(in ^ 0xff);
+    }
+
+    public static byte[] inv(byte[] in)
+    {
+        int s;
+        byte[] out = new byte[in.length];
+        for (s = 0; s < in.length; s++)
+        {
+            out[s] = (byte)(in[s] ^ 0xff);
+        }
+        return out;
+    }
+    
     /**
      * Rotates byte array left
      * @param arr The source array
@@ -523,7 +539,7 @@ class CryptTools
     {
         return new String(rotateArrayBitsLeft(in.getBytes()));
     }
-
+    
     /**
      * Does galois field multiplication with value
      * @param in Array to be multiplied
@@ -574,7 +590,7 @@ class CryptTools
     }
 
     /**
-     * Does galois field divisoin with array
+     * Does galois field division with array
      * @param in Array to be divided
      * @param divs Array of divisors (none must be 0)
      * @return Divided array
