@@ -1,5 +1,6 @@
 package com.peter.crypto;
 
+import java.awt.Dimension;
 import java.util.*;
 
 /**
@@ -83,6 +84,11 @@ public class NumberField
         return height;
     }
 
+    public Dimension getSize()
+    {
+        return new Dimension (width, height);
+    }
+    
     /**
      * Sorts all rows
      *

@@ -1,11 +1,8 @@
 package com.peter.crypto;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 
 public class Test
 {
-
     public static void main(String[] args) throws Exception
     {
         String in = 
@@ -13,7 +10,8 @@ public class Test
                 + "und fixieren müsste." +
             "Damit ist der Traum von Erez zu Ende.";
         NumberField n = NumberFieldFactory.squareFromString(in);
-        for (int s = 0; s < in.length(); s++)
+        int rots = in.length();
+        for (int s = 0; s < rots; s++)
         {
             n = n.reverse();
             n = n.rotateColumnsDownIncremental();
@@ -22,17 +20,22 @@ public class Test
         
         String flat = n.asFlatString();
         NumberField n2 = NumberFieldFactory.squareFromString(flat);
-        for (int s = 0; s < in.length(); s++)
+        for (int s = 0; s < rots; s++)
         {
             n2 = n2.transpose();
             n2 = n2.rotateColumnsUpIncremental();
             n2 = n2.reverse();
         }
         
-        System.out.println(n.toCharString());
-        System.out.println(in);
-        System.out.println(flat);
-        System.out.println(n2.asFlatString());
+//        System.out.println(n.toCharString());
+//        System.out.println(in);
+//        System.out.println(flat);
+        
+        System.out.println(n2.getSize()+"\n"+n2.asFlatString());
+        System.out.println(n.getSize()+"\n"+n.asFlatString());
+
+        double nn = new SimilarStrings (n.asFlatString(), n2.asFlatString()).getResult();
+        System.out.println(nn);
     }
 }
 

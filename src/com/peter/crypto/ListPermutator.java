@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Permutator for lists
  */
-class ListPermutator<E>
+public class ListPermutator<E>
 {
     /**
      * Hold reference to source

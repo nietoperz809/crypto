@@ -14,6 +14,7 @@ import java.util.Set;
  */
 public class NumberFieldDisplay extends JPanel
 {
+    private static final long serialVersionUID = 1L;
     /**
      * Reference to field to be drawn
      */

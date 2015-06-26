@@ -7,7 +7,7 @@ import java.util.Random;
  * This is my fancy Aes256 class.
  * Written from scratch 'cause i want to learn how that works
  */
-class MyAES256
+public class MyAES256
 {
     private final byte[] key = new byte[32];
     private final byte[] enckey = new byte[32];
