@@ -10,7 +10,51 @@ public class Test
                 + "und fixieren müsste." +
             "Damit ist der Traum von Erez zu Ende.";
         NumberField n = NumberFieldFactory.squareFromString(in);
-        int rots = in.length();
+        
+        StringMatch dl = new StringMatch();
+        String start = n.asFlatString();
+        System.out.println(start.length());
+        for (int s=0; s<100; s++)
+        {
+            n = n.reverse();
+            n = n.rotateColumnsDownIncremental();
+            n = n.transpose();
+            String vgl = n.asFlatString();
+            //double nn = 10000 * new SimilarStrings (start, vgl).getResult() -9000;
+            
+            int nn = StringMatch.getLevenshteinDistance(start, vgl);
+            System.out.println(s+" "+nn);
+        }
+    }
+}
+
+
+/*
+    public static void main(String[] args) throws Exception
+    {
+        String in = 
+            "Weil Frieden bedeutet, dass der Staat Israel seine Grenzen definieren "
+                + "und fixieren müsste." +
+            "Damit ist der Traum von Erez zu Ende.";
+        NumberField n = NumberFieldFactory.squareFromString(in);
+        
+        StringMatch dl = new StringMatch();
+        String start = n.asFlatString();
+        System.out.println(start.length());
+        for (int s=0; s<100; s++)
+        {
+            n = n.reverse();
+            n = n.rotateColumnsDownIncremental();
+            n = n.transpose();
+            String vgl = n.asFlatString();
+            //double nn = 10000 * new SimilarStrings (start, vgl).getResult() -9000;
+            int nn = StringMatch.getLevenshteinDistance(start, vgl);
+            System.out.println(s+" "+nn);
+        }
+    }
+
+
+int rots = in.length();
         for (int s = 0; s < rots; s++)
         {
             n = n.reverse();
@@ -36,12 +80,9 @@ public class Test
 
         double nn = new SimilarStrings (n.asFlatString(), n2.asFlatString()).getResult();
         System.out.println(nn);
-    }
-}
 
 
-/*
- static String rotxor (String in) throws UnsupportedEncodingException
+static String rotxor (String in) throws UnsupportedEncodingException
  {
  byte[] b1 = in.getBytes("UTF-8");
  byte[] rot = CryptTools.rotateArrayLeft(b1, 1);
