@@ -19,26 +19,21 @@ public class CharCounter
     };
     private char[] result;
     private char[] reverse;
-    
-    public CharCounter(int len)
+
+    public void setMaterial(char[] mat)
     {
-        result = new char[len];
-        reverse = new char[len];
-        for (int s = 0; s < len; s++)
+        material = mat.clone();
+        for (int s = 0; s < result.length; s++)
         {
             result[s] = material[0];
         }
     }
 
-    public CharCounter(char[] m, int len)
+    public CharCounter(int len)
     {
-        material = m;
         result = new char[len];
         reverse = new char[len];
-        for (int s = 0; s < len; s++)
-        {
-            result[s] = material[0];
-        }
+        setMaterial (material);
     }
 
     private int index(char c)
@@ -53,7 +48,7 @@ public class CharCounter
         return -1; // error
     }
 
-    public boolean countUp (int idx)
+    public boolean countUp(int idx)
     {
         int i = index(result[idx]);
         if (i < (material.length - 1))
@@ -68,18 +63,20 @@ public class CharCounter
                 return countUp(idx + 1);
             }
             else
+            {
                 return false;
+            }
         }
         return true;
     }
 
-    public char[] getResult (boolean rev)
+    public char[] getResult(boolean rev)
     {
         if (rev == true)
         {
-            for (int s=0; s<result.length; s++)
+            for (int s = 0; s < result.length; s++)
             {
-                reverse[s] = result[result.length-s-1];
+                reverse[s] = result[result.length - s - 1];
             }
             return reverse;
         }
@@ -89,11 +86,19 @@ public class CharCounter
     public static void main(String[] args) throws Exception
     {
         CharCounter cc = new CharCounter(3);
+        char[] material =
+        {
+            'a', 'b', 'c'
+        };
+        cc.setMaterial(material);
+
         for (;;)
         {
             System.out.println(Arrays.toString(cc.getResult(true)));
             if (false == cc.countUp(0))
+            {
                 System.exit(999);
+            }
             Thread.sleep(10);
         }
     }
