@@ -11,8 +11,9 @@ import java.util.Collection;
  * ArrayList implementation capable of doing cyclic permutations
  * @param <E>
  */
-class PermutationArrayList<E> extends ArrayList<E>
+public class PermutationArrayList<E> extends ArrayList<E>
 {
+    private static final long serialVersionUID = 1L;
     private int[] permutationArray; /* Array to hold generated permutation */
     private int[] xx;
     private boolean first_call = true;
@@ -195,9 +196,14 @@ class PermutationArrayList<E> extends ArrayList<E>
         return res.size();
     }
 
-    public static void test()
+    public static void main (String[] a)
     {
-        PermutationArrayList<String> p = new PermutationArrayList<String>(Arrays.asList("hallo", "lala", "doof"));
-        p.printAll(System.out);
+//        List<String> l = Arrays.asList("hallo", "lala", "doof");
+//        PermutationArrayList<String> p = new PermutationArrayList<>(l);
+//        p.printAll(System.out);
+
+        List<Integer> l2 = Arrays.asList(0,1,2);
+        PermutationArrayList<Integer> p2 = new PermutationArrayList<>(l2);
+        p2.printAll(System.out);
     }
 }
