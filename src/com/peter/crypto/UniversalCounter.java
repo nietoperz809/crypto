@@ -5,25 +5,22 @@ package com.peter.crypto;
  */
 public final class UniversalCounter
 {
-    private char[] material =
-    {
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-    };
+    private char[] _digitSet;
     
-    private int _count;
+    private long _count;
     private int _len;
 
     /**
-     * Sets new material
-     * @param mat new material
+     * Sets new _digitSet
+     * @param mat new _digitSet
      */
     public void setMaterial(char[] mat)
     {
-        material = mat.clone();
+        _digitSet = mat.clone();
     }
 
     /**
-     * Sets new material
+     * Sets new _digitSet
      * @param c first character
      * @param num number of characters
      */
@@ -46,33 +43,17 @@ public final class UniversalCounter
     {
         _count = 0;
         _len = len;
-        setMaterial(material);
+        setMaterial('0', '9'-'0'+1);
     }
 
     /**
      * Advances the counter
      * @return false if counter reached the end
      */
-    public void tick()
+    public void setValue(long n)
     {
-        _count++;
+        _count = n;
     }
-
-    /**
-     * Advances the counter i times
-     * @param i
-     */
-    public void tick (int i)
-    {
-        while (i-- != 0)
-            tick();
-    }
-    
-    /**
-     * Recursive Workhorse 
-     * @param idx counter index that is currently addressed
-     * @return false if counter reached end
-     */
 
     /**
      * Get Counter as string
@@ -93,7 +74,7 @@ public final class UniversalCounter
     public String toTrimmedString (boolean rev)
     {
         String s = toString(rev);
-        String test = ""+material[0];
+        String test = ""+_digitSet[0];
         while (s.startsWith(test))
             s = s.substring(1);
         if (s.length() == 0)
@@ -109,15 +90,15 @@ public final class UniversalCounter
     public char[] getResult(boolean rev)
     {
         char[] res = new char[_len];
-        int c = _count;
+        long c = _count;
         for (int s=0; s<_len; s++)
         {
-            int c2 = c%material.length;
-            c = c/material.length;
+            int c2 = (int)(c%_digitSet.length);
+            c = c/_digitSet.length;
             if (rev == true)
-                res[_len-s-1] = material[c2];
+                res[_len-s-1] = _digitSet[c2];
             else
-                res[s] = material[c2];
+                res[s] = _digitSet[c2];
         }
         return res;
     }
@@ -130,16 +111,17 @@ public final class UniversalCounter
     public static void main(String[] args) throws Exception
     {
         UniversalCounter cc = new UniversalCounter(8);
-        cc.setMaterial('0', 2);
+        cc.setMaterial('0', '9'-'0'+1);
 
-        cc.tick(8);
-        System.out.println(cc.toTrimmedString(true));
+//        cc.tick(100);
+//        System.out.println(cc.toTrimmedString(true));
         
-//        for (;;)
-//        {
-//            System.out.println(cc.toTrimmedString(true));
-//            //System.out.println(Arrays.toString(cc.getResult(true)));
-//            cc.tick();
-//        }
+        long n = 1;
+        for (;;)
+        {
+            System.out.println(cc.toTrimmedString(true));
+            cc.setValue(n);
+            n++;
+        }
     }
 }
