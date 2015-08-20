@@ -25,6 +25,22 @@ public final class UniversalCounter
     }
 
     /**
+     * Sets new material
+     * @param c first character
+     * @param num number of characters
+     */
+    public void setMaterial (char c, int num)
+    {
+        char[] mat = new char[num];
+        for (int s=0; s<num; s++)
+        {
+            mat[s] = c;
+            c++;
+        }
+        setMaterial(mat);
+    }
+    
+    /**
      * Constructor
      * @param len Length of counter
      */
@@ -129,23 +145,19 @@ public final class UniversalCounter
     public static void main(String[] args) throws Exception
     {
         UniversalCounter cc = new UniversalCounter(8);
-        char[] material =
-        {
-            '0', '1' //, '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-        };
-        cc.setMaterial(material);
+        cc.setMaterial('a', 'z'-'a'+1);
 
-        cc.tick(127);
-        System.out.println(cc.toString(true));
+//        cc.tick(257);
+//        System.out.println(cc.toString(true));
         
-//        for (;;)
-//        {
-//            System.out.println(cc.toString(true));
-//            //System.out.println(Arrays.toString(cc.getResult(true)));
-//            if (false == cc.tick())
-//            {
-//                System.exit(999);
-//            }
-//        }
+        for (;;)
+        {
+            System.out.println(cc.toString(true));
+            //System.out.println(Arrays.toString(cc.getResult(true)));
+            if (false == cc.tick())
+            {
+                System.exit(999);
+            }
+        }
     }
 }
