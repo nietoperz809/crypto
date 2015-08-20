@@ -9,7 +9,9 @@ public final class UniversalCounter
     {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
     };
-    private final char[] result;
+    
+    private int _count;
+    private int _len;
 
     /**
      * Sets new material
@@ -18,10 +20,6 @@ public final class UniversalCounter
     public void setMaterial(char[] mat)
     {
         material = mat.clone();
-        for (int s = 0; s < result.length; s++)
-        {
-            result[s] = material[0];
-        }
     }
 
     /**
@@ -46,34 +44,18 @@ public final class UniversalCounter
      */
     public UniversalCounter(int len)
     {
-        result = new char[len];
+        _count = 0;
+        _len = len;
         setMaterial(material);
-    }
-
-    /**
-     * Calculates index of character in material array
-     * @param c the character
-     * @return the index
-     */
-    private int index(char c)
-    {
-        for (int s = 0; s < material.length; s++)
-        {
-            if (material[s] == c)
-            {
-                return s;
-            }
-        }
-        return -1; // error
     }
 
     /**
      * Advances the counter
      * @return false if counter reached the end
      */
-    public boolean tick()
+    public void tick()
     {
-        return countUp(0);
+        _count++;
     }
 
     /**
@@ -91,21 +73,6 @@ public final class UniversalCounter
      * @param idx counter index that is currently addressed
      * @return false if counter reached end
      */
-    private boolean countUp(int idx)
-    {
-        int i = index(result[idx]);
-        if (i < (material.length - 1))
-        {
-            result[idx] = material[i + 1];
-            return true;
-        }
-        result[idx] = material[0];
-        if (idx < (result.length - 1))
-        {
-            return countUp(idx + 1);
-        }
-        return false;
-    }
 
     /**
      * Get Counter as string
@@ -119,22 +86,40 @@ public final class UniversalCounter
     }
 
     /**
+     * Returns as String but omits leading zeros
+     * @param rev true if string is reversed
+     * @return the string
+     */
+    public String toTrimmedString (boolean rev)
+    {
+        String s = toString(rev);
+        String test = ""+material[0];
+        while (s.startsWith(test))
+            s = s.substring(1);
+        if (s.length() == 0)
+            return test;
+        return s;
+    }
+    
+    /**
      * Get counter as array
      * @param rev true if output should be reverted
      * @return the array
      */
     public char[] getResult(boolean rev)
     {
-        if (rev == true)
+        char[] res = new char[_len];
+        int c = _count;
+        for (int s=0; s<_len; s++)
         {
-            char[] reverse = new char[result.length];
-            for (int s = 0; s < result.length; s++)
-            {
-                reverse[s] = result[result.length - s - 1];
-            }
-            return reverse;
+            int c2 = c%material.length;
+            c = c/material.length;
+            if (rev == true)
+                res[_len-s-1] = material[c2];
+            else
+                res[s] = material[c2];
         }
-        return result.clone();
+        return res;
     }
 
     /**
@@ -145,19 +130,16 @@ public final class UniversalCounter
     public static void main(String[] args) throws Exception
     {
         UniversalCounter cc = new UniversalCounter(8);
-        cc.setMaterial('a', 'z'-'a'+1);
+        cc.setMaterial('0', 2);
 
-//        cc.tick(257);
-//        System.out.println(cc.toString(true));
+        cc.tick(8);
+        System.out.println(cc.toTrimmedString(true));
         
-        for (;;)
-        {
-            System.out.println(cc.toString(true));
-            //System.out.println(Arrays.toString(cc.getResult(true)));
-            if (false == cc.tick())
-            {
-                System.exit(999);
-            }
-        }
+//        for (;;)
+//        {
+//            System.out.println(cc.toTrimmedString(true));
+//            //System.out.println(Arrays.toString(cc.getResult(true)));
+//            cc.tick();
+//        }
     }
 }
