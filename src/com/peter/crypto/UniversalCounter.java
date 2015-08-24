@@ -11,6 +11,17 @@ public final class UniversalCounter
     private int _len;
 
     /**
+     * Constructor
+     * @param len Length of generated string
+     */
+    public UniversalCounter(int len)
+    {
+        _count = 0;
+        _len = len;
+        setMaterial('0', '9'-'0'+1);
+    }
+
+    /**
      * Sets new _digitSet
      * @param mat new _digitSet
      */
@@ -35,20 +46,14 @@ public final class UniversalCounter
         setMaterial(mat);
     }
     
-    /**
-     * Constructor
-     * @param len Length of counter
-     */
-    public UniversalCounter(int len)
+    public void setMaterial (char first, char last)
     {
-        _count = 0;
-        _len = len;
-        setMaterial('0', '9'-'0'+1);
+        setMaterial(first, last-first+1);
     }
 
     /**
-     * Advances the counter
-     * @return false if counter reached the end
+     * Sets a value for conversion
+     * @param n the value
      */
     public void setValue(long n)
     {
@@ -62,8 +67,7 @@ public final class UniversalCounter
      */
     public String toString(boolean rev)
     {
-        char[] c = getResult(rev);
-        return String.valueOf(c);
+        return String.valueOf(getResult(rev));
     }
 
     /**
@@ -111,7 +115,7 @@ public final class UniversalCounter
     public static void main(String[] args) throws Exception
     {
         UniversalCounter cc = new UniversalCounter(8);
-        cc.setMaterial('0', '9'-'0'+1);
+        cc.setMaterial('0', '9');
 
 //        cc.tick(100);
 //        System.out.println(cc.toTrimmedString(true));

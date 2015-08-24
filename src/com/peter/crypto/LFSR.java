@@ -3,7 +3,7 @@ package com.peter.crypto;
 /**
  * Class that implements a linear feedback shift register
  */
-class LFSR extends ShiftRegister
+public class LFSR extends ShiftRegister
 {
     /**
      * The list of 'Taps'
