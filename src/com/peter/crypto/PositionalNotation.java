@@ -3,18 +3,18 @@ package com.peter.crypto;
 /**
  * Character-based counter
  */
-public final class UniversalCounter
+public final class PositionalNotation
 {
     private char[] _digitSet;
     
     private long _count;
-    private int _len;
+    private final int _len;
 
     /**
      * Constructor
      * @param len Length of generated string
      */
-    public UniversalCounter(int len)
+    public PositionalNotation(int len)
     {
         _count = 0;
         _len = len;
@@ -62,22 +62,21 @@ public final class UniversalCounter
 
     /**
      * Get Counter as string
-     * @param rev true if output should be reverted
      * @return the string
      */
-    public String toString(boolean rev)
+    @Override
+    public String toString()
     {
-        return String.valueOf(getResult(rev));
+        return String.valueOf(getResult());
     }
 
     /**
      * Returns as String but omits leading zeros
-     * @param rev true if string is reversed
      * @return the string
      */
-    public String toTrimmedString (boolean rev)
+    public String toTrimmedString()
     {
-        String s = toString(rev);
+        String s = toString();
         String test = ""+_digitSet[0];
         while (s.startsWith(test))
             s = s.substring(1);
@@ -87,22 +86,19 @@ public final class UniversalCounter
     }
     
     /**
-     * Get counter as array
-     * @param rev true if output should be reverted
+     * Workhorse: Get counter as array
      * @return the array
      */
-    public char[] getResult(boolean rev)
+    public char[] getResult()
     {
         char[] res = new char[_len];
         long c = _count;
+        int c2;
         for (int s=0; s<_len; s++)
         {
-            int c2 = (int)(c%_digitSet.length);
+            c2 = (int)(c%_digitSet.length);
             c = c/_digitSet.length;
-            if (rev == true)
-                res[_len-s-1] = _digitSet[c2];
-            else
-                res[s] = _digitSet[c2];
+            res[_len-s-1] = _digitSet[c2];
         }
         return res;
     }
@@ -114,7 +110,7 @@ public final class UniversalCounter
      */
     public static void main(String[] args) throws Exception
     {
-        UniversalCounter cc = new UniversalCounter(8);
+        PositionalNotation cc = new PositionalNotation(8);
         cc.setMaterial('0', '9');
 
 //        cc.tick(100);
@@ -123,7 +119,7 @@ public final class UniversalCounter
         long n = 1;
         for (;;)
         {
-            System.out.println(cc.toTrimmedString(true));
+            System.out.println(cc.toTrimmedString());
             cc.setValue(n);
             n++;
         }
