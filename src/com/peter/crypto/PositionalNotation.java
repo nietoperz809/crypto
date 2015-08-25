@@ -94,11 +94,11 @@ public final class PositionalNotation
         char[] res = new char[_len];
         long c = _count;
         int c2;
-        for (int s=0; s<_len; s++)
+        for (int s=1; s<=_len; s++)
         {
             c2 = (int)(c%_digitSet.length);
             c = c/_digitSet.length;
-            res[_len-s-1] = _digitSet[c2];
+            res[_len-s] = _digitSet[c2];
         }
         return res;
     }
