@@ -116,12 +116,10 @@ public final class PositionalNotation
 //        cc.tick(100);
 //        System.out.println(cc.toTrimmedString(true));
         
-        long n = 1;
-        for (;;)
+        for (long n=0; n<20; n++)
         {
-            System.out.println(cc.toTrimmedString());
             cc.setValue(n);
-            n++;
+            System.out.println(cc.toTrimmedString());
         }
     }
 }
