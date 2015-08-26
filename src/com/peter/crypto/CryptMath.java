@@ -193,7 +193,7 @@ public class CryptMath implements BigIntValues
      */
     private static BigInteger[] reducedSetOfResidues(BigInteger xx)
     {
-        ArrayList<BigInteger> list = new ArrayList<BigInteger>();
+        ArrayList<BigInteger> list = new ArrayList<>();
         for (BigInteger s = ONE; s.compareTo(xx) <= 0; s = s.add(ONE))
         {
             if (relativelyPrime(s, xx))
@@ -245,7 +245,7 @@ public class CryptMath implements BigIntValues
      */
     private static long[] divisors(long x)
     {
-        ArrayList<Long> list = new ArrayList<Long>();
+        ArrayList<Long> list = new ArrayList<>();
         long sqr = (long)Math.sqrt(x);
         for (long n = 1; n <= sqr; n++)
         {
@@ -693,11 +693,13 @@ public class CryptMath implements BigIntValues
 
     public static BigInteger[] primeFilter (BigInteger[] in)
     {
-        ArrayList<BigInteger> list = new ArrayList<BigInteger>();
-        for (int s=0; s<in.length; s++)
+        ArrayList<BigInteger> list = new ArrayList<>();
+        for (BigInteger in1 : in)
         {
-            if (millerRabinPrimeTest (in[s]))
-                list.add(in[s]);
+            if (millerRabinPrimeTest(in1))
+            {
+                list.add(in1);
+            }
         }
         BigInteger[] out = new BigInteger[list.size()];
         return list.toArray(out);
@@ -724,5 +726,11 @@ public class CryptMath implements BigIntValues
             p = p.add(ONE);
         }
         return p;
+    }
+
+    public static void main(String[] args)
+    {
+        BigInteger p = getNextPrimeAbove(BigInteger.valueOf(12345678));
+        System.out.println(p);
     }
 }

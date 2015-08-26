@@ -7,8 +7,8 @@ import java.math.BigInteger;
  */
 public class CharNumbers
 {
-    private String charset;
-    private int cslen;
+    private final String charset;
+    private final int cslen;
 
     public CharNumbers (String cs)
     {
@@ -34,6 +34,11 @@ public class CharNumbers
         return nsHelper (number, cslen, s);
     }
 
+    public String numberString (long number)
+    {
+        return numberString (BigInteger.valueOf(number));
+    }
+    
     public BigInteger stringNumber (String number)
     {
         BigInteger exp = BigInteger.ONE;
@@ -53,5 +58,11 @@ public class CharNumbers
         }
         return sum;
     }
-
+    
+    public static void main(String[] args)
+    {
+        CharNumbers cn = new CharNumbers ("01");
+        String s = cn.numberString(BigInteger.valueOf(1234));
+        System.out.println(s);
+    }
 }

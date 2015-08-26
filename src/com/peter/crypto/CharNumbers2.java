@@ -3,7 +3,7 @@ package com.peter.crypto;
 /**
  * Character-based counter
  */
-public final class PositionalNotation
+public final class CharNumbers2
 {
     private char[] _digitSet;
     
@@ -14,7 +14,7 @@ public final class PositionalNotation
      * Constructor
      * @param len Length of generated string
      */
-    public PositionalNotation(int len)
+    public CharNumbers2(int len)
     {
         _count = 0;
         _len = len;
@@ -110,7 +110,7 @@ public final class PositionalNotation
      */
     public static void main(String[] args) throws Exception
     {
-        PositionalNotation cc = new PositionalNotation(8);
+        CharNumbers2 cc = new CharNumbers2(8);
         cc.setMaterial('0', '9');
 
 //        cc.tick(100);

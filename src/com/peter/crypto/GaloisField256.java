@@ -9,8 +9,8 @@ public class GaloisField256
     private final int GF = 256;
 
     // establish global Log and Antilog arrays
-    private int[] Log = new int[GF];
-    private int[] ALog = new int[GF];
+    private final int[] Log = new int[GF];
+    private final int[] ALog = new int[GF];
 
     static GaloisField256 m_instance = null;
 
@@ -36,12 +36,12 @@ public class GaloisField256
 
     public int[] getLog()
     {
-        return Log;
+        return Log.clone();
     }
 
     public int[] getALog()
     {
-        return ALog;
+        return ALog.clone();
     }
 
     public static GaloisField256 getInstance()
