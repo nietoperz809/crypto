@@ -7,7 +7,6 @@ public final class CharNumbers2
 {
     private char[] _digitSet;
     
-    private long _count;
     private final int _len;
 
     /**
@@ -16,9 +15,8 @@ public final class CharNumbers2
      */
     public CharNumbers2(int len)
     {
-        _count = 0;
         _len = len;
-        setMaterial('0', '9'-'0'+1);
+        setMaterial("0123456789");
     }
 
     /**
@@ -32,51 +30,31 @@ public final class CharNumbers2
 
     /**
      * Sets new _digitSet
-     * @param c first character
-     * @param num number of characters
+     * @param s new digitSet as String
      */
-    public void setMaterial (char c, int num)
+    public void setMaterial (String s)
     {
-        char[] mat = new char[num];
-        for (int s=0; s<num; s++)
-        {
-            mat[s] = c;
-            c++;
-        }
-        setMaterial(mat);
+        setMaterial (s.toCharArray());
     }
     
-    public void setMaterial (char first, char last)
-    {
-        setMaterial(first, last-first+1);
-    }
-
-    /**
-     * Sets a value for conversion
-     * @param n the value
-     */
-    public void setValue(long n)
-    {
-        _count = n;
-    }
-
     /**
      * Get Counter as string
+     * @param value input Value
      * @return the string
      */
-    @Override
-    public String toString()
+    public String toString (long value)
     {
-        return String.valueOf(getResult());
+        return String.valueOf(getResult(value));
     }
 
     /**
      * Returns as String but omits leading zeros
+     * @param value input Value
      * @return the string
      */
-    public String toTrimmedString()
+    public String toTrimmedString(long value)
     {
-        String s = toString();
+        String s = toString(value);
         String test = ""+_digitSet[0];
         while (s.startsWith(test))
             s = s.substring(1);
@@ -87,12 +65,13 @@ public final class CharNumbers2
     
     /**
      * Workhorse: Get counter as array
+     * @param value input value
      * @return the array
      */
-    public char[] getResult()
+    public char[] getResult (long value)
     {
         char[] res = new char[_len];
-        long c = _count;
+        long c = value;
         int c2;
         for (int s=1; s<=_len; s++)
         {
@@ -110,16 +89,12 @@ public final class CharNumbers2
      */
     public static void main(String[] args) throws Exception
     {
-        CharNumbers2 cc = new CharNumbers2(8);
-        cc.setMaterial('0', '9');
+        CharNumbers2 cc = new CharNumbers2(10);
+        cc.setMaterial("01234567890abcdef");
 
-//        cc.tick(100);
-//        System.out.println(cc.toTrimmedString(true));
-        
         for (long n=0; n<20; n++)
         {
-            cc.setValue(n);
-            System.out.println(cc.toTrimmedString());
+            System.out.println(cc.toTrimmedString(123456789));
         }
     }
 }

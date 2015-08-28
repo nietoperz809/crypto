@@ -8,12 +8,10 @@ import java.math.BigInteger;
 public class CharNumbers
 {
     private final String charset;
-    private final int cslen;
 
     public CharNumbers (String cs)
     {
         charset = cs;
-        cslen = cs.length();
     }
 
     private String nsHelper (BigInteger number, int base, String str)
@@ -26,24 +24,18 @@ public class CharNumbers
         return str;
     }
 
-    public String numberString (BigInteger number)
+    public String toString (BigInteger number)
     {
         if (number.compareTo(BigInteger.ZERO) == 0)
             return "0";
         String s = "";
-        return nsHelper (number, cslen, s);
+        return nsHelper (number, charset.length(), s);
     }
 
-    public String numberString (long number)
-    {
-        return numberString (BigInteger.valueOf(number));
-    }
-    
-    public BigInteger stringNumber (String number)
+    public BigInteger toNumber (String number) throws Exception
     {
         BigInteger exp = BigInteger.ONE;
         BigInteger sum = BigInteger.ZERO;
-        BigInteger err = BigInteger.valueOf(-1);
         int len = number.length() - 1;
         int idx;
         char c;
@@ -51,18 +43,22 @@ public class CharNumbers
         {
             c = number.charAt(n);
             idx = charset.indexOf(c);
-            if (idx == -1 || idx >= cslen)
-                return err;
+            if (idx < 0)
+                throw new Exception ("Input Set Mismatch");
             sum = sum.add(BigInteger.valueOf(idx).multiply(exp));
-            exp = exp.multiply(BigInteger.valueOf (cslen));
+            exp = exp.multiply(BigInteger.valueOf (charset.length()));
         }
         return sum;
     }
     
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
-        CharNumbers cn = new CharNumbers ("01");
-        String s = cn.numberString(BigInteger.valueOf(1234));
+        CharNumbers cn = new CharNumbers ("0123456789abcdef");
+        
+        String s = cn.toString(BigInteger.valueOf(65536));
         System.out.println(s);
+        
+        BigInteger i = cn.toNumber("0");
+        System.out.println(i);
     }
 }
