@@ -1,40 +1,42 @@
 package com.peter.crypto;
 
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
 /**
  * 17296950165164170047139891882388300467691593 --> HARD!!!
- *
+ * Brent is fastest!
  */
 public class Factorizer implements BigIntValues
 {
     /**
      * List of first 1001 primes
      */
-    private static long firstPrimes[] =
-            {
-                2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
-                67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137,
-                139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199,
-                211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277,
-                281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359,
-                367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439,
-                443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521,
-                523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607,
-                613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683,
-                691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773,
-                787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863,
-                877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967,
-                971, 977, 983, 991, 997, 1009
-            };
+    private static final long firstPrimes[] =
+    {
+        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
+        67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137,
+        139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199,
+        211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277,
+        281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359,
+        367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439,
+        443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521,
+        523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607,
+        613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683,
+        691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773,
+        787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863,
+        877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967,
+        971, 977, 983, 991, 997, 1009
+    };
 
     /**
      * Seeks prime factor in firstPrime list
+     *
      * @param x Number to factor
      * @return Prime if found or <b>null</b> if not found
      */
-    public static BigInteger isFirstPrimeDivisor (BigInteger x)
+    public static BigInteger isFirstPrimeDivisor(BigInteger x)
     {
         for (long firstPrime : firstPrimes)
         {
@@ -49,24 +51,30 @@ public class Factorizer implements BigIntValues
 
     /**
      * Gets prime factor by trial division
-     * @param x  Number to factor
+     *
+     * @param x Number to factor
      * @return Prime if found or the number itself if not found
      */
     public static BigInteger getTrialDivisor(BigInteger x)
     {
         BigInteger s;
-        BigInteger end = CryptMath.sqrt(x); 
-        for (s = TWO ;s.compareTo(end)<0; s = s.add(ONE))
+        BigInteger end = CryptMath.sqrt(x);
+        if (end.compareTo(TWO) <= 0)
+            end = x;
+        for (s = TWO; s.compareTo(end) < 0; s = s.add(ONE))
         {
             BigInteger mod = x.mod(s);
             if (mod.compareTo(ZERO) == 0)
+            {
                 return s;
+            }
         }
         return x;
     }
 
     /**
      * Decomposits a number int primes by trial division
+     *
      * @param x The number
      * @return A list of all prime factors
      */
@@ -77,9 +85,13 @@ public class Factorizer implements BigIntValues
         {
             BigInteger div = isFirstPrimeDivisor(x);
             if (div == null)
+            {
                 div = getTrialDivisor(x);
+            }
             if (div.compareTo(ONE) == 0)
+            {
                 break;
+            }
             list.add(div);
             x = x.divide(div);
         }
@@ -87,24 +99,83 @@ public class Factorizer implements BigIntValues
         return list.toArray(arr);
     }
 
+    public static BigInteger rhoFactor (BigInteger N)
+    {
+        BigInteger divisor;
+        SecureRandom random = new SecureRandom();
+        BigInteger c = new BigInteger(N.bitLength(), random);
+        BigInteger x = new BigInteger(N.bitLength(), random);
+        BigInteger xx = x;
+
+        if (N.bitCount() == 1)
+        {
+            return N;
+        }
+        // check divisibility by 2
+        if (N.mod(TWO).compareTo(ZERO) == 0)
+        {
+            return TWO;
+        }
+
+        do
+        {
+            x = x.multiply(x).mod(N).add(c).mod(N);
+            xx = xx.multiply(xx).mod(N).add(c).mod(N);
+            xx = xx.multiply(xx).mod(N).add(c).mod(N);
+            divisor = x.subtract(xx).gcd(N);
+        }
+        while ((divisor.compareTo(ONE)) == 0);
+
+        return divisor;
+    }
+
+    public static BigInteger[] factByRho(BigInteger x)
+    {
+        ArrayList<BigInteger> list = new ArrayList<>();
+        for (;;)
+        {
+            BigInteger div = isFirstPrimeDivisor(x);
+            if (div == null)
+            {
+                div = rhoFactor(x);
+            }
+            if (div.compareTo(ONE) == 0)
+            {
+                break;
+            }
+            list.add(div);
+            x = x.divide(div);
+        }
+        BigInteger[] arr = new BigInteger[1];
+        return list.toArray(arr);
+    }
+    
+    
     /**
      * Finds prime factor using the BRENT method
+     *
      * @param n Number to factor
      * @return A prime number that is a prime factor of n
      */
-    public static BigInteger brentFactor (BigInteger n)
+    public static BigInteger brentFactor(BigInteger n)
     {
         if (n.bitCount() == 1)
+        {
             return n;
+        }
         if (CryptMath.isPowerOfTwo(n))
+        {
             return n;
+        }
         if (CryptMath.millerRabinPrimeTest(n))
+        {
             return n;
+        }
 
         BigInteger xi = TWO;
         BigInteger xm = TWO;
         BigInteger s;
-        for (int i = 1;;i++)
+        for (int i = 1;; i++)
         {
             xi = xi.pow(2).add(ONE).mod(n);
             s = (xi.subtract(xm)).gcd(n);
@@ -112,38 +183,68 @@ public class Factorizer implements BigIntValues
             {
                 return s;
             }
-            if ((i&(i-1)) == 0)
+            if ((i & (i - 1)) == 0)
             {
                 xm = xi;
             }
             /*
-            if (i%10000 == 0)     // peter!!!
-            {
-               xm = xm.add (CryptMath.getNextPrimeAbove(n));
-            }
-            */
+             if (i%10000 == 0)     // peter!!!
+             {
+             xm = xm.add (CryptMath.getNextPrimeAbove(n));
+             }
+             */
         }
     }
 
     /**
-     * Decomposits a number into primes using BRENT method
+     * Decomposit a number into primes using BRENT method
+     *
      * @param x Number to factor
      * @return List of all prime factors
      */
-    public static BigInteger[] factByBrent (BigInteger x)
+    public static BigInteger[] factByBrent(BigInteger x)
     {
-        ArrayList<BigInteger> list = new ArrayList<BigInteger>();
+        ArrayList<BigInteger> list = new ArrayList<>();
         for (;;)
         {
             BigInteger div = isFirstPrimeDivisor(x);
             if (div == null)
+            {
                 div = brentFactor(x);
+            }
             if (div.compareTo(ONE) == 0)
+            {
                 break;
+            }
             list.add(div);
             x = x.divide(div);
         }
         BigInteger[] arr = new BigInteger[1];
         return list.toArray(arr);
+    }
+
+    public static void main(String[] args)
+    {
+        for (int s=2; s<1000000; s++)
+        {
+            BigInteger n = BigInteger.valueOf(s);
+            BigInteger b = Factorizer.getTrialDivisor(n);
+            System.out.println(b);
+        }
+//        //BigInteger b1 = new BigInteger("111111111111111111111111111111111111111111111111111111111111111111111111111");
+//        BigInteger b1 = new BigInteger("11111111111111111111111111111111111111111111111");
+//        //BigInteger b1 = new BigInteger("17296950165164170047139891882388300467691593");
+//        Instant start = Instant.now();
+//        BigInteger[] list = factByBrent(b1);
+//        Instant end = Instant.now();
+//        System.out.println(Duration.between(start, end));
+//        System.out.println(Arrays.toString(list));
+//
+//        start = Instant.now();
+//        list = factByRho(b1);
+//        end = Instant.now();
+//        System.out.println(Duration.between(start, end));
+//        System.out.println(Arrays.toString(list));
+    
     }
 }
