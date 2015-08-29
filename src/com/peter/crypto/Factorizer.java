@@ -1,8 +1,12 @@
 package com.peter.crypto;
 
+import java.io.IOException;
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 17296950165164170047139891882388300467691593 --> HARD!!!
@@ -49,6 +53,21 @@ public class Factorizer implements BigIntValues
         return null;
     }
 
+    public static List<BigInteger> getFirstPrimeDivisors(BigInteger x)
+    {
+        List<BigInteger> list = new ArrayList<>();
+        for (long firstPrime : firstPrimes)
+        {
+            BigInteger test = BigInteger.valueOf(firstPrime);
+            if (x.mod(test).compareTo(ZERO) == 0)
+            {
+                list.add(test);
+            }
+        }
+        return list;
+    }
+    
+    
     /**
      * Gets prime factor by trial division
      *
@@ -59,7 +78,7 @@ public class Factorizer implements BigIntValues
     {
         BigInteger s;
         BigInteger end = CryptMath.sqrt(x);
-        if (end.compareTo(TWO) <= 0)
+        if (end.compareTo(THREE) <= 0)
             end = x;
         for (s = TWO; s.compareTo(end) < 0; s = s.add(ONE))
         {
@@ -98,58 +117,6 @@ public class Factorizer implements BigIntValues
         BigInteger[] arr = new BigInteger[list.size()];
         return list.toArray(arr);
     }
-
-    public static BigInteger rhoFactor (BigInteger N)
-    {
-        BigInteger divisor;
-        SecureRandom random = new SecureRandom();
-        BigInteger c = new BigInteger(N.bitLength(), random);
-        BigInteger x = new BigInteger(N.bitLength(), random);
-        BigInteger xx = x;
-
-        if (N.bitCount() == 1)
-        {
-            return N;
-        }
-        // check divisibility by 2
-        if (N.mod(TWO).compareTo(ZERO) == 0)
-        {
-            return TWO;
-        }
-
-        do
-        {
-            x = x.multiply(x).mod(N).add(c).mod(N);
-            xx = xx.multiply(xx).mod(N).add(c).mod(N);
-            xx = xx.multiply(xx).mod(N).add(c).mod(N);
-            divisor = x.subtract(xx).gcd(N);
-        }
-        while ((divisor.compareTo(ONE)) == 0);
-
-        return divisor;
-    }
-
-    public static BigInteger[] factByRho(BigInteger x)
-    {
-        ArrayList<BigInteger> list = new ArrayList<>();
-        for (;;)
-        {
-            BigInteger div = isFirstPrimeDivisor(x);
-            if (div == null)
-            {
-                div = rhoFactor(x);
-            }
-            if (div.compareTo(ONE) == 0)
-            {
-                break;
-            }
-            list.add(div);
-            x = x.divide(div);
-        }
-        BigInteger[] arr = new BigInteger[1];
-        return list.toArray(arr);
-    }
-    
     
     /**
      * Finds prime factor using the BRENT method
@@ -223,28 +190,37 @@ public class Factorizer implements BigIntValues
         return list.toArray(arr);
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
-        for (int s=2; s<1000000; s++)
-        {
-            BigInteger n = BigInteger.valueOf(s);
-            BigInteger b = Factorizer.getTrialDivisor(n);
-            System.out.println(b);
-        }
-//        //BigInteger b1 = new BigInteger("111111111111111111111111111111111111111111111111111111111111111111111111111");
-//        BigInteger b1 = new BigInteger("11111111111111111111111111111111111111111111111");
-//        //BigInteger b1 = new BigInteger("17296950165164170047139891882388300467691593");
-//        Instant start = Instant.now();
-//        BigInteger[] list = factByBrent(b1);
-//        Instant end = Instant.now();
-//        System.out.println(Duration.between(start, end));
-//        System.out.println(Arrays.toString(list));
-//
+        //BigInteger b1 = new BigInteger("111111111111111111111111111111111111111111111111111111111111111111111111111");
+        BigInteger b1 = new BigInteger("11111111111111111111111111111111111111111111");
+        //BigInteger b1 = new BigInteger("17296950165164170047139891882388300467691593");
+        Instant start = Instant.now();
+        BigInteger[] list = factByBrent(b1);
+        Instant end = Instant.now();
+        System.out.println(Duration.between(start, end));
+        System.out.println(Arrays.toString(list));
+
 //        start = Instant.now();
 //        list = factByRho(b1);
 //        end = Instant.now();
 //        System.out.println(Duration.between(start, end));
 //        System.out.println(Arrays.toString(list));
-    
+//    
     }
 }
+
+/*
+        byte[] arr = new byte[10000000];
+        for (int s=2; s<10000002; s++)
+        {
+            BigInteger n = BigInteger.valueOf(s);
+            BigInteger b = Factorizer.getTrialDivisor(n);
+            if (b.equals(n))
+                arr[s-2]=(byte)'p';
+            else
+                arr[s-2]=(byte)'-';
+        }
+        IO.writeFile("c:\\primes.txt", arr);
+
+*/
