@@ -40,7 +40,7 @@ public class Factorizer implements BigIntValues
      * @param x Number to factor
      * @return Prime if found or <b>null</b> if not found
      */
-    public static BigInteger isFirstPrimeDivisor(BigInteger x)
+    public static BigInteger isSmallPrimeDivisor(BigInteger x)
     {
         for (long firstPrime : firstPrimes)
         {
@@ -102,7 +102,7 @@ public class Factorizer implements BigIntValues
         ArrayList<BigInteger> list = new ArrayList<BigInteger>();
         for (;;)
         {
-            BigInteger div = isFirstPrimeDivisor(x);
+            BigInteger div = isSmallPrimeDivisor(x);
             if (div == null)
             {
                 div = getTrialDivisor(x);
@@ -172,13 +172,17 @@ public class Factorizer implements BigIntValues
     public static BigInteger[] factByBrent(BigInteger x)
     {
         ArrayList<BigInteger> list = new ArrayList<>();
-        for (;;)
+        for(;;) // first check small primes
         {
-            BigInteger div = isFirstPrimeDivisor(x);
+            BigInteger div = isSmallPrimeDivisor(x);
             if (div == null)
-            {
-                div = brentFactor(x);
-            }
+                break;
+            list.add(div);
+            x = x.divide(div);
+        }
+        for (;;) // then use Brent
+        {
+            BigInteger div = brentFactor(x);
             if (div.compareTo(ONE) == 0)
             {
                 break;
@@ -186,15 +190,20 @@ public class Factorizer implements BigIntValues
             list.add(div);
             x = x.divide(div);
         }
-        BigInteger[] arr = new BigInteger[1];
-        return list.toArray(arr);
+        return list.toArray(new BigInteger[list.size()]);
     }
 
     public static void main(String[] args) throws IOException
     {
         //BigInteger b1 = new BigInteger("111111111111111111111111111111111111111111111111111111111111111111111111111");
-        BigInteger b1 = new BigInteger("11111111111111111111111111111111111111111111");
-        //BigInteger b1 = new BigInteger("17296950165164170047139891882388300467691593");
+        //BigInteger b1 = new BigInteger("111111111111111111111111111111111111111111111111");
+        //BigInteger b1 = new BigInteger(""+(5*5*5));
+        
+        // PT2M26.022S
+        // [55351781210701, 312491301758148310989239616493]
+        BigInteger b1 = new BigInteger("17296950165164170047139891882388300467691593");
+
+        //BigInteger b1 = new BigInteger("123456");
         Instant start = Instant.now();
         BigInteger[] list = factByBrent(b1);
         Instant end = Instant.now();
