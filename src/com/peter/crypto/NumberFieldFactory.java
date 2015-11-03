@@ -3,7 +3,7 @@ package com.peter.crypto;
 import java.util.Arrays;
 import java.util.Random;
 
-class NumberFieldFactory
+public class NumberFieldFactory
 {
     /**
      * Generates array of primes

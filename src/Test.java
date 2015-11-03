@@ -1,4 +1,9 @@
-package com.peter.crypto;
+
+import com.peter.crypto.NumberField;
+import com.peter.crypto.NumberFieldFactory;
+import com.peter.crypto.StringMatch;
+
+
 
 
 public class Test
