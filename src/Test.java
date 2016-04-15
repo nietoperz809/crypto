@@ -1,21 +1,31 @@
 
-import com.peter.crypto.NumberField;
-import com.peter.crypto.NumberFieldFactory;
-import com.peter.crypto.StringMatch;
-
-
+import com.peter.crypto.*;
 
 
 public class Test
 {
     public static void main(String[] args) throws Exception
     {
-        String in = 
+        String base = "abcdefghijklmnopqrstuvwxyz";
+        String seek = "peter";
+        for (int s=0;s<100; s++)
+        {
+            String str = CryptTools.generateRandomString (seek/*, 5*/);
+            SimilarStrings ss = new SimilarStrings (seek,str);
+            double res = ss.getResult();
+            System.out.println (str+" - "+res);
+        }
+    }
+}
+
+/*
+
+        String in =
             "Weil Frieden bedeutet, dass der Staat Israel seine Grenzen definieren "
                 + "und fixieren müsste." +
             "Damit ist der Traum von Erez zu Ende.";
         NumberField n = NumberFieldFactory.squareFromString(in);
-        
+
         StringMatch dl = new StringMatch();
         String start = n.asFlatString();
         System.out.println(start.length());
@@ -26,13 +36,13 @@ public class Test
             n = n.transpose();
             String vgl = n.asFlatString();
             //double nn = 10000 * new SimilarStrings (start, vgl).getResult() -9000;
-            
+
             int nn = StringMatch.getLevenshteinDistance(start, vgl);
             System.out.println(s+" "+nn);
         }
-    }
-}
 
+
+ */
 
 /*
     public static void main(String[] args) throws Exception

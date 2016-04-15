@@ -33,7 +33,7 @@ public class ShiftRegister
     }
 
     /**
-     * Shifts the LFSR left one bit
+     * Shifts left one bit
      */
     public void clockLeft()
     {
@@ -41,7 +41,7 @@ public class ShiftRegister
     }
 
     /**
-     * Shifts the LFSR right one bit
+     * Shifts right one bit
      */
     public void clockRight()
     {
