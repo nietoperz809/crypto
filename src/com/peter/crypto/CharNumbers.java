@@ -57,8 +57,10 @@ public class CharNumbers
         
         String s = cn.toString(BigInteger.valueOf(65536));
         System.out.println(s);
-        
-        BigInteger i = cn.toNumber("0");
+
+        String ss="243f"; //6a8885a308d31319";
+        //ss = new StringBuilder(ss).reverse().toString();
+        BigInteger i = cn.toNumber(ss);
         System.out.println(i);
     }
 }

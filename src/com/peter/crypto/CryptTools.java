@@ -660,8 +660,9 @@ public class CryptTools
     /**
      * generate random string from charset
      * characters can occur more than once
+     *
      * @param charset String containing the charset
-     * @param len length of return string
+     * @param len     length of return string
      * @return a random string
      */
     public static String generateRandomString (CharSequence charset, int len)
@@ -677,19 +678,21 @@ public class CryptTools
 
     /**
      * returns first len values of shuffled string
+     *
      * @param charset the input string
-     * @param len length of return string
+     * @param len     length of return string
      * @return result string
      */
     public static String generateRandomString (String charset, int len)
     {
-        String s = generateRandomString (charset);
-        return s.substring (0, len);
+        String s = generateRandomString(charset);
+        return s.substring(0, len);
     }
 
 
     /**
      * Shuffles input string
+     *
      * @param in the input
      * @return shuffled output
      */

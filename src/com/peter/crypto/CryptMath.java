@@ -27,7 +27,7 @@ public class CryptMath implements BigIntValues
      * @param base Radix
      * @return The new string
      */
-    public static String numberString (BigInteger number, int base)
+    private static String numberString (BigInteger number, int base)
     {
         if (number.compareTo(BigInteger.ZERO) == 0)
             return "0";
@@ -47,7 +47,7 @@ public class CryptMath implements BigIntValues
      }
 
 
-    public static BigInteger stringNumber (String number, int base)
+    private static BigInteger stringNumber (String number, int base)
     {
         BigInteger exp = BigInteger.ONE;
         BigInteger sum = BigInteger.ZERO;
@@ -85,7 +85,7 @@ public class CryptMath implements BigIntValues
      * @param base
      * @return
      */
-    public static long numberStringQS (BigInteger number, int base)
+    private static long numberStringQS (BigInteger number, int base)
     {
         long ret = 0;
         String num = numberString (number, base);
@@ -220,7 +220,7 @@ public class CryptMath implements BigIntValues
      * @param x Input value
      * @return List of divisors
      */
-    public static BigInteger[] divisors(BigInteger x)
+    private static BigInteger[] divisors (BigInteger x)
     {
         ArrayList<BigInteger> list = new ArrayList<>();
         BigInteger sqrt = sqrt(x);
@@ -549,7 +549,7 @@ public class CryptMath implements BigIntValues
      * @param b Input b
      * @return The GCD
      */
-    public static BigInteger gcd (BigInteger a, BigInteger b)
+    private static BigInteger gcd (BigInteger a, BigInteger b)
     {
         return a.gcd(b);
     }
@@ -603,46 +603,7 @@ public class CryptMath implements BigIntValues
      */
     public static boolean millerRabinPrimeTest(long p)
     {
-        if (p == 2) // two is prime
-        {
-            return true;
-        }
-        else if (p <= 1 || ((p & 1) == 0)) // 0, 1 and even numbers are not prime
-        {
-            return false;
-        }
-
-        Random rnd = new Random();
-        BigInteger bg = BigInteger.valueOf(p);
-
-        // Find a and m such that m is odd and this == 1 + 2**a * m
-        BigInteger thisMinusOne = bg.subtract(ONE);
-        BigInteger m = thisMinusOne;
-        int a = m.getLowestSetBit();
-        m = m.shiftRight(a);
-
-        for (int i = 0; i < 50; i++)
-        {
-            // Generate a uniform random on (1, this)
-            BigInteger b;
-            do
-            {
-                b = new BigInteger(bg.bitLength(), rnd);
-            }
-            while (b.compareTo(ONE) <= 0 || b.compareTo(bg) >= 0);
-
-            int j = 0;
-            BigInteger z = b.modPow(m, bg);
-            while (!((j == 0 && z.equals(ONE)) || z.equals(thisMinusOne)))
-            {
-                if (j > 0 && z.equals(ONE) || ++j == a)
-                {
-                    return false;
-                }
-                z = z.modPow(TWO, bg);
-            }
-        }
-        return true;
+        return millerRabinPrimeTest (BigInteger.valueOf(p));
     }
 
     public static boolean millerRabinPrimeTest(BigInteger p)
@@ -653,7 +614,7 @@ public class CryptMath implements BigIntValues
             return true;
         }
         // Even numbers, one and zero are not prime
-        if (p.testBit(0) == false || p.compareTo(ONE) == 0 || p.compareTo(ZERO) == 0)
+        if (!p.testBit(0) || p.compareTo(ONE) == 0 || p.compareTo(ZERO) == 0)
         {
             return false;
         }
@@ -719,7 +680,7 @@ public class CryptMath implements BigIntValues
         return p;
     }
 
-    public static BigInteger getNextPrimeAbove(BigInteger p)
+    private static BigInteger getNextPrimeAbove (BigInteger p)
     {
         while (!millerRabinPrimeTest(p))
         {

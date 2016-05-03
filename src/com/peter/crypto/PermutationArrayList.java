@@ -202,8 +202,46 @@ public class PermutationArrayList<E> extends ArrayList<E>
 //        PermutationArrayList<String> p = new PermutationArrayList<>(l);
 //        p.printAll(System.out);
 
-        List<Integer> l2 = Arrays.asList(0,1,2);
-        PermutationArrayList<Integer> p2 = new PermutationArrayList<>(l2);
-        p2.printAll(System.out);
+//        List<Integer> l2 = Arrays.asList(0,1,2);
+//        PermutationArrayList<Integer> p2 = new PermutationArrayList<>(l2);
+//        p2.printAll(System.out);
+
+        char[] chars = "peter".toCharArray();
+        List<Character> l = new ArrayList<Character>();
+        for (char c : chars)
+        {
+            l.add(c);
+        }
+        PermutationArrayList<Character> p = new PermutationArrayList<>(l);
+        p.printAll(System.out);
     }
+
+    public static List<String> generateStringPermutations (String in)
+    {
+        char[] chars = in.toCharArray();
+        List<String> retval = new ArrayList<>();
+        List<Character> l = new ArrayList<Character>();
+        for (char c : chars)
+        {
+            l.add(c);
+        }
+        PermutationArrayList<Character> p = new PermutationArrayList<>(l);
+        List<List<Character>> ll = p.getAllPermutations();
+        //  fill list
+        for (List<Character> lc : ll)
+        {
+            retval.add(characterListToString(lc));
+        }
+
+        return retval;
+    }
+
+    private static String characterListToString (List<Character> arrayList)
+    {
+        StringBuffer b = new StringBuffer();
+        for (Character s : arrayList)
+            b.append(s);
+        return b.toString();
+    }
+
 }

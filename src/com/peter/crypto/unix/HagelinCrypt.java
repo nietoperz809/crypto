@@ -13,27 +13,28 @@ import java.io.IOException;
  */
 public class HagelinCrypt
 {
-    int cagetable[] = new int[]
+    private final int[] cagetable = new int[]
     {
         0, 1, 1, 2, 2, 3, 4, 4, 5, 6, 8, 8, 9, 10, 12, 16,
         16, 17, 18, 20, 24, 32, 32, 33, 34, 36, 40, 48
     };
-    int[] cage = new int[27];
-    int warr1[] = new int[52];
-    int warr2[] = new int[50];
-    int warr3[] = new int[46];
-    int warr4[] = new int[42];
-    int warr5[] = new int[38];
-    int warr6[] = new int[34];
-    int wheel1;
-    int wheel2;
-    int wheel3;
-    int wheel4;
-    int wheel5;
-    int wheel6;
-    int key[] = new int[130];
+    private final int[] cage = new int[27];
+    private final int[] warr1 = new int[52];
+    private final int[] warr2 = new int[50];
+    private final int[] warr3 = new int[46];
+    private final int[] warr4 = new int[42];
+    private final int[] warr5 = new int[38];
+    private final int[] warr6 = new int[34];
+    private int wheel1;
+    private int wheel2;
+    private int wheel3;
+    private int wheel4;
+    private int wheel5;
+    private int wheel6;
+    private final int[] key = new int[130];
 
-    int ix, jx;
+    private int ix;
+    private int jx;
 
     /**
      *
@@ -43,8 +44,8 @@ public class HagelinCrypt
         int ip, jp;
         int i;
         jp = 0;
-        key[jp++] = 004;
-        key[jp++] = 034;
+        key[jp++] = 4;
+        key[jp++] = 28;
         ip = 0;
         while (jp < 128)
         {
@@ -65,7 +66,7 @@ public class HagelinCrypt
         }
     }
 
-    int getbit()
+    private int getbit ()
     {
         int b;
         b = (key[jx] >>> ix) & 1;
@@ -98,7 +99,7 @@ public class HagelinCrypt
      * @return
      * @throws IOException
      */
-    public String crypt (String in) throws IOException
+    public String crypt (String in)
     {
         StringBuilder out = new StringBuilder();
         int precious;
@@ -109,12 +110,12 @@ public class HagelinCrypt
         while (loop < in.length())
         {
             precious = in.charAt(loop++);
-            temp = 040 * warr1[wheel1 + 1]; //0
-            temp += 020 * warr2[wheel2 + 1]; //0
-            temp += 010 * warr3[wheel3 + 1]; //8
-            temp += 004 * warr4[wheel4 + 1]; // 12
-            temp += 002 * warr5[wheel5 + 1]; // 14
-            temp += 001 * warr6[wheel6 + 1]; // 15
+            temp = 32 * warr1[wheel1 + 1]; //0
+            temp += 16 * warr2[wheel2 + 1]; //0
+            temp += 8 * warr3[wheel3 + 1]; //8
+            temp += 4 * warr4[wheel4 + 1]; // 12
+            temp += 2 * warr5[wheel5 + 1]; // 14
+            temp += 1 * warr6[wheel6 + 1]; // 15
 
             wheel1 = warr1[wheel1];
             wheel2 = warr2[wheel2];
@@ -140,7 +141,7 @@ public class HagelinCrypt
             }
             else
             {
-                crypt = ('a' + 'z' - precious + random) % 0400;
+                crypt = ('a' + 'z' - precious + random) % 256;
                 if (crypt >= 'a' && crypt <= 'z' && precious > 'z')
                 {
                     crypt += 26;
