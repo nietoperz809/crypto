@@ -1,3 +1,4 @@
+import com.peter.crypto.IO;
 import com.peter.crypto.PiDigitsHex;
 
 import java.math.BigInteger;
@@ -24,9 +25,12 @@ public class Test
 //        System.out.println(PiDigitsHex.packedPi16(0));
 //        System.out.println(PiDigitsHex.packedPi32(0));
 
-        BigInteger bi = PiDigitsHex.packedPi(0,300);
+        BigInteger bi = PiDigitsHex.packedPi(0,10000);
+        byte[] bb = bi.toByteArray();
+        IO.writeFile("c:\\pidigits.bin", bb);
+
         //System.out.println (Arrays.toString(bi.toByteArray()));
-        System.out.println(bi);
+        //System.out.println(bi);
 //        String password = "mxyzptlk";
 //        StringShuffler sf = new StringShuffler(password);
 //        byte[] b1 = Files.readAllBytes(Paths.get("C:\\Users\\Administrator\\Desktop\\testfile.txt"));

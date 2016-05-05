@@ -1,6 +1,10 @@
 package com.peter.crypto;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * To change this template use File | Settings | File Templates.
@@ -28,14 +32,8 @@ public class IO
      */
     public static void printAsVector (int[] arr, PrintStream ps)
     {
-        ps.print('[');
-        for (int s=0; s<arr.length; s++)
-        {
-            ps.printf ("[%d,%d]", s, arr[s]);
-            if (s != arr.length-1)
-                ps.print(",");
-        }
-        ps.println(']');
+        String str = Arrays.toString(arr);
+        ps.println (str);
     }
 
     /**
@@ -46,15 +44,8 @@ public class IO
      */
     public static byte[] readFile(String name) throws IOException
     {
-        File f = new File(name);
-        byte[] content = new byte[(int) f.length()];
-        FileInputStream fi = new FileInputStream(f);
-        if (fi.read(content) != f.length())
-        {
-            throw new IllegalArgumentException();
-        }
-        fi.close();
-        return content;
+        Path path = Paths.get(name);
+        return Files.readAllBytes(path);
     }
 
     /**
@@ -65,9 +56,7 @@ public class IO
      */
     public static void writeFile(String name, byte[] content) throws IOException
     {
-        File f = new File(name);
-        FileOutputStream fo = new FileOutputStream(f);
-        fo.write(content);
-        fo.close();
+        Path path = Paths.get(name);
+        Files.write(path, content);
     }
 }
