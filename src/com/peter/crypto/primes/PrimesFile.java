@@ -26,13 +26,15 @@ public class PrimesFile
      */
     static
     {
-        InputStream in = ClassLoader.getSystemResourceAsStream(filename);
         try
         {
+            InputStream in = ClassLoader.getSystemResourceAsStream(filename);
             max = in.available();
+            System.out.println("Loaded "+max+" primes");
         }
-        catch (IOException ex)
+        catch (Exception ex)
         {
+            System.out.println("Could not load primes file");
             max = 0;
         }
     }

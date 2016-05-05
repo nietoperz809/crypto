@@ -9,16 +9,27 @@ public class PiDigitsHex
 {
     private final static BigInteger sixteen = BigInteger.valueOf(16);
 
-    public static int[] piArray (int offset, int size)
+    /**
+     * Get fractional partitions of PI as hex values
+     * @param offset start digit
+     * @param length number of digits
+     * @return array of hex values
+     */
+    public static int[] piArray (int offset, int length)
     {
-        int[] arr = new int[size];
-        for (int s=0; s<size; s++)
+        int[] arr = new int[length];
+        for (int s=0; s<length; s++)
         {
             arr[s] = piDigit (s+offset);
         }
         return arr;
     }
 
+    /**
+     * Get packed byte value of hexadecimal PI fractional part in big endian notation
+     * @param offset position
+     * @return a byte value representing 2 digits of the PI fraction
+     */
     public static byte packedPi8 (int offset)
     {
         int b = piDigit(offset);
@@ -27,6 +38,12 @@ public class PiDigitsHex
         return (byte)b;
     }
 
+    /**
+     * Packs hex PI fraction bytes into big integer
+     * @param offset where to begin
+     * @param length how many of them
+     * @return a bigint
+     */
     public static BigInteger packedPi (int offset, int length)
     {
         BigInteger b = BigInteger.valueOf(piDigit(offset));
