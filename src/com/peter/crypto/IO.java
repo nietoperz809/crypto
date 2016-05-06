@@ -60,30 +60,50 @@ public class IO
         Files.write(path, content);
     }
 
-    public static void printHexMonitorStyle (byte[] in, int items, PrintStream ps)
+    /**
+     * Converts byte array to hex monitor style output
+     * @param in the byte array
+     * @param bytesPerLine number of bytes per line
+     * @return a String that is the human readable data block
+     */
+    public static String toHexMonStyle (byte[] in, int bytesPerLine)
     {
         StringBuilder sb = new StringBuilder();
-        for (int t=0; t<in.length; t+=items)
+        for (int t=0; t<in.length; t+=bytesPerLine)
         {
             StringBuilder sb2 = new StringBuilder();
-            for (int s = 0; s < items; s++)
+            for (int s = 0; s < bytesPerLine; s++)
             {
-                byte b = in[s+t];
-                sb.append(String.format("%02x ", b));
-                if (!Character.isISOControl(b))
-                    sb2.append ((char)b);
+                int idx = s+t;
+                if (idx >= in.length)
+                {
+                    sb.append("   ");
+                }
                 else
-                    sb2.append(".");
+                {
+                    byte b = in[idx];
+                    sb.append(String.format("%02x ", b));
+                    if (b>0x1f)   // show 0x20 ... 0x7f
+                        sb2.append ((char)b);
+                    else
+                        sb2.append(".");
+                }
             }
             sb.append (" --  ").append(sb2).append("\r\n");
         }
-        ps.println(sb.toString());
+        return sb.toString();
+    }
+
+    public static void printHexMonitorStyle (byte[] in, int bytesPerLine, PrintStream ps)
+    {
+        String s = toHexMonStyle(in, bytesPerLine);
+        ps.println(s);
     }
 
     // test
     public static void main (String[] args)
     {
-        byte[] b = ArrayGenerators.makeCountedValueBytes(0, 255);
+        byte[] b = ArrayGenerators.makeCountedValueBytes(0, 1000);
         printHexMonitorStyle (b, 16, System.out);
     }
 }
