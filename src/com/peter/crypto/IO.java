@@ -59,4 +59,31 @@ public class IO
         Path path = Paths.get(name);
         Files.write(path, content);
     }
+
+    public static void printHexMonitorStyle (byte[] in, int items, PrintStream ps)
+    {
+        StringBuilder sb = new StringBuilder();
+        for (int t=0; t<in.length; t+=items)
+        {
+            StringBuilder sb2 = new StringBuilder();
+            for (int s = 0; s < items; s++)
+            {
+                byte b = in[s+t];
+                sb.append(String.format("%02x ", b));
+                if (!Character.isISOControl(b))
+                    sb2.append ((char)b);
+                else
+                    sb2.append(".");
+            }
+            sb.append (" --  ").append(sb2).append("\r\n");
+        }
+        ps.println(sb.toString());
+    }
+
+    // test
+    public static void main (String[] args)
+    {
+        byte[] b = ArrayGenerators.makeCountedValueBytes(0, 255);
+        printHexMonitorStyle (b, 16, System.out);
+    }
 }
