@@ -72,6 +72,7 @@ public class IO
         for (int t=0; t<in.length; t+=bytesPerLine)
         {
             StringBuilder sb2 = new StringBuilder();
+            sb.append(String.format("%08x : ", t));
             for (int s = 0; s < bytesPerLine; s++)
             {
                 int idx = s+t;
