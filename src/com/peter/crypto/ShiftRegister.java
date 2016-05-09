@@ -117,7 +117,7 @@ public class ShiftRegister
      * Gets the value of the LFSR as long
      * @return Current value
      */
-    public long getValue()
+    public long getLongValue ()
     {
         return val.longValue();
     }

@@ -1,77 +1,38 @@
-import com.peter.crypto.IO;
-import com.peter.crypto.PiDigitsHex;
-
-import java.math.BigInteger;
-import java.util.Arrays;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class Test
 {
     public static void main (String[] args) throws Exception
     {
-//        System.out.println(PiDigits2.getPiString(100));
-//        System.out.println(PiDigits.pi_digits(100));
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+        scheduler.scheduleAtFixedRate(
+                new Runnable()
+                {
+                    @Override
+                    public void run ()
+                    {
+                        System.out.println("Tata");
+                    }
+                },
+                1000 /* Startverzögerung */,
+                33 /* Dauer */,
+                TimeUnit.MILLISECONDS);
+        scheduler.scheduleAtFixedRate(
+                new Runnable()
+                {
+                    @Override
+                    public void run ()
+                    {
+                        System.out.print("lolololo");
+                    }
+                },
+                1000 /* Startverzögerung */,
+                12 /* Dauer */,
+                TimeUnit.MILLISECONDS);
 
-//        System.out.println(PiDigitsHex.piDigit(0));
-//        System.out.println(PiDigitsHex.piDigit(1));
-//        System.out.println(PiDigitsHex.piDigit(2));
-//        System.out.println(PiDigitsHex.piDigit(3));
-//        System.out.println(PiDigitsHex.piDigit(4));
-//        System.out.println(PiDigitsHex.piDigit(5));
-//        System.out.println(PiDigitsHex.piDigit(6));
-//        System.out.println(PiDigitsHex.piDigit(7));
-
-//        System.out.println(PiDigitsHex.packedPi8(0));
-//        System.out.println(PiDigitsHex.packedPi16(0));
-//        System.out.println(PiDigitsHex.packedPi32(0));
-
-        BigInteger bi = PiDigitsHex.packedPi(0,10000);
-        byte[] bb = bi.toByteArray();
-        IO.writeFile("c:\\pidigits.bin", bb);
-
-        //System.out.println (Arrays.toString(bi.toByteArray()));
-        //System.out.println(bi);
-//        String password = "mxyzptlk";
-//        StringShuffler sf = new StringShuffler(password);
-//        byte[] b1 = Files.readAllBytes(Paths.get("C:\\Users\\Administrator\\Desktop\\testfile.txt"));
-//        String plain = new String (b1);
-//        String encrypted = sf.shuffle (plain);
-//        String decrypted = sf.deshuffle(encrypted);
-//        System.out.println(encrypted);
-//        System.out.println("----------------------");
-//        System.out.println(decrypted);
-
-//        byte[] b1 = Files.readAllBytes(Paths.get("C:\\Users\\Administrator\\Desktop\\hackmail.txt"));
-//        String plain = new String(b1);
-//
-//        char[][] t = Stringmatrix.toMatrix(plain);
-//
-//        t = Stringmatrix.revMatrix(t);
-//
-//        String h = Stringmatrix.fromMatrix(t);
-//        System.out.println(h);
-//
-//        new Thread (()->{System.out.println("blah");}).start();
-
-//        int xy = (int)Math.ceil(Math.sqrt(plain.length()));
-//        System.out.println(plain.length());
-//        System.out.println(xy*xy);
-
-//        String base = "abcdefghijklmnopqrstuvwxyz";
-//        String seek = "peter";
-//        for (int s=0;s<100; s++)
-//        {
-//            String str = CryptTools.generateRandomString (seek/*, 5*/);
-//            SimilarStrings ss = new SimilarStrings (seek,str);
-//            double res = ss.getResult();
-//            System.out.println (str+" - "+res);
-//        }
-
-//        List<String> l = PermutationArrayList.generateStringPermutations("peter");
-//        System.out.println(l.toString());
-//        NumberField n = NumberFieldFactory.divTable(256);
-//        NumberFieldDisplay nd = new NumberFieldDisplay(n);
-//        nd.setVisible(true);
     }
 }
 

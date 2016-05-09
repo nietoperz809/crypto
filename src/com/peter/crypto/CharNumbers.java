@@ -3,12 +3,16 @@ package com.peter.crypto;
 import java.math.BigInteger;
 
 /**
- * Created by IntelliJ IDEA.
+ * Class to convert Numbers in Strings and vice versa
  */
 public class CharNumbers
 {
     private final String charset;
 
+    /**
+     * Constructor
+     * @param cs  Charset to use. Length of cs is also the base
+     */
     public CharNumbers (String cs)
     {
         charset = cs;
@@ -24,6 +28,11 @@ public class CharNumbers
         return str;
     }
 
+    /**
+     * Converts number into string
+     * @param number input number
+     * @return the string
+     */
     public String toString (BigInteger number)
     {
         if (number.compareTo(BigInteger.ZERO) == 0)
@@ -32,6 +41,12 @@ public class CharNumbers
         return nsHelper (number, charset.length(), s);
     }
 
+    /**
+     * Converts string to number
+     * @param number input number
+     * @return output string
+     * @throws Exception if input contains illegal chars
+     */
     public BigInteger toNumber (String number) throws Exception
     {
         BigInteger exp = BigInteger.ONE;
@@ -50,7 +65,12 @@ public class CharNumbers
         }
         return sum;
     }
-    
+
+    /**
+     * Test code
+     * @param args not used
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception
     {
         CharNumbers cn = new CharNumbers ("0123456789abcdef");
