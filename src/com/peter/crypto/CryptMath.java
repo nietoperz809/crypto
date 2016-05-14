@@ -27,7 +27,7 @@ public class CryptMath implements BigIntValues
      * @param base Radix
      * @return The new string
      */
-    private static String numberString (BigInteger number, int base)
+    private static String numberToString (BigInteger number, int base)
     {
         if (number.compareTo(BigInteger.ZERO) == 0)
             return "0";
@@ -41,13 +41,13 @@ public class CryptMath implements BigIntValues
       * @param base Radix
       * @return The new string
       */
-     public static String numberString (long number, int base)
+     public static String numberToString (long number, int base)
      {
-        return numberString (BigInteger.valueOf(number), base);
+        return numberToString(BigInteger.valueOf(number), base);
      }
 
 
-    private static BigInteger stringNumber (String number, int base)
+    private static BigInteger stringToNumber (String number, int base)
     {
         BigInteger exp = BigInteger.ONE;
         BigInteger sum = BigInteger.ZERO;
@@ -62,22 +62,15 @@ public class CryptMath implements BigIntValues
             if (idx == -1 || idx >= base)
                 return err;
             sum = sum.add(BigInteger.valueOf(idx).multiply(exp));
-            /*
-            System.out.println (number.charAt(n));
-            System.out.println (exp);
-            System.out.println (idx);
-            System.out.println ("-----------");
-            */
             exp = exp.multiply(BigInteger.valueOf(base));
         }
         return sum;
     }
 
-    public static BigInteger stringNumber (String number)
+    public static BigInteger stringToNumber (String number)
     {
-        return stringNumber (number, 36);
+        return stringToNumber(number, 36);
     }
-
 
     /**
      * Quersumme
@@ -88,7 +81,7 @@ public class CryptMath implements BigIntValues
     private static long numberStringQS (BigInteger number, int base)
     {
         long ret = 0;
-        String num = numberString (number, base);
+        String num = numberToString(number, base);
         for (int s=0; s<num.length(); s++)
         {
             char c = num.charAt(s);
@@ -111,7 +104,7 @@ public class CryptMath implements BigIntValues
     }
 
     /**
-     * Test if a=b congruent mod n
+     * Test if a=b is congruent mod n
      * @param a Value 1
      * @param b Value 2
      * @param n Divisor

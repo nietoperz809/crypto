@@ -1,4 +1,4 @@
-package com.peter.crypto;
+package com.peter.crypto.pigenerators;
 
 /**
  * Created by Administrator on 4/28/2016.

@@ -1,4 +1,4 @@
-package com.peter.crypto;
+package com.peter.crypto.pigenerators;
 
 import java.math.BigDecimal;
 

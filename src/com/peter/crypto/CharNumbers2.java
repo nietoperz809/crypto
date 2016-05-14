@@ -5,7 +5,7 @@ package com.peter.crypto;
  */
 public final class CharNumbers2
 {
-    private char[] _digitSet;
+    private char[] _digitSet = "0123456789".toCharArray();
     
     private final int _len;
 
@@ -16,7 +16,6 @@ public final class CharNumbers2
     public CharNumbers2(int len)
     {
         _len = len;
-        setMaterial("0123456789");
     }
 
     /**
@@ -64,7 +63,7 @@ public final class CharNumbers2
     }
     
     /**
-     * Workhorse: Get counter as array
+     * Workhorse: Get value as char array
      * @param value input value
      * @return the array
      */
@@ -84,7 +83,7 @@ public final class CharNumbers2
 
     /**
      * Test routine
-     * @param args
+     * @param args not used
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception
