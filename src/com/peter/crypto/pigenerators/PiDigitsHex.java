@@ -28,7 +28,7 @@ public class PiDigitsHex
         {
             try
             {
-                arr[s] = ParallelPiHexEngine.taskedPiDigit(s+offset);
+                arr[s] = ParallelPiHexEngine.piDigit(s+offset);
             }
             catch (Exception e)
             {
@@ -47,9 +47,9 @@ public class PiDigitsHex
     {
         try
         {
-            int b = ParallelPiHexEngine.taskedPiDigit(offset);
+            int b = ParallelPiHexEngine.piDigit(offset);
             b = b<<4;
-            b |= ParallelPiHexEngine.taskedPiDigit(offset+1);
+            b |= ParallelPiHexEngine.piDigit(offset+1);
             return (byte)b;
         }
         catch (Exception e)
@@ -69,11 +69,11 @@ public class PiDigitsHex
     {
         try
         {
-            BigInteger b = BigInteger.valueOf(ParallelPiHexEngine.taskedPiDigit(offset));
+            BigInteger b = BigInteger.valueOf(ParallelPiHexEngine.piDigit(offset));
             for (int s=1; s<length; s++)
             {
                 b = b.multiply(sixteen);
-                b = b.add (BigInteger.valueOf(ParallelPiHexEngine.taskedPiDigit(offset+s)));
+                b = b.add (BigInteger.valueOf(ParallelPiHexEngine.piDigit(offset+s)));
             }
             return b;
         }

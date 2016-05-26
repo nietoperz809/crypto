@@ -14,16 +14,16 @@ public class ParallelPiHexEngine
 
     static
     {
-        pool = new ForkJoinPool(8); //ForkJoinPool.commonPool();
+        pool = ForkJoinPool.commonPool();
     }
 
     public static void main (String[] args) throws Exception
     {
         int pos = 800000;
-        for (int s = 0; s < 10; s++)
+        for (int s = 0; s < 1; s++)
         {
             long t = System.currentTimeMillis();
-            int p = taskedPiDigit(pos);
+            int p = piDigit(pos);
             t = System.currentTimeMillis() - t;
             System.out.println(p);
             System.out.println("runtime: " + t);
@@ -33,7 +33,7 @@ public class ParallelPiHexEngine
     /**
      * Computes the nth digit of Pi in base-16.
      */
-    public static int taskedPiDigit (int n) throws Exception
+    public static int piDigit (int n) throws Exception
     {
         if (n < 0)
         {
