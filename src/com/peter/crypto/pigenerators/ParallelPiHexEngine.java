@@ -56,6 +56,9 @@ public class ParallelPiHexEngine
         return (int) (x * 16);
     }
 
+    /**
+     *  Calculate a term asynchronously 
+     */
     static class Term implements Callable<Double>
     {
         int j, n, mult;
@@ -79,7 +82,6 @@ public class ParallelPiHexEngine
             Future<Double> t = pool.submit(new RightSum(j, n));
             return s.get() + t.get();
         }
-
 
         static class LeftSum implements Callable<Double>
         {

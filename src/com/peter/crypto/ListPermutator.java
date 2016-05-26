@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Permutator for lists
+ * @param <E>
  */
 public class ListPermutator<E>
 {
@@ -123,9 +124,15 @@ public class ListPermutator<E>
             new ArrayList<>(Arrays.asList("vielleicht", "schoen", "morgen", "nicht", "gewaltig", "herzhaft")),
         };
 
+        @SuppressWarnings("unchecked")
         ListPermutator<?> perm = new ListPermutator<>(Arrays.asList((List<String>[])mylist));
 
         int num = perm.printAll(System.out);
         System.out.println ("Perms " + num);
+    }
+    
+    public static void main(String[] args)
+    {
+        test();
     }
 }

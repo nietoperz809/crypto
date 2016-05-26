@@ -3,6 +3,7 @@ package com.peter.crypto;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * To change this template use File | Settings | File Templates.
@@ -11,43 +12,46 @@ public class CryptMath implements BigIntValues
 {
     private static final String Digits36 = "0123456789abcdefghijklmnopqrstuvwxyz";
 
-    private static String nsHelper (BigInteger number, int base, String str)
+    private static String nsHelper(BigInteger number, int base, String str)
     {
         if (number.compareTo(BigInteger.ZERO) != 0)
         {
-            str = nsHelper (number.divide(BigInteger.valueOf(base)), base, str);
-            str += Digits36.charAt (number.mod(BigInteger.valueOf(base)).intValue());
+            str = nsHelper(number.divide(BigInteger.valueOf(base)), base, str);
+            str += Digits36.charAt(number.mod(BigInteger.valueOf(base)).intValue());
         }
         return str;
     }
 
     /**
      * Returns string representation of a number
+     *
      * @param number Number to be converted
      * @param base Radix
      * @return The new string
      */
-    private static String numberToString (BigInteger number, int base)
+    private static String numberToString(BigInteger number, int base)
     {
         if (number.compareTo(BigInteger.ZERO) == 0)
+        {
             return "0";
+        }
         String s = "";
         return nsHelper(number, base, s);
     }
 
     /**
-      * Returns string representation of a number
-      * @param number Number to be converted
-      * @param base Radix
-      * @return The new string
-      */
-     public static String numberToString (long number, int base)
-     {
+     * Returns string representation of a number
+     *
+     * @param number Number to be converted
+     * @param base Radix
+     * @return The new string
+     */
+    public static String numberToString(long number, int base)
+    {
         return numberToString(BigInteger.valueOf(number), base);
-     }
+    }
 
-
-    private static BigInteger stringToNumber (String number, int base)
+    private static BigInteger stringToNumber(String number, int base)
     {
         BigInteger exp = BigInteger.ONE;
         BigInteger sum = BigInteger.ZERO;
@@ -55,38 +59,43 @@ public class CryptMath implements BigIntValues
         int len = number.length() - 1;
         int idx;
         char c;
-        for (int n=len; n>=0; n--)
+        for (int n = len; n >= 0; n--)
         {
             c = number.charAt(n);
             idx = Digits36.indexOf(c);
             if (idx == -1 || idx >= base)
+            {
                 return err;
+            }
             sum = sum.add(BigInteger.valueOf(idx).multiply(exp));
             exp = exp.multiply(BigInteger.valueOf(base));
         }
         return sum;
     }
 
-    public static BigInteger stringToNumber (String number)
+    public static BigInteger stringToNumber(String number)
     {
         return stringToNumber(number, 36);
     }
 
     /**
      * Quersumme
+     *
      * @param number
      * @param base
      * @return
      */
-    private static long numberStringQS (BigInteger number, int base)
+    private static long numberStringQS(BigInteger number, int base)
     {
         long ret = 0;
         String num = numberToString(number, base);
-        for (int s=0; s<num.length(); s++)
+        for (int s = 0; s < num.length(); s++)
         {
             char c = num.charAt(s);
             if (c >= 'a')
+            {
                 c -= 39;
+            }
             ret = ret + c - '0';
         }
         return ret;
@@ -94,52 +103,57 @@ public class CryptMath implements BigIntValues
 
     /**
      * Quersumme
+     *
      * @param number
      * @param base
      * @return
      */
-    public static long numberStringQS (int number, int base)
+    public static long numberStringQS(int number, int base)
     {
-        return numberStringQS (BigInteger.valueOf(number), base);
+        return numberStringQS(BigInteger.valueOf(number), base);
     }
 
     /**
      * Test if a=b is congruent mod n
+     *
      * @param a Value 1
      * @param b Value 2
      * @param n Divisor
      * @return true if they are
      */
-    public static boolean congruence (BigInteger a, BigInteger b, BigInteger n)
+    public static boolean congruence(BigInteger a, BigInteger b, BigInteger n)
     {
         return a.remainder(n).compareTo(b.remainder(n)) == 0;
     }
 
     /**
      * Calculates Jacobi symbol (a/b)
+     *
      * @param a value a
      * @param b value b, must be odd
      * @return Jacobio symbol 1, 0, -1
      * @throws Exception if b is even
      */
-    private static int jacobiSymbol (BigInteger a, BigInteger b) throws Exception
+    private static int jacobiSymbol(BigInteger a, BigInteger b) throws Exception
     {
         int e = 0;
         int s = 1;
 
         if (!b.testBit(0))
         {
-            throw new Exception ("b must be odd");
+            throw new Exception("b must be odd");
         }
 
         if (a.compareTo(ZERO) == 0 || a.compareTo(ONE) == 0)
+        {
             return a.intValue();
+        }
         while (a.mod(TWO).compareTo(ZERO) == 0)
         {
             a = a.divide(TWO);
             e++;
         }
-        if (e%2 != 0 && (b.mod(EIGHT).compareTo(THREE) == 0 || b.mod(EIGHT).compareTo(FIVE) == 0 ))
+        if (e % 2 != 0 && (b.mod(EIGHT).compareTo(THREE) == 0 || b.mod(EIGHT).compareTo(FIVE) == 0))
         {
             s = -1;
         }
@@ -148,28 +162,32 @@ public class CryptMath implements BigIntValues
             s = -s;
         }
         if (a.compareTo(ONE) == 0)
+        {
             return s;
+        }
         return s * jacobiSymbol(b.mod(a), a);
     }
 
     /**
      * Calculates Legendre symbol (a/b)
+     *
      * @param a value a
      * @param b value b, must be odd
      * @return Jacobio symbol 1, 0, -1
      * @throws Exception if b is even
      */
-    public static int legendreSymbol (BigInteger a, BigInteger b) throws Exception
+    public static int legendreSymbol(BigInteger a, BigInteger b) throws Exception
     {
         if (!millerRabinPrimeTest(b))
         {
-            throw new Exception ("b must be prime");
+            throw new Exception("b must be prime");
         }
-        return jacobiSymbol (a,b);
+        return jacobiSymbol(a, b);
     }
 
     /**
      * If gcd(x,y) == 1 then these numbers are relatively prime
+     *
      * @param x Number 1
      * @param y Number 2
      * @return true if x and 1 are relatively prime
@@ -180,7 +198,9 @@ public class CryptMath implements BigIntValues
     }
 
     /**
-     * This function returns a list of numbers from 1..xx that are relatively prime to xx
+     * This function returns a list of numbers from 1..xx that are relatively
+     * prime to xx
+     *
      * @param xx Base value
      * @return a list of so called reduced residues
      */
@@ -200,6 +220,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Calculates Euler phi-function
+     *
      * @param x Source value
      * @return The PHI function
      */
@@ -210,10 +231,11 @@ public class CryptMath implements BigIntValues
 
     /**
      * Get list of all divisors of x
+     *
      * @param x Input value
      * @return List of divisors
      */
-    private static BigInteger[] divisors (BigInteger x)
+    private static BigInteger[] divisors(BigInteger x)
     {
         ArrayList<BigInteger> list = new ArrayList<>();
         BigInteger sqrt = sqrt(x);
@@ -225,60 +247,66 @@ public class CryptMath implements BigIntValues
                 list.add(x.divide(n));
             }
         }
-        if (list.get(list.size()-1).equals(list.get(list.size()-2)))
-            list.remove(list.size()-1);
+        if (list.get(list.size() - 1).equals(list.get(list.size() - 2)))
+        {
+            list.remove(list.size() - 1);
+        }
         BigInteger[] arr = new BigInteger[list.size()];
         return list.toArray(arr);
     }
 
     /**
      * Get list of all divisors of x
+     *
      * @param x Input value
      * @return List of divisors
      */
     private static long[] divisors(long x)
     {
         ArrayList<Long> list = new ArrayList<>();
-        long sqr = (long)Math.sqrt(x);
+        long sqr = (long) Math.sqrt(x);
         for (long n = 1; n <= sqr; n++)
         {
-            if (x%n == 0)
+            if (x % n == 0)
             {
                 list.add(n);
-                list.add(x/n);
+                list.add(x / n);
             }
         }
-        if (list.get(list.size()-1).equals(list.get(list.size()-2)))
-            list.remove(list.size()-1);
+        if (list.get(list.size() - 1).equals(list.get(list.size() - 2)))
+        {
+            list.remove(list.size() - 1);
+        }
         long[] arr = new long[list.size()];
-        for (int s=0; s<list.size(); s++)
+        for (int s = 0; s < list.size(); s++)
         {
             arr[s] = list.get(s);
         }
         return arr;
     }
 
-    public static long nextSquare (long x)
+    public static long nextSquare(long x)
     {
-        return (long)Math.ceil(Math.sqrt(x));
+        return (long) Math.ceil(Math.sqrt(x));
     }
-    
+
     /**
      * Returns list of best two divisors
+     *
      * @param x Input value
      * @return Array of two elements
      */
     public static long[] bestTwoDivisors(long x)
     {
         long[] out = new long[2];
-        long sqr = (long)Math.sqrt(x);
-        for (long s=sqr; s>=1; s--)
+        long sqr = (long) Math.sqrt(x);
+        for (long s = sqr; s >= 1; s--)
         {
             //System.out.printf ("%d %d %d\n", s, x%s, x/s);
-            if (x%s == 0)
+            if (x % s == 0)
             {
                 out[0] = s;
-                out[1] = x/s;
+                out[1] = x / s;
                 break;
             }
         }
@@ -287,6 +315,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Returns sum of all divisors
+     *
      * @param x Source value
      * @return The sum
      */
@@ -324,7 +353,8 @@ public class CryptMath implements BigIntValues
 
     /**
      * Returns sum of all digits of x
-     * @param x    Source value
+     *
+     * @param x Source value
      * @param step Number of digits for a single value
      * @return The sum
      */
@@ -343,9 +373,10 @@ public class CryptMath implements BigIntValues
     }
 
     /**
-     * Calculates alternating Qsum
-     * For 3 that means: 123,471,023,473 --> 473 - 23 + 471 - 123 = 798
-     * @param x    Input value
+     * Calculates alternating Qsum For 3 that means: 123,471,023,473 --> 473 -
+     * 23 + 471 - 123 = 798
+     *
+     * @param x Input value
      * @param step number of digits of one element
      * @return The qsum
      */
@@ -381,13 +412,14 @@ public class CryptMath implements BigIntValues
 
     /**
      * Calculates log2 of BigInteger
+     *
      * @param x The source
      * @return The log2 value
      */
     public static int log2(BigInteger x)
     {
         int res = 0;
-        for (; ;)
+        for (;;)
         {
             x = x.shiftRight(1);
             if (x.compareTo(ZERO) == 0)
@@ -401,6 +433,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Returns log10(x) by simply counting the digits
+     *
      * @param x Source value
      * @return log10
      */
@@ -411,6 +444,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Tests if BigInteger is a power of 2
+     *
      * @param x BigInteger to test
      * @return true if x is perfect power of 2
      */
@@ -421,6 +455,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Calculates faculty from BigInteger
+     *
      * @param x The source value
      * @return The faculty
      */
@@ -437,6 +472,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Calculates SQRT from BigInteger the Newton way
+     *
      * @param x Input value
      * @return SQRT(x)
      */
@@ -461,6 +497,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Tests if BigInteger is a square
+     *
      * @param x Value to test
      * @return true if x is a square
      */
@@ -479,6 +516,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Calculates Fibonacci numbers
+     *
      * @param n Input value
      * @return The Fibonacci number
      */
@@ -509,6 +547,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Computes the GCD of a and b
+     *
      * @param a Input a
      * @param b Input b
      * @return The GCD
@@ -531,34 +570,36 @@ public class CryptMath implements BigIntValues
         return a;
     }
 
-    public static long lcm (long a, long b)
+    public static long lcm(long a, long b)
     {
-        return a*b/gcd(a,b);
+        return a * b / gcd(a, b);
     }
 
     /**
      * Computes GCD for BigIntegers
+     *
      * @param a Input a
      * @param b Input b
      * @return The GCD
      */
-    private static BigInteger gcd (BigInteger a, BigInteger b)
+    private static BigInteger gcd(BigInteger a, BigInteger b)
     {
         return a.gcd(b);
     }
 
-    public static BigInteger lcm (BigInteger a, BigInteger b)
+    public static BigInteger lcm(BigInteger a, BigInteger b)
     {
-        return a.multiply(b).divide(gcd(a,b));
+        return a.multiply(b).divide(gcd(a, b));
     }
 
     /**
      * Checks a number if it is prime the fermat way
-     * @param n      Number to test
+     *
+     * @param n Number to test
      * @param trials Security counter, the bigger the better is the test
      * @return true if prime
      */
-    public static boolean fermatPrimeTest (BigInteger n, int trials)
+    public static boolean fermatPrimeTest(BigInteger n, int trials)
     {
         if (n.compareTo(THREE) < 0)
         {
@@ -581,6 +622,7 @@ public class CryptMath implements BigIntValues
 
     /**
      * Calculates mersenne number
+     *
      * @param n The input value
      * @return Mersenne number
      */
@@ -591,12 +633,13 @@ public class CryptMath implements BigIntValues
 
     /**
      * Checks if a given number is a prime number
+     *
      * @param p Number to test
      * @return TRUE if number is prime
      */
     public static boolean millerRabinPrimeTest(long p)
     {
-        return millerRabinPrimeTest (BigInteger.valueOf(p));
+        return millerRabinPrimeTest(BigInteger.valueOf(p));
     }
 
     public static boolean millerRabinPrimeTest(BigInteger p)
@@ -644,8 +687,7 @@ public class CryptMath implements BigIntValues
         return true;
     }
 
-
-    public static BigInteger[] primeFilter (BigInteger[] in)
+    public static BigInteger[] primeFilter(BigInteger[] in)
     {
         ArrayList<BigInteger> list = new ArrayList<>();
         for (BigInteger in1 : in)
@@ -661,10 +703,11 @@ public class CryptMath implements BigIntValues
 
     /**
      * Counts up to the next prime number if p is not prime itself
+     *
      * @param p Number to check
      * @return p+x that is the first prime number
      */
-    public static long getNextPrimeAbove (long p)
+    public static long getNextPrimeAbove(long p)
     {
         while (!millerRabinPrimeTest(p))
         {
@@ -673,13 +716,31 @@ public class CryptMath implements BigIntValues
         return p;
     }
 
-    private static BigInteger getNextPrimeAbove (BigInteger p)
+    private static BigInteger getNextPrimeAbove(BigInteger p)
     {
         while (!millerRabinPrimeTest(p))
         {
             p = p.add(ONE);
         }
         return p;
+    }
+
+    /**
+     * Shuffles int array inplace
+     * @param ar 
+     */
+    static void shuffleArray (int[] ar)
+    {
+        // If running on Java 6 or older, use `new Random()` on RHS here
+        Random rnd = ThreadLocalRandom.current();
+        for (int i = ar.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
     }
 
     public static void main(String[] args)
