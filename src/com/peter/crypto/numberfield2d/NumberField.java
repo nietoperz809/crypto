@@ -1,6 +1,7 @@
 package com.peter.crypto.numberfield2d;
 
 import com.peter.crypto.CryptMath;
+import com.stefanmuenchow.arithmetic.Arithmetic;
 
 import java.awt.Dimension;
 import java.lang.reflect.Array;
@@ -9,7 +10,7 @@ import java.util.*;
 /**
  * New Class. User: Administrator Date: 19.05.2009 Time: 23:26:15
  */
-public class NumberField <T extends Number> extends GenericNumber<T>
+public class NumberField <T extends Number> extends Arithmetic<T>
 {
     final T[][] values;
     private final int width;
@@ -60,7 +61,7 @@ public class NumberField <T extends Number> extends GenericNumber<T>
      */
     private NumberField (NumberField src)
     {
-        super (src.getGenericType());
+        super (src.type());
         values = (T[][]) src.createNumberArray (src.getWidth(), src.getHeight());
         width = src.getWidth();
         height = src.getHeight();
@@ -154,7 +155,7 @@ public class NumberField <T extends Number> extends GenericNumber<T>
             }
             else
             {
-                vals[s] = this.createNumberObject();
+                vals[s] = this.createNumberObject("0");
             }
         }
         return NumberFieldFactory.fromArray(vals, width, height);
@@ -171,7 +172,7 @@ public class NumberField <T extends Number> extends GenericNumber<T>
             }
             else
             {
-                vals[s] = this.createNumberObject();
+                vals[s] = this.createNumberObject("0");
             }
         }
         return NumberFieldFactory.fromArray(vals, width, height);
@@ -418,6 +419,16 @@ public class NumberField <T extends Number> extends GenericNumber<T>
         return arr;
     }
 
+    public Double[][] asDoubleArray()
+    {
+        Double[][] arr = createNumberArray (Double.class, width, height);
+        for (int s = 0; s < arr.length; s++)
+        {
+            System.arraycopy(values[s], 0, arr[s], 0, arr[s].length);
+        }
+        return arr;
+    }
+
     /**
      * Exchanges rows and columns
      *
@@ -425,7 +436,7 @@ public class NumberField <T extends Number> extends GenericNumber<T>
      */
     public NumberField transpose()
     {
-        NumberField m = new NumberField (this.getGenericType(), getHeight(), getWidth());
+        NumberField m = new NumberField (this.type(), getHeight(), getWidth());
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
@@ -442,7 +453,7 @@ public class NumberField <T extends Number> extends GenericNumber<T>
      * @param n Value to add
      * @return A new field
      */
-    public NumberField add (T n)
+    public NumberField addValue (T n)
     {
         NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)

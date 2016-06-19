@@ -3,6 +3,7 @@ package com.peter.crypto.numberfield2d;
 import com.peter.crypto.CryptMath;
 import com.peter.crypto.GaloisField256;
 import com.peter.crypto.PermutationArrayList;
+import com.stefanmuenchow.arithmetic.Arithmetic;
 
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
@@ -243,30 +244,26 @@ public class NumberFieldFactory
             {
                 for (int s = min; s < max; s++)
                 {
-
-                    System.out.println(c.getName());
-                    Constructor co = c.getConstructor();
-                    Number nu = (Number)co.newInstance();
-                    nu = (int)str.charAt(idx);
-                    n.values[min][s] = (int)str.charAt(idx);
+                    n.values[min][s] = n.createNumberObject(""+(int)str.charAt(idx));
                     idx++;
                 }
 
                 for (int s = min + 1; s < max; s++)
                 {
-                    n.values[s][max - 1] = c.cast(Integer.valueOf(str.charAt(idx)));
+                    int ch = str.charAt(idx);
+                    n.values[s][max - 1] = n.createNumberObject(""+(int)str.charAt(idx));
                     idx++;
                 }
 
                 for (int s = max - 2; s >= min; s--)
                 {
-                    n.values[max - 1][s] = c.cast(Integer.valueOf(str.charAt(idx)));
+                    n.values[max - 1][s] = n.createNumberObject(""+(int)str.charAt(idx));
                     idx++;
                 }
 
                 for (int s = max - 2; s >= min + 1; s--)
                 {
-                    n.values[s][min] = c.cast(Integer.valueOf(str.charAt(idx)));
+                    n.values[s][min] = n.createNumberObject(""+(int)str.charAt(idx));
                     idx++;
                 }
                 min++;
@@ -275,7 +272,7 @@ public class NumberFieldFactory
             // Set center value when square is odd
             if ((xy & 1) == 1)
             {
-                n.values[loops][loops] = c.cast(Integer.valueOf(str.charAt(idx)));
+                n.values[loops][loops] = n.createNumberObject(""+(int)str.charAt(idx));
             }
         }
         catch (Exception e)
@@ -1429,6 +1426,7 @@ public class NumberFieldFactory
         Double[] d = fromIntArray(arr);
         return fromArray(d, d.length, 1);
     }
+
 
     public static NumberField fromArray (Double[][] arr)
     {

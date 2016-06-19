@@ -42,7 +42,7 @@ public class NumberFieldMath
         num = a;
         int m = _m = a.getHeight ();
         int n = _n = a.getWidth ();
-        Double[][] lu = _lu = a.asArray ();
+        Double[][] lu = _lu = a.asDoubleArray ();
         _piv = new int[m];
         for (int i = 0; i < m; ++i)
             _piv[i] = i;
@@ -467,13 +467,13 @@ public class NumberFieldMath
 
     public NumberField upperTriangle()
     {
-        Double[][] a= UpperTriangle(num.asArray());
+        Double[][] a= UpperTriangle(num.asDoubleArray());
         return NumberFieldFactory.fromArray(a);
     }
 
     public NumberField adjoint() // throws Exception
     {
-        Double[][] a = num.asArray();
+        Double[][] a = num.asDoubleArray();
         a = adjoint(a);
         if (a == null)
             return null;
@@ -482,7 +482,7 @@ public class NumberFieldMath
 
     public NumberField inverse()
     {
-        Double[][] a = num.asArray();
+        Double[][] a = num.asDoubleArray();
         a = Inverse(a);
         if (a == null)
             return null;
@@ -491,7 +491,7 @@ public class NumberFieldMath
 
     public NumberField multiply (NumberField other)
     {
-        Double[][] a = Multiply (num.asArray(), other.asArray());
+        Double[][] a = Multiply (num.asDoubleArray(), other.asDoubleArray());
         if (a == null)
             return null;
         return NumberFieldFactory.fromArray(a);

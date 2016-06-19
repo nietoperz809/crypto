@@ -71,6 +71,19 @@ public class GenericNumber <T extends Number>
         }
     }
 
+    public static <T extends Number> T createNumberObject (Class<T> clazz, String init)
+    {
+        try
+        {
+            return (T) clazz.getConstructor (String.class).newInstance(init);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static <T extends Number> T[] createNumberArray (Class<T> clazz, int size)
     {
         return (T[]) Array.newInstance(clazz, size);
