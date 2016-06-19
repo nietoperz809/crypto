@@ -99,7 +99,9 @@ public class Factorizer implements BigIntValues
      */
     public static BigInteger[] factByTrialDivision(BigInteger x)
     {
-        ArrayList<BigInteger> list = new ArrayList<BigInteger>();
+        if (x.equals(BigInteger.ZERO))
+            return new BigInteger[0];
+        ArrayList<BigInteger> list = new ArrayList<>();
         for (;;)
         {
             BigInteger div = isSmallPrimeDivisor(x);
@@ -192,23 +194,54 @@ public class Factorizer implements BigIntValues
         }
         return list.toArray(new BigInteger[list.size()]);
     }
-
+    
+    /**
+     * Omega function, 
+     * see: https://en.wikipedia.org/wiki/Prime_factor#Omega_function
+     * @param from first number
+     * @param to last number
+     * @return array of number of prime divisors
+     */
+    public static int[] omega (int from, int to)
+    {
+        int size = to - from + 1;
+        int[] res = new int[size];
+        for (int s=0; s<size; s++)
+        {
+            BigInteger bi = BigInteger.valueOf(s+from);
+            res[s] = factByBrent (bi).length;
+        }
+        return res;
+    }
+    
     public static void main(String[] args) throws IOException
     {
         //BigInteger b1 = new BigInteger("111111111111111111111111111111111111111111111111111111111111111111111111111");
         //BigInteger b1 = new BigInteger("111111111111111111111111111111111111111111111111");
         //BigInteger b1 = new BigInteger(""+(5*5*5));
+
+        int[] a = omega (30, 60);
+        System.out.println(Arrays.toString(a));
+        
+        System.out.print(" ");
+        for (int s = 30; s<=60; s++)
+        {
+            BigInteger bi = BigInteger.valueOf(s);
+            BigInteger[] prim = factByTrialDivision (bi);
+            System.out.print(prim.length + ", ");
+        }
+        
         
         // PT2M26.022S
-        // [55351781210701, 312491301758148310989239616493]
-        BigInteger b1 = new BigInteger("17296950165164170047139891882388300467691593");
-
-        //BigInteger b1 = new BigInteger("123456");
-        Instant start = Instant.now();
-        BigInteger[] list = factByBrent(b1);
-        Instant end = Instant.now();
-        System.out.println(Duration.between(start, end));
-        System.out.println(Arrays.toString(list));
+//        // [55351781210701, 312491301758148310989239616493]
+//        BigInteger b1 = new BigInteger("17296950165164170047139891882388300467691593");
+//
+//        //BigInteger b1 = new BigInteger("123456");
+//        Instant start = Instant.now();
+//        BigInteger[] list = factByBrent(b1);
+//        Instant end = Instant.now();
+//        System.out.println(Duration.between(start, end));
+//        System.out.println(Arrays.toString(list));
 
 //        start = Instant.now();
 //        list = factByRho(b1);

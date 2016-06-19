@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class BaseTranslator
 {
-    public static boolean checkInput (int[] digits, int inputBase,
+    private static boolean checkInput (int[] digits, int inputBase,
                                          int outputBase, int outputLength)
     {
 
@@ -83,35 +83,51 @@ class BaseTranslator
         return outputArray;
     }
 
-    private static final String dig = "0123456789abcdefghijklmnopqrstuvwxyz";
+    private static final String digits = "0123456789abcdefghijklmnopqrstuvwxyz";
 
+    /**
+     * Converts a String of Digits (0...z) to an int-Array
+     * @param in String of (0...z) characters
+     * @return int Array
+     */
     public static int[] toDigits (String in)
     {
         int[] res = new int[in.length()];
         for (int s=0; s<in.length(); s++)
         {
-            res[s] = dig.indexOf(in.charAt(s));
+            res[s] = digits.indexOf(in.charAt(s));
         }
         return res;
     }
 
+    /**
+     * Converst a int array to String
+     * @param in int array of values 0 ... 36
+     * @return String of chars (0 ... z)
+     */
     public static String toString (int[] in)
     {
         StringBuilder sb = new StringBuilder();
         for (int anIn : in)
         {
-            sb.append(dig.charAt(anIn));
+            sb.append(digits.charAt(anIn));
         }
         return sb.toString();
     }
 
+    /**
+     * Converts int array from one base to another
+     * @param digits input array
+     * @param inputBase base of input array
+     * @param outputBase base of output array
+     * @return converted int array
+     */
     public static int[] convertInteger  (int[] digits, int inputBase,
                                   int outputBase /*, int outputLength*/)
     {
 //        if (!checkInput(digits, inputBase, outputBase, outputLength))
 //            return null;
         String digs = toString (digits);
-        //Integer digi = Integer.parseInt (digs, inputBase);
         String s = Integer.toString(Integer.parseInt(digs, inputBase), outputBase);
         return toDigits(s);
     }
