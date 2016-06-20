@@ -3,9 +3,7 @@ package com.peter.crypto.numberfield2d;
 import com.peter.crypto.CryptMath;
 import com.peter.crypto.GaloisField256;
 import com.peter.crypto.PermutationArrayList;
-import com.stefanmuenchow.arithmetic.Arithmetic;
 
-import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -34,7 +32,7 @@ public class NumberFieldFactory
 
     public static NumberField countedUp (int x, int y, int start)
     {
-        Double[] a = countedDoubleArray(x * y, start);
+        Integer[] a = countedIntegerArray(x * y, start);
         return fromArray(a, x, y);
     }
 
@@ -45,12 +43,12 @@ public class NumberFieldFactory
      * @param start First value
      * @return A new array
      */
-    public static Double[] countedDoubleArray (int len, int start)
+    public static Integer[] countedIntegerArray (int len, int start)
     {
-        Double[] vect = new Double[len];
+        Integer[] vect = new Integer[len];
         for (int s = 0; s < len; s++)
         {
-            vect[s] = (double) (s + start);
+            vect[s] = s + start;
         }
         return vect;
     }
@@ -639,18 +637,18 @@ public class NumberFieldFactory
 
     public static NumberField logicalOrTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
+        Integer[] vect = countedIntegerArray(xy, 0);
         return logicalOrTable(vect, vect);
     }
 
-    public static NumberField logicalOrTable (Double[] row, Double col[])
+    public static NumberField logicalOrTable (Integer[] row, Integer col[])
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Math.abs((double) (col[a].intValue() | row[b].intValue()));
+                m.values[a][b] = col[a].intValue() | row[b].intValue();
             }
         }
         return m;
@@ -658,18 +656,18 @@ public class NumberFieldFactory
 
     public static NumberField logicalAndTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
-        return logicalAndTable(vect, vect);
+        Integer[] vect = countedIntegerArray(xy, 0);
+        return logicalAndTable (vect, vect);
     }
 
-    public static NumberField logicalAndTable (Double[] row, Double col[])
+    public static NumberField logicalAndTable (Integer[] row, Integer col[])
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Math.abs((double) (col[a].intValue() & row[b].intValue()));
+                m.values[a][b] = col[a] & row[b];
             }
         }
         return m;
@@ -677,18 +675,18 @@ public class NumberFieldFactory
 
     public static NumberField logicalXorTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
-        return logicalXorTable(vect, vect);
+        Integer[] vect = countedIntegerArray(xy, 0);
+        return logicalXorTable (vect, vect);
     }
 
-    public static NumberField logicalXorTable (Double[] row, Double col[])
+    public static NumberField logicalXorTable (Integer[] row, Integer col[])
     {
         NumberField m = new NumberField (Double.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Math.abs((double) (col[a].intValue() ^ row[b].intValue()));
+                m.values[a][b] =  col[a] ^ row[b];
             }
         }
         return m;
@@ -696,18 +694,18 @@ public class NumberFieldFactory
 
     public static NumberField logicalEquTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
-        return logicalEquTable(vect, vect);
+        Integer[] vect = countedIntegerArray(xy, 0);
+        return logicalEquTable (vect, vect);
     }
 
-    public static NumberField logicalEquTable (Double[] row, Double col[])
+    public static NumberField logicalEquTable (Integer[] row, Integer col[])
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Math.abs((double) (~(col[a].intValue() ^ row[b].intValue())));
+                m.values[a][b] =  ~(col[a].intValue() ^ row[b].intValue());
             }
         }
         return m;
@@ -715,18 +713,18 @@ public class NumberFieldFactory
 
     public static NumberField logicalImpTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
-        return logicalImpTable(vect, vect);
+        Integer[] vect = countedIntegerArray(xy, 0);
+        return logicalImpTable (vect, vect);
     }
 
-    public static NumberField logicalImpTable (Double[] row, Double col[])
+    public static NumberField logicalImpTable (Integer[] row, Integer col[])
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Math.abs((double) ((~(col[a].intValue() ^ row[b].intValue())) | row[b].intValue()));
+                m.values[a][b] = (~(col[a] ^ row[b])) | row[b];
             }
         }
         return m;
@@ -734,13 +732,13 @@ public class NumberFieldFactory
 
     public static NumberField modTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
-        return modTable(vect, vect);
+        Integer[] vect = countedIntegerArray(xy, 0);
+        return modTable (vect, vect);
     }
 
-    public static NumberField modTable (Double[] row, Double col[])
+    public static NumberField modTable (Integer[] row, Integer col[])
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
@@ -760,13 +758,13 @@ public class NumberFieldFactory
 
     public static NumberField divTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
+        Integer[] vect = countedIntegerArray(xy, 0);
         return divTable(vect, vect);
     }
 
-    public static NumberField divTable (Double[] row, Double col[])
+    public static NumberField divTable (Integer[] row, Integer col[])
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
@@ -784,14 +782,14 @@ public class NumberFieldFactory
         return m;
     }
 
-    public static NumberField moduloMultiplicationTable (Double[] row, Double[] col, int mod)
+    public static NumberField moduloMultiplicationTable (Integer[] row, Integer[] col, int mod)
     {
         return moduloMultiplicationTable(row, col, mod, 0);
     }
 
-    public static NumberField moduloMultiplicationTable (Double[] row, Double[] col, int mod, int offset)
+    public static NumberField moduloMultiplicationTable (Integer[] row, Integer[] col, int mod, int offset)
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
@@ -816,11 +814,11 @@ public class NumberFieldFactory
      */
     public static NumberField moduloMultiplicationTable (int mod, int offset)
     {
-        Double[] vect = countedDoubleArray(mod, 0);
-        return moduloMultiplicationTable(vect, vect, mod, offset);
+        Integer[] vect = countedIntegerArray(mod, 0);
+        return moduloMultiplicationTable (vect, vect, mod, offset);
     }
 
-    public static NumberField multiplicationTable (Double[] row, Double[] col)
+    public static NumberField multiplicationTable (Integer[] row, Integer[] col)
     {
         return multiplicationTable(row, col, 0);
     }
@@ -833,9 +831,9 @@ public class NumberFieldFactory
      * @param offset Number added to each multiplication
      * @return New Numberfield that is: row[n][m] * col[n][m]
      */
-    public static NumberField multiplicationTable (Double[] row, Double[] col, int offset)
+    public static NumberField multiplicationTable (Integer[] row, Integer[] col, int offset)
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
@@ -856,16 +854,16 @@ public class NumberFieldFactory
      */
     public static NumberField moduloAdditionTable (int mod, int offset)
     {
-        Double[] vect = countedDoubleArray(mod, 0);
+        Integer[] vect = countedIntegerArray(mod, 0);
         return moduloAdditionTable(vect, vect, offset);
     }
 
-    public static NumberField moduloAdditionTable (Double[] row, Double[] col, int mod)
+    public static NumberField moduloAdditionTable (Integer[] row, Integer[] col, int mod)
     {
         return moduloAdditionTable(row, col, mod, 0);
     }
 
-    public static NumberField moduloAdditionTable (Double[] row, Double[] col, int mod, int offset)
+    public static NumberField moduloAdditionTable (Integer[] row, Integer[] col, int mod, int offset)
     {
         NumberField m = new NumberField (Double.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
@@ -880,18 +878,18 @@ public class NumberFieldFactory
 
     public static NumberField gcdTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 1);
+        Integer[] vect = countedIntegerArray(xy, 1);
         return gcdTable(vect, vect);
     }
 
-    public static NumberField gcdTable (Double[] row, Double[] col)
+    public static NumberField gcdTable (Integer[] row, Integer[] col)
     {
         NumberField m = new NumberField (Double.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (double) CryptMath.gcd(col[a].longValue(), row[b].longValue());
+                m.values[a][b] = CryptMath.gcd(col[a], row[b]);
             }
         }
         return m;
@@ -899,24 +897,24 @@ public class NumberFieldFactory
 
     public static NumberField lcmTable (int xy)
     {
-        Double[] vect = countedDoubleArray(xy, 1);
+        Integer[] vect = countedIntegerArray(xy, 1);
         return lcmTable(vect, vect);
     }
 
-    public static NumberField lcmTable (Double[] row, Double[] col)
+    public static NumberField lcmTable (Integer[] row, Integer[] col)
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (double) CryptMath.lcm(col[a].longValue(), row[b].longValue());
+                m.values[a][b] = CryptMath.lcm(col[a], row[b]);
             }
         }
         return m;
     }
 
-    public static NumberField additionTable (Double[] v1, Double[] v2)
+    public static NumberField additionTable (Integer[] v1, Integer[] v2)
     {
         return additionTable(v1, v2, 0);
     }
@@ -926,9 +924,9 @@ public class NumberFieldFactory
 //        return moduloAdditionTable (xy, 0);
 //    }
 
-    public static NumberField additionTable (Double[] row, Double[] col, int offset)
+    public static NumberField additionTable (Integer[] row, Integer[] col, int offset)
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (Integer.class, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
@@ -1119,9 +1117,9 @@ public class NumberFieldFactory
      * @param val Value of all elements
      * @return A new Field
      */
-    public static NumberField sameValue (int x, int y, double val)
+    public static NumberField sameValue (int x, int y, int val)
     {
-        NumberField m = new NumberField (Double.class, x, y);
+        NumberField m = new NumberField (Integer.class, x, y);
         for (int a = 0; a < y; a++)
         {
             for (int b = 0; b < x; b++)
@@ -1167,6 +1165,7 @@ public class NumberFieldFactory
      * @param max max value
      * @return The new field
      */
+    @SuppressWarnings("unchecked")
     public static NumberField random (int x, int y, int max)
     {
         max++;
@@ -1197,6 +1196,7 @@ public class NumberFieldFactory
      * @param y Height
      * @return A new field
      */
+    @SuppressWarnings("unchecked")
     public static NumberField expand (int x, int y)
     {
         NumberField m = new NumberField (Double.class, x, y);
@@ -1216,6 +1216,7 @@ public class NumberFieldFactory
      * @param xy Width == Height
      * @return A new Field
      */
+    @SuppressWarnings("unchecked")
     public static NumberField diagLRIncrementing (int xy)
     {
         NumberField m = new NumberField (Double.class, xy, xy);
@@ -1260,6 +1261,8 @@ public class NumberFieldFactory
      * @param y Height
      * @return A new Field
      */
+    @SuppressWarnings("unchecked")
+
     public static NumberField incrementingRows (int x, int y)
     {
         NumberField m = new NumberField (Double.class, x, y);
@@ -1307,8 +1310,8 @@ public class NumberFieldFactory
      */
     public static NumberField multiplicationTable (int xy, int offset)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
-        return multiplicationTable(vect, vect, offset);
+        Integer[] vect = countedIntegerArray(xy, 0);
+        return multiplicationTable (vect, vect, offset);
     }
 
     public static NumberField rhombus (int xy)
@@ -1343,7 +1346,7 @@ public class NumberFieldFactory
      */
     public static NumberField additionTable (int xy, int offset)
     {
-        Double[] vect = countedDoubleArray(xy, 0);
+        Integer[] vect = countedIntegerArray(xy, 0);
         return additionTable(vect, vect, offset);
     }
 
