@@ -88,4 +88,13 @@ public interface Operations<X extends Number> {
 	 * @return	-a
 	 */
 	X neg (X a);
+
+    X mod (X a, X b);
+
+    // Logicals
+	X and (X a, X b);
+    X or (X a, X b);
+    X xor (X a, X b);
+    X equ (X a, X b);
+    X imp (X a, X b);
 }

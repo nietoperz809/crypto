@@ -2,7 +2,8 @@ package com.stefanmuenchow.arithmetic.operation;
 
 import com.stefanmuenchow.arithmetic.Operations;
 
-public class ByteOperations implements Operations<Byte> {
+public class ByteOperations implements Operations<Byte>
+{
 
 	@Override
 	public Byte add(Byte a, Byte b) {
@@ -43,4 +44,40 @@ public class ByteOperations implements Operations<Byte> {
 	public Byte neg(Byte a) {
 		return (byte) (a * (-1));
 	}
+
+    @Override
+    public Byte mod (Byte a, Byte b)
+    {
+        return (byte)(a % b);
+    }
+
+    @Override
+    public Byte and (Byte a, Byte b)
+    {
+        return (byte) (a & b);
+    }
+
+    @Override
+    public Byte or (Byte a, Byte b)
+    {
+        return (byte) (a | b);
+    }
+
+    @Override
+    public Byte xor (Byte a, Byte b)
+    {
+        return (byte) (a ^ b);
+    }
+
+    @Override
+    public Byte equ (Byte a, Byte b)
+    {
+        return (byte) ~(a ^ b);
+    }
+
+    @Override
+    public Byte imp (Byte a, Byte b)
+    {
+        return (byte) (~(a ^ b) | b);
+    }
 }

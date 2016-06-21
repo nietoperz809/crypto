@@ -1,5 +1,7 @@
 package com.peter.crypto.numberfield2d;
 
+import com.stefanmuenchow.arithmetic.Arithmetic;
+
 import static java.lang.Math.min;
 import static java.lang.Math.abs;
 
@@ -130,7 +132,7 @@ public class NumberFieldMath
      */
     public NumberField getL ()
     {
-        Double[][] l = new Double[_m][_n];
+        Double[][] l = Arithmetic.createNumberArray (Double.class, _m, _n);
         for (int i = 0; i < _m; ++i)
         {
             for (int j = 0; j < _n; ++j)

@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * New Class. User: Administrator Date: 19.05.2009 Time: 23:26:15
  */
-public class NumberField <T extends Arithmetic<? extends Number>> extends Arithmetic<T>
+public class NumberField <T extends Number> extends Arithmetic<T>
 {
     final T[][] values;
     private final int width;
@@ -26,7 +26,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
     {
         super(c);
         //values = (T[][]) Array.newInstance(c, x, y);
-        values = this.createNumberArray(x,y);
+        values = createNumberArray ( x,y);
         width = x;
         height = y;
         for (int a = 0; a < y; a++)
@@ -653,8 +653,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                //m.values[a][b] %= n;
-                Double.valueOf(m.values[a][b].doubleValue() % n);
+                m.values[a][b] = Arithmetic.mod (m.values[a][b],n);
             }
         }
         return m;
@@ -667,8 +666,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] =
-                        createNumberObject(m.values[a][b].intValue() / n);
+                m.values[a][b] = Arithmetic.div(m.values[a][b], n);
             }
         }
         return m;
@@ -688,8 +686,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
                 }
                 else
                 {
-                    m.values[a][b] = createNumberObject(m.values[a][b].intValue() % x);
-                    //m.values[a][b] %= x;
+                    m.values[a][b] = Arithmetic.mod(m.values[a][b], x);
                 }
             }
         }
@@ -708,8 +705,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = m.values[a][b].neg();
-                //m.values[a][b] = -m.values[a][b];
+                m.values[a][b] = Arithmetic.neg(m.values[a][b]);
             }
         }
         return m;
@@ -728,7 +724,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = m.values[a][b].add(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.add(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -741,7 +737,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = m.values[a][b].sub(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.sub (m.values[a][b], m2.values[a][b]);
             }
         }
         return m;
@@ -761,7 +757,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = m.values[a][b].and(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.and(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -781,8 +777,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] = m.values[a][b].or(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.or(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -802,8 +797,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] =  m.values[a][b].xor(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.xor( m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -823,8 +817,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] = m.values[a][b].equ(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.equ(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -844,8 +837,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] = m.values[a][b].imp(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.imp(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -864,7 +856,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = m.values[a][b].mul(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.mul(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -883,7 +875,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
                 }
                 else
                 {
-                    m.values[a][b] = m.values[a][b].div(m2.values[a][b]);
+                    m.values[a][b] = Arithmetic.div(m.values[a][b],m2.values[a][b]);
                 }
             }
         }
@@ -897,7 +889,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = m.values[a][b].max(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.max(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -910,7 +902,7 @@ public class NumberField <T extends Arithmetic<? extends Number>> extends Arithm
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = m.values[a][b].min(m2.values[a][b]);
+                m.values[a][b] = Arithmetic.min(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;

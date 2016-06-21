@@ -2,7 +2,8 @@ package com.stefanmuenchow.arithmetic.operation;
 
 import com.stefanmuenchow.arithmetic.Operations;
 
-public class IntegerOperations implements Operations<Integer> {
+public class IntegerOperations implements Operations<Integer>
+{
 
 	@Override
 	public Integer add(Integer a, Integer b) {
@@ -43,4 +44,40 @@ public class IntegerOperations implements Operations<Integer> {
 	public Integer neg(Integer a) {
 		return a * (-1);
 	}
+
+    @Override
+    public Integer mod (Integer a, Integer b)
+    {
+        return a % b;
+    }
+
+    @Override
+    public Integer and (Integer a, Integer b)
+    {
+        return a & b;
+    }
+
+    @Override
+    public Integer or (Integer a, Integer b)
+    {
+        return a | b;
+    }
+
+    @Override
+    public Integer xor (Integer a, Integer b)
+    {
+        return a ^ b;
+    }
+
+    @Override
+    public Integer equ (Integer a, Integer b)
+    {
+        return ~(a ^ b);
+    }
+
+    @Override
+    public Integer imp (Integer a, Integer b)
+    {
+        return ~(a ^ b) | b;
+    }
 }

@@ -21,7 +21,7 @@ import java.lang.reflect.Array;
  *
  * @author Stefan Münchow
  */
-public class Arithmetic<X extends Number>
+public class Arithmetic<X extends Number> extends Number
 {
     private Class<X> targetClass;
     private X value;
@@ -105,6 +105,13 @@ public class Arithmetic<X extends Number>
         return this;
     }
 
+    public static <A extends Number> Arithmetic<A> add (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.add(op2);
+        return ar;
+    }
+
     private Operations<X> getOperations ()
     {
         if (operations == null)
@@ -136,6 +143,13 @@ public class Arithmetic<X extends Number>
         return this;
     }
 
+    public static <A extends Number> Arithmetic<A> sub (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.sub(op2);
+        return ar;
+    }
+
     /**
      * Divide current value of this instance by operand.
      *
@@ -149,6 +163,12 @@ public class Arithmetic<X extends Number>
         return this;
     }
 
+    public static <A extends Number> Arithmetic<A> div (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.div(op2);
+        return ar;
+    }
     /**
      * Multiply current value of this instance with operand.
      *
@@ -160,6 +180,13 @@ public class Arithmetic<X extends Number>
     {
         value = getOperations().mul(value, convertNumber(operand));
         return this;
+    }
+
+    public static <A extends Number> Arithmetic<A> mul (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.mul(op2);
+        return ar;
     }
 
     /**
@@ -175,6 +202,13 @@ public class Arithmetic<X extends Number>
         return this;
     }
 
+    public static <A extends Number> Arithmetic<A> max (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.max(op2);
+        return ar;
+    }
+
     /**
      * Return minimum value of current value of this instance and operand.
      *
@@ -186,6 +220,13 @@ public class Arithmetic<X extends Number>
     {
         value = getOperations().min(value, convertNumber(operand));
         return this;
+    }
+
+    public static <A extends Number> Arithmetic<A> min (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.min(op2);
+        return ar;
     }
 
     /**
@@ -200,6 +241,13 @@ public class Arithmetic<X extends Number>
         return this;
     }
 
+    public static <A extends Number> Arithmetic<A> abs (A op1)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.abs();
+        return ar;
+    }
+
     /**
      * Negate the current value of this instance.
      *
@@ -212,42 +260,121 @@ public class Arithmetic<X extends Number>
         return this;
     }
 
-    public <A extends Number> A[] createNumberArray (int size)
+    public static <A extends Number> Arithmetic<A> neg (A op1)
     {
-        return (A[]) Array.newInstance(targetClass, size);
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.neg();
+        return ar;
     }
 
-    public <A extends Number> A[][] createNumberArray (int w, int h)
+    public <A extends Number> Arithmetic<X> and (A operand)
     {
-        return (A[][]) Array.newInstance(targetClass, w,h);
+        value = getOperations().and(value, convertNumber(operand));
+        return this;
     }
 
-    public <A extends Number> A createNumberObject(String num)
+    public static <A extends Number> Arithmetic<A> and (A op1, A op2)
     {
-        try
-        {
-            return (A) targetClass.getConstructor (String.class).newInstance(num);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.and(op2);
+        return ar;
+    }
+
+    public <A extends Number> Arithmetic<X> or (A operand)
+    {
+        value = getOperations().or(value, convertNumber(operand));
+        return this;
+    }
+
+    public static <A extends Number> Arithmetic<A> or (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.or(op2);
+        return ar;
+    }
+
+    public <A extends Number> Arithmetic<X> xor (A operand)
+    {
+        value = getOperations().xor(value, convertNumber(operand));
+        return this;
+    }
+
+    public static <A extends Number> Arithmetic<A> xor (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.xor(op2);
+        return ar;
+    }
+
+    public <A extends Number> Arithmetic<X> equ (A operand)
+    {
+        value = getOperations().equ(value, convertNumber(operand));
+        return this;
+    }
+
+    public static <A extends Number> Arithmetic<A> equ (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.equ(op2);
+        return ar;
+    }
+
+    public <A extends Number> Arithmetic<X> imp (A operand)
+    {
+        value = getOperations().imp(value, convertNumber(operand));
+        return this;
+    }
+
+    public static <A extends Number> Arithmetic<A> imp (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.imp(op2);
+        return ar;
+    }
+
+    public <A extends Number> Arithmetic<X> mod (A operand)
+    {
+        value = getOperations().mod(value, convertNumber(operand));
+        return this;
+    }
+
+    public static <A extends Number> Arithmetic<A> mod (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        ar.mod(op2);
+        return ar;
+    }
+
+    public X[] createNumberArray (int size)
+    {
+        return (X[]) Array.newInstance(targetClass, size);
+    }
+
+    public X[][] createNumberArray (int w, int h)
+    {
+        return (X[][]) Array.newInstance(targetClass, w,h);
+    }
+
+    public X createNumberObject (String num)
+    {
+        return createNumberObject(targetClass, num);
+    }
+
+    public X createNumberObject (int num)
+    {
+        return createNumberObject(targetClass, ""+num);
+    }
+
+    public X createNumberObject (double num)
+    {
+        return createNumberObject(targetClass, ""+num);
     }
 
 /////////////////////// static funcs /////////////////////
 
     public static <A extends Number> A createNumberObject (Class<A> clazz)
     {
-        try
-        {
-            return (A) clazz.getConstructor (String.class).newInstance("0");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return null;
-        }
+        return createNumberObject(clazz, "0");
     }
 
     public static <A extends Number> A createNumberObject (Class<A> clazz, String init)
@@ -271,5 +398,29 @@ public class Arithmetic<X extends Number>
     public static <A extends Number> A[][] createNumberArray (Class<A> clazz, int w, int h)
     {
         return (A[][]) Array.newInstance(clazz, w,h);
+    }
+
+    @Override
+    public int intValue ()
+    {
+        return value.intValue();
+    }
+
+    @Override
+    public long longValue ()
+    {
+        return value.longValue();
+    }
+
+    @Override
+    public float floatValue ()
+    {
+        return value.floatValue();
+    }
+
+    @Override
+    public double doubleValue ()
+    {
+        return value.doubleValue();
     }
 }

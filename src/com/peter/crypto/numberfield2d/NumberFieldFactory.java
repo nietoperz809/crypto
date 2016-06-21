@@ -3,6 +3,7 @@ package com.peter.crypto.numberfield2d;
 import com.peter.crypto.CryptMath;
 import com.peter.crypto.GaloisField256;
 import com.peter.crypto.PermutationArrayList;
+import com.stefanmuenchow.arithmetic.Arithmetic;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -202,7 +203,7 @@ public class NumberFieldFactory
         int y = 0;
         double val = 0;
 
-        n.values[x][y] = val++;
+        n.values[x][y] = (Arithmetic) n.createNumberObject(val++);
 
         for (int s = 0; s < xy * xy; s++)
         {
@@ -220,7 +221,7 @@ public class NumberFieldFactory
             {
                 break;
             }
-            n.values[x][y] = val++;
+            n.values[x][y] = (Arithmetic) n.createNumberObject(val++);
         }
 
         return n.getSubField(0, orig - 1, 0, orig - 1);
@@ -242,26 +243,26 @@ public class NumberFieldFactory
             {
                 for (int s = min; s < max; s++)
                 {
-                    n.values[min][s] = n.createNumberObject(""+(int)str.charAt(idx));
+                    n.values[min][s] = n.createNumberObject((int)str.charAt(idx));
                     idx++;
                 }
 
                 for (int s = min + 1; s < max; s++)
                 {
                     int ch = str.charAt(idx);
-                    n.values[s][max - 1] = n.createNumberObject(""+(int)str.charAt(idx));
+                    n.values[s][max - 1] = n.createNumberObject((int)str.charAt(idx));
                     idx++;
                 }
 
                 for (int s = max - 2; s >= min; s--)
                 {
-                    n.values[max - 1][s] = n.createNumberObject(""+(int)str.charAt(idx));
+                    n.values[max - 1][s] = n.createNumberObject((int)str.charAt(idx));
                     idx++;
                 }
 
                 for (int s = max - 2; s >= min + 1; s--)
                 {
-                    n.values[s][min] = n.createNumberObject(""+(int)str.charAt(idx));
+                    n.values[s][min] = n.createNumberObject((int)str.charAt(idx));
                     idx++;
                 }
                 min++;
@@ -270,7 +271,7 @@ public class NumberFieldFactory
             // Set center value when square is odd
             if ((xy & 1) == 1)
             {
-                n.values[loops][loops] = n.createNumberObject(""+(int)str.charAt(idx));
+                n.values[loops][loops] = n.createNumberObject((int)str.charAt(idx));
             }
         }
         catch (Exception e)
@@ -294,7 +295,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < xy; b++)
             {
-                n.values[a][b] = sub - n.values[a][b].intValue();
+                n.values[a][b] = (Arithmetic) n.createNumberObject(sub - n.values[a][b].intValue());
             }
         }
         return n;
@@ -324,22 +325,22 @@ public class NumberFieldFactory
         {
             for (int s = min; s < max; s++)
             {
-                n.values[min][s] = val++;
+                n.values[min][s] = (Arithmetic) n.createNumberObject(val++);
             }
 
             for (int s = min + 1; s < max; s++)
             {
-                n.values[s][max - 1] = val++;
+                n.values[s][max - 1] = (Arithmetic) n.createNumberObject(val++);
             }
 
             for (int s = max - 2; s >= min; s--)
             {
-                n.values[max - 1][s] = val++;
+                n.values[max - 1][s] = (Arithmetic) n.createNumberObject(val++);
             }
 
             for (int s = max - 2; s >= min + 1; s--)
             {
-                n.values[s][min] = val++;
+                n.values[s][min] = (Arithmetic) n.createNumberObject(val++);
             }
 
             min++;
@@ -348,7 +349,7 @@ public class NumberFieldFactory
         // Set center value when square is odd
         if ((xy & 1) == 1)
         {
-            n.values[loops][loops] = val;
+            n.values[loops][loops] = (Arithmetic) n.createNumberObject(val++);
         }
         return n;
     }
@@ -385,14 +386,14 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = a * x + b + start;
+                m.values[a][b] = (Arithmetic) m.createNumberObject(a * x + b + start);
             }
         }
         for (int a = 1; a < y; a += 2)
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = a * x + x - b - start - 1;
+                m.values[a][b] = (Arithmetic) m.createNumberObject(a * x + x - b - start - 1);
             }
         }
         return m;
@@ -406,9 +407,9 @@ public class NumberFieldFactory
      * @param v2 Value of even fields
      * @return The checker board
      */
-    public static NumberField chessBoard (int xy, double v1, double v2)
+    public static NumberField chessBoard (int xy, int v1, int v2)
     {
-        return countedSnake(xy).mod(2).substitute(0L, v1).substitute(1L, v2);
+        return countedSnake(xy).mod(2).substitute(0, v1).substitute(1, v2);
     }
 
     public static NumberField counted (int xy)
@@ -432,7 +433,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = a * x + b + start;
+                m.values[a][b] = (Arithmetic) m.createNumberObject(a * x + b + start);
             }
         }
         return m;
@@ -500,7 +501,7 @@ public class NumberFieldFactory
         NumberField m = new NumberField (Double.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
-            m.values[a][a] = val;
+            m.values[a][a] = (Arithmetic) m.createNumberObject(val);
         }
         return m;
     }
@@ -517,7 +518,7 @@ public class NumberFieldFactory
         NumberField m = new NumberField (Double.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
-            m.values[a][xy - a - 1] = val;
+            m.values[a][xy - a - 1] = (Arithmetic) m.createNumberObject(val);
         }
         return m;
     }
@@ -539,8 +540,8 @@ public class NumberFieldFactory
         NumberField m = new NumberField (Double.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
-            m.values[a][xy - a - 1] = val;
-            m.values[a][a] = val;
+            m.values[a][xy - a - 1] = (Arithmetic) m.createNumberObject(val);
+            m.values[a][a] = (Arithmetic) m.createNumberObject(val);
         }
         return m;
     }
@@ -573,8 +574,8 @@ public class NumberFieldFactory
         int half = xy / 2;
         for (int s = 0; s < xy; s++)
         {
-            m.values[s][half] = val;
-            m.values[half][s] = val;
+            m.values[s][half] = (Arithmetic) m.createNumberObject(val);
+            m.values[half][s] = (Arithmetic) m.createNumberObject(val);
         }
         return m;
     }
@@ -629,7 +630,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b <= a; b++)
             {
-                m.values[a][b] = val;
+                m.values[a][b] = (Arithmetic) m.createNumberObject(val);
             }
         }
         return m;
@@ -648,7 +649,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = col[a].intValue() | row[b].intValue();
+                m.values[a][b] = (Arithmetic) m.createNumberObject (col[a] | row[b]);
             }
         }
         return m;
@@ -667,7 +668,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = col[a] & row[b];
+                m.values[a][b] = (Arithmetic) m.createNumberObject (col[a] & row[b]);
             }
         }
         return m;
@@ -686,7 +687,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] =  col[a] ^ row[b];
+                m.values[a][b] = (Arithmetic) m.createNumberObject (col[a] ^ row[b]);
             }
         }
         return m;
@@ -705,7 +706,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] =  ~(col[a].intValue() ^ row[b].intValue());
+                m.values[a][b] = (Arithmetic) m.createNumberObject (~(col[a] ^ row[b]));
             }
         }
         return m;
@@ -724,7 +725,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (~(col[a] ^ row[b])) | row[b];
+                m.values[a][b] = (Arithmetic) m.createNumberObject ((~(col[a] ^ row[b]))|row[b]);
             }
         }
         return m;
@@ -745,11 +746,11 @@ public class NumberFieldFactory
             {
                 if (row[b] == 0)
                 {
-                    m.values[a][b] = col[a];
+                    m.values[a][b] = (Arithmetic) m.createNumberObject (col[a]);
                 }
                 else
                 {
-                    m.values[a][b] = col[a] % row[b];
+                    m.values[a][b] = (Arithmetic) m.createNumberObject (col[a] % row[b]);
                 }
             }
         }
@@ -771,11 +772,11 @@ public class NumberFieldFactory
             {
                 if (row[b] == 0)
                 {
-                    m.values[a][b] = col[a];
+                    m.values[a][b] = (Arithmetic) m.createNumberObject (col[a]);
                 }
                 else
                 {
-                    m.values[a][b] = col[a] / row[b];
+                    m.values[a][b] = (Arithmetic) m.createNumberObject (col[a] / row[b]);
                 }
             }
         }
@@ -794,7 +795,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = ((col[a] * row[b]) + offset) % mod;
+                m.values[a][b] = (Arithmetic) m.createNumberObject (((col[a] * row[b]) + offset) % mod);
             }
         }
         return m;
@@ -838,7 +839,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = col[a] * row[b] + offset;
+                m.values[a][b] = (Arithmetic) m.createNumberObject (col[a] * row[b] + offset);
             }
         }
         return m;
@@ -870,7 +871,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (col[a] + row[b] + offset) % mod;
+                m.values[a][b] = (Arithmetic) m.createNumberObject ((col[a] + row[b] + offset) % mod);
             }
         }
         return m;
@@ -889,7 +890,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = CryptMath.gcd(col[a], row[b]);
+                m.values[a][b] = (Arithmetic) m.createNumberObject (CryptMath.gcd(col[a], row[b]));
             }
         }
         return m;
@@ -908,7 +909,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = CryptMath.lcm(col[a], row[b]);
+                m.values[a][b] = (Arithmetic) m.createNumberObject (CryptMath.lcm(col[a], row[b]));
             }
         }
         return m;
@@ -931,7 +932,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (col[a] + row[b] + offset);
+                m.values[a][b] = (Arithmetic) m.createNumberObject ((col[a] + row[b] + offset));
             }
         }
         return m;
@@ -974,7 +975,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < xy; b++)
             {
-                m.values[a][b] = arr[(a + b) % arr.length];
+                m.values[a][b] = (Arithmetic) m.createNumberObject (arr[(a + b) % arr.length]);
             }
         }
         return m;
@@ -1017,7 +1018,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < arr2.length; b++)
             {
-                m.values[a][b] = arr1[a] * arr2[b];
+                m.values[a][b] = (Arithmetic) m.createNumberObject (arr1[a] * arr2[b]);
             }
         }
         return m;
@@ -1030,7 +1031,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < arr2.length; b++)
             {
-                m.values[a][b] = arr1[a] + arr2[b];
+                m.values[a][b] = (Arithmetic) m.createNumberObject (arr1[a] + arr2[b]);
             }
         }
         return m;
@@ -1124,7 +1125,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[b][a] = val;
+                m.values[b][a] = (Arithmetic) m.createNumberObject (val);
             }
         }
         return m;
@@ -1150,7 +1151,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = seq[idx];
+                m.values[a][b] = (Arithmetic) m.createNumberObject (seq[idx]);
                 idx = (idx + 1) % seq.length;
             }
         }
@@ -1175,7 +1176,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (double) rnd.nextInt(max);
+                m.values[a][b] = (Arithmetic) m.createNumberObject (rnd.nextInt(max));
 
             }
         }
@@ -1204,7 +1205,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (double) Math.max(a, b);
+                m.values[a][b] = (Arithmetic) m.createNumberObject (Math.max(a, b));
             }
         }
         return m;
@@ -1222,7 +1223,7 @@ public class NumberFieldFactory
         NumberField m = new NumberField (Double.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
-            m.values[a][a] = (double) a;
+            m.values[a][a] = (Arithmetic) m.createNumberObject (a);
         }
         return m;
     }
@@ -1271,7 +1272,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (double) i;
+                m.values[a][b] = (Arithmetic) m.createNumberObject (i);
             }
             i++;
         }
@@ -1382,7 +1383,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (double) Math.min(a, b);
+                m.values[a][b] = (Arithmetic) m.createNumberObject ( Math.min(a, b));
             }
         }
         return m;
@@ -1539,7 +1540,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (double) gf.Product(col[a].intValue(), row[b].intValue());
+                m.values[a][b] = (Arithmetic) m.createNumberObject (gf.Product(col[a].intValue(), row[b].intValue()));
             }
         }
         return m;
@@ -1553,7 +1554,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (double) gf.Quotient(col[a].intValue(), row[b].intValue());
+                m.values[a][b] = (Arithmetic) m.createNumberObject (gf.Quotient(col[a].intValue(), row[b].intValue()));
             }
         }
         return m;
