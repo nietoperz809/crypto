@@ -4,7 +4,6 @@ import com.peter.crypto.CryptMath;
 import com.stefanmuenchow.arithmetic.Arithmetic;
 
 import java.awt.Dimension;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -25,15 +24,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
     public NumberField (Class<T> c, int x, int y)
     {
         super(c);
-        //values = (T[][]) Array.newInstance(c, x, y);
-        values = createNumberArray ( x,y);
+        values = createNumberArray (x,y);
         width = x;
         height = y;
-        for (int a = 0; a < y; a++)
+        for (int y1 = 0; y1 < y; y1++)
         {
-            for (int b = 0; b < x; b++)
+            for (int x1 = 0; x1 < x; x1++)
             {
-                values[a][b] =  null;
+                values[y1][x1] =  null;
             }
         }
     }
@@ -47,12 +45,12 @@ public class NumberField <T extends Number> extends Arithmetic<T>
      * @param n the number of columns.
      * @param a the array.
      */
-    public NumberField (int m, int n, Number[][] a)
+    public NumberField (int m, int n, T[][] a)
     {
         super ((Class<T>) a[0][0].getClass());
         width = m;
         height = n;
-        values = (T[][]) a;
+        values = a;
     }
 
     /**
@@ -60,7 +58,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
      *
      * @param src Source field
      */
-    private NumberField (NumberField src)
+    public NumberField (NumberField src)
     {
         super (src.type());
         values = (T[][]) src.createNumberArray (src.getWidth(), src.getHeight());
@@ -121,7 +119,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
     {
         T[] vals = asFlatArray();
         Arrays.sort(vals);
-        return NumberFieldFactory.fromArray(vals, width, height);
+        return NumberFieldFactory.fromArray(vals[0].getClass(), vals, width, height);
     }
 
     /**
@@ -142,7 +140,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
             vals[b] = tmp;
         }
 
-        return NumberFieldFactory.fromArray(vals, width, height);
+        return NumberFieldFactory.fromArray (vals[0].getClass(), vals, width, height);
     }
 
     public NumberField onlyPrimes()
@@ -159,7 +157,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
                 vals[s] = this.createNumberObject("0");
             }
         }
-        return NumberFieldFactory.fromArray(vals, width, height);
+        return NumberFieldFactory.fromArray(vals[0].getClass(), vals, width, height);
     }
 
     public NumberField onlyPrimes (T replacement)
@@ -176,7 +174,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
                 vals[s] = this.createNumberObject("0");
             }
         }
-        return NumberFieldFactory.fromArray(vals, width, height);
+        return NumberFieldFactory.fromArray(vals[0].getClass(), vals, width, height);
     }
 
     /**
@@ -195,7 +193,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
             {
                 if (values[a][b].intValue() == v1)
                 {
-                    m.values[a][b] = (Arithmetic) m.createNumberObject(v2);
+                    m.values[a][b] = m.createNumberObject(v2);
                 }
             }
         }
@@ -209,14 +207,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
      * @param v2 Value to set
      * @return A new Field
      */
-    public NumberField substituteNot(T v1, T v2)
+    public NumberField substituteNot(int v1, int v2)
     {
         NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
             {
-                if (values[a][b] != v1)
+                if (values[a][b].intValue() != v1)
                 {
                     m.values[a][b] = v2;
                 }
@@ -241,7 +239,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
      */
     public NumberField keepValuesBetween (Long low, Long high)
     {
-        NumberField m = new NumberField (this.values[0].getClass(), width, height);
+        NumberField m = new NumberField (type(), width, height);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
@@ -257,7 +255,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
 
     public NumberField keepEven()
     {
-        NumberField m = new NumberField (this.values[0].getClass(), width, height);
+        NumberField m = new NumberField (type(), width, height);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
@@ -273,7 +271,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
 
     public NumberField keepOdd()
     {
-        NumberField m = new NumberField (this.values[0].getClass(), width, height);
+        NumberField m = new NumberField (type(), width, height);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
@@ -448,126 +446,6 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         return m;
     }
 
-    /**
-     * Adds a value to all elements of the Field
-     *
-     * @param n Value to add
-     * @return A new field
-     */
-    public NumberField addValue (T n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                m.values[a][b] = createNumberObject(m.values[a][b].intValue()+n.intValue());
-                //m.values[a][b] += n;
-            }
-        }
-        return m;
-    }
-
-    /**
-     * Calculates Locical AND over the integers of the field
-     *
-     * @param n Value to combine with
-     * @return A new field containing resulting integers
-     */
-    public NumberField logicalAnd(int n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] = createNumberObject(integer & n);
-            }
-        }
-        return m;
-    }
-
-    /**
-     * Calculates Locical OR over the integers of the field
-     *
-     * @param n Value to combine with
-     * @return A new field containing resulting integers
-     */
-    public NumberField logicalOr(int n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] = createNumberObject(integer | n);
-            }
-        }
-        return m;
-    }
-
-    /**
-     * Calculates Locical XOR over the integers of the field
-     *
-     * @param n Value to combine with
-     * @return A new field containing resulting integers
-     */
-    public NumberField logicalXor(int n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] = createNumberObject(integer ^ n);
-            }
-        }
-        return m;
-    }
-
-    /**
-     * Calculates Locical EQUALITY over the integers of the field
-     *
-     * @param n Value to combine with
-     * @return A new field containing resulting integers
-     */
-    public NumberField logicalEqu(int n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] = createNumberObject (~(integer ^ n));
-            }
-        }
-        return m;
-    }
-
-    /**
-     * Calculates Locical IMPLICATION over the integers of the field
-     *
-     * @param n Value to combine with
-     * @return A new field containing resulting integers
-     */
-    public NumberField logicalImp(int n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                int integer = m.values[a][b].intValue();
-                m.values[a][b] = createNumberObject ((~(integer ^ n)) | n);
-            }
-        }
-        return m;
-    }
-
     public NumberField sqrt()
     {
         NumberField m = new NumberField(this);
@@ -581,14 +459,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         return m;
     }
 
-    public NumberField abs()
+    public NumberField absolute()
     {
         NumberField m = new NumberField(this);
         for (int a = 0; a < height; a++)
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = createNumberObject(Math.abs(values[a][b].doubleValue()));
+                m.values[a][b] = abs(values[a][b]);
             }
         }
         return m;
@@ -620,25 +498,6 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         return m;
     }
 
-    /**
-     * Multiplies all elements of the Field
-     *
-     * @param n Multiplicator
-     * @return A new field
-     */
-    public NumberField mult(int n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                //m.values[a][b] *= n;
-                m.values[a][b] = createNumberObject(m.values[a][b].intValue() * n);
-            }
-        }
-        return m;
-    }
 
     /**
      * Applies mod-operator to all elements
@@ -653,41 +512,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.mod (m.values[a][b],n);
-            }
-        }
-        return m;
-    }
-
-    public NumberField div(int n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                m.values[a][b] = Arithmetic.div(m.values[a][b], n);
-            }
-        }
-        return m;
-    }
-
-    public NumberField mod(NumberField n)
-    {
-        NumberField m = new NumberField(this);
-        for (int a = 0; a < height; a++)
-        {
-            for (int b = 0; b < width; b++)
-            {
-                double x = n.values[a][b].doubleValue();
-                if (x == 0)
-                {
-                    m.values[a][b] = createNumberObject(0); //Integer.MAX_VALUE;
-                }
-                else
-                {
-                    m.values[a][b] = Arithmetic.mod(m.values[a][b], x);
-                }
+                m.values[a][b] = mod (m.values[a][b],n);
             }
         }
         return m;
@@ -705,7 +530,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.neg(m.values[a][b]);
+                m.values[a][b] = neg(m.values[a][b]);
             }
         }
         return m;
@@ -724,7 +549,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.add(m.values[a][b],m2.values[a][b]);
+                m.values[a][b] = add(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -737,7 +562,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.sub (m.values[a][b], m2.values[a][b]);
+                m.values[a][b] = sub (m.values[a][b], m2.values[a][b]);
             }
         }
         return m;
@@ -757,7 +582,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.and(m.values[a][b],m2.values[a][b]);
+                m.values[a][b] = and(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -777,7 +602,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.or(m.values[a][b],m2.values[a][b]);
+                m.values[a][b] = or(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -797,7 +622,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.xor( m.values[a][b],m2.values[a][b]);
+                m.values[a][b] = xor( m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -817,7 +642,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.equ(m.values[a][b],m2.values[a][b]);
+                m.values[a][b] = equ(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -856,7 +681,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.mul(m.values[a][b],m2.values[a][b]);
+                m.values[a][b] = mul(m.values[a][b],m2.values[a][b]);
             }
         }
         return m;
@@ -875,7 +700,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
                 }
                 else
                 {
-                    m.values[a][b] = Arithmetic.div(m.values[a][b],m2.values[a][b]);
+                    m.values[a][b] = div(m.values[a][b],m2.values[a][b]);
                 }
             }
         }
@@ -1145,7 +970,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         T temp = arr[arr.length - 1];
         System.arraycopy(arr, 0, arr, 1, arr.length - 1);
         arr[0] = temp;
-        return NumberFieldFactory.fromArray(arr, width, height);
+        return NumberFieldFactory.fromArray(arr[0].getClass(), arr, width, height);
     }
 
     /**
@@ -1169,7 +994,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         T temp = arr[0];
         System.arraycopy(arr, 1, arr, 0, arr.length - 1);
         arr[arr.length - 1] = temp;
-        return NumberFieldFactory.fromArray(arr, width, height);
+        return NumberFieldFactory.fromArray(arr[0].getClass(), arr, width, height);
     }
 
     /**
@@ -1451,7 +1276,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
      * @param value The value
      * @return A new field
      */
-    public NumberField setSubField(int startx, int endx, int starty, int endy, double value)
+    public NumberField setSubField(int startx, int endx, int starty, int endy, Number value)
     {
         endx++;
         endy++;
@@ -1461,7 +1286,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
             {
                 for (int b = startx; b < endx; b++)
                 {
-                    m.values[a][b] = createNumberObject(value);
+                    m.values[a][b] = createNumberObject(value.intValue()); //(value);
                 }
             }
         }
@@ -1740,7 +1565,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                s.append(String.format("% 4f ", values[a][b]));
+                s.append(values[a][b]).append(" ");
             }
             s.append("\n");
         }

@@ -352,7 +352,7 @@ public class Arithmetic<X extends Number> extends Number
 
     public X[][] createNumberArray (int w, int h)
     {
-        return (X[][]) Array.newInstance(targetClass, w,h);
+        return (X[][]) Array.newInstance(targetClass, h, w);
     }
 
     public X createNumberObject (String num)
@@ -397,7 +397,7 @@ public class Arithmetic<X extends Number> extends Number
 
     public static <A extends Number> A[][] createNumberArray (Class<A> clazz, int w, int h)
     {
-        return (A[][]) Array.newInstance(clazz, w,h);
+        return (A[][]) Array.newInstance(clazz, h, w);
     }
 
     @Override
