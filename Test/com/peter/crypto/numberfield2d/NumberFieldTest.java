@@ -122,4 +122,35 @@ public class NumberFieldTest
 
     }
 
+    @Test
+    public void testAddTable()
+    {
+        try
+        {
+            NumberField a = NumberFieldFactory.additionTable(Integer.class, 10);
+            assertNotNull(a);
+            System.out.println(a);
+        }
+        catch (Exception e)
+        {
+            fail (e.getMessage());
+        }
+
+    }
+
+    @Test
+    public void testBaseTable()
+    {
+        try
+        {
+            NumberField a = NumberFieldFactory.baseTable(Byte.class, 4, 2);
+            assertNotNull(a);
+            System.out.println(a);
+        }
+        catch (Exception e)
+        {
+            fail (e.toString());
+        }
+
+    }
 }

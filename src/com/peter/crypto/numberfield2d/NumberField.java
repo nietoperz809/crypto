@@ -37,6 +37,24 @@ public class NumberField <T extends Number> extends Arithmetic<T>
     }
 
     /**
+     * Fills Numberfield with values from 1D-array
+     * @param arr The array to be used
+     */
+    public void fill (T arr[])
+    {
+        int arridx = 0;
+        for (int h = 0; h < height; h++)
+        {
+            for (int w = 0; w < width; w++)
+            {
+                values[h][w] = arr[arridx];
+                if (arridx++ == arr.length)
+                    return;
+            }
+        }
+    }
+
+    /**
      * Constructs a matrix quickly without checking arguments. Does not copy
      * array elements into a new array. Rather, the new matrix simply references
      * the specified array.

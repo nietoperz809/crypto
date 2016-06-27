@@ -97,4 +97,6 @@ public interface Operations<X extends Number> {
     X xor (X a, X b);
     X equ (X a, X b);
     X imp (X a, X b);
+
+	int compare (X a, X b);
 }

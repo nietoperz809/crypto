@@ -91,4 +91,10 @@ public class BigDecimalOperations implements Operations<BigDecimal>
     {
         throw new NotImplementedException();
     }
+
+    @Override
+    public int compare (BigDecimal a, BigDecimal b)
+    {
+        return a.compareTo(b);
+    }
 }

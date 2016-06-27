@@ -80,4 +80,10 @@ public class ByteOperations implements Operations<Byte>
     {
         return (byte) (~(a ^ b) | b);
     }
+
+	@Override
+	public int compare (Byte a, Byte b)
+	{
+		return a-b;
+	}
 }

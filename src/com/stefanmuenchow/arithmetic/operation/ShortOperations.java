@@ -88,4 +88,10 @@ public class ShortOperations implements Operations<Short>
     {
         return (short) (~(a ^ b) | b);
     }
+
+    @Override
+    public int compare (Short a, Short b)
+    {
+        return a-b;
+    }
 }

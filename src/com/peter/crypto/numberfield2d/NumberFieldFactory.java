@@ -1090,43 +1090,51 @@ public class NumberFieldFactory
      * @param numBits Number of bits
      * @return A new field
      */
-    public static NumberField binaryTable (int numBits)
+    public static NumberField binaryTable (Class<? extends Number> cl, int numBits)
     {
-        return baseTable(numBits, 2);
+        return baseTable (cl, numBits, 2);
     }
 
     /**
      * Create all base X combinations
      *
-     * @param numBits Number of digits
+     * @param columns Number of digits
      * @param base    Base of numbering system
      * @return A new field
      */
-    public static NumberField baseTable (int numBits, int base)
-    {
-        NumberField m = new NumberField (Double.class, numBits, (int) Math.pow(base, numBits));
-        Double[] arr = new Double[numBits];
 
-        for (int s = 0; s < numBits; s++)
+    public static NumberField baseTable (Class<? extends Number> cl,
+                                         int columns, int base)
+    {
+        int size = (int) Math.pow(base, columns);
+        NumberField m = new NumberField (cl, columns, size);
+
+        Number[] arr = m.createNumberArray(columns);
+
+        for (int s = 0; s < columns; s++)
         {
-            arr[s] = 0d;
+            arr[s] = m.createNumberObject(0);
         }
 
         for (int s = 0; s < m.getHeight(); s++)
         {
-            System.arraycopy(arr, 0, m.values[s], 0, arr.length);
-            for (int n = 0; n < numBits; n++)
+            for (int n=0; n<arr.length; n++)
             {
-                arr[n]++;
-                if (arr[n] != base)
+                m.values[s][n] = m.createNumberObject(arr[n].intValue());
+            }
+            for (int n = 0; n < columns; n++)
+            {
+                arr[n] = m.createNumberObject (arr[n].intValue()+1);
+                if (Arithmetic.compare(arr[n], base) != 0)
                 {
                     break;
                 }
-                arr[n] = 0d;
+                arr[n] = m.createNumberObject(0);
             }
         }
         return m;
     }
+
 
     /**
      * Constructor that generates a field with all elements having the same value

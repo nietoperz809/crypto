@@ -81,4 +81,10 @@ public class DoubleOperations implements Operations<Double>
     {
         throw new NotImplementedException();
     }
+
+	@Override
+	public int compare (Double a, Double b)
+	{
+		return (int)(a-b);
+	}
 }

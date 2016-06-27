@@ -89,4 +89,10 @@ public class LongOperations implements Operations<Long>
         return ~(a ^ b) | b;
     }
 
+    @Override
+    public int compare (Long a, Long b)
+    {
+        return (int)(a-b);
+    }
+
 }

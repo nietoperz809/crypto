@@ -57,6 +57,19 @@ public class Arithmetic<X extends Number> extends Number
         }
     }
 
+    public Arithmetic (Class<X> clazz, String init)
+    {
+        try
+        {
+            this.targetClass = clazz;
+            this.value = createNumberObject(clazz, init); //clazz.getConstructor (String.class).newInstance("0");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Adds a new target type for generic Arithmetic. After this method is called once,
      * the new target type is known by all newly created {@link Arithmetic} instances.
@@ -325,6 +338,11 @@ public class Arithmetic<X extends Number> extends Number
         return this;
     }
 
+    public <A extends Number> int compare (A operand)
+    {
+        return getOperations().compare(value, convertNumber(operand));
+    }
+
     public static <A extends Number> Arithmetic<A> imp (A op1, A op2)
     {
         Arithmetic<A> ar = new Arithmetic<>(op1);
@@ -343,6 +361,12 @@ public class Arithmetic<X extends Number> extends Number
         Arithmetic<A> ar = new Arithmetic<>(op1);
         ar.mod(op2);
         return ar;
+    }
+
+    public static <A extends Number> int compare (A op1, A op2)
+    {
+        Arithmetic<A> ar = new Arithmetic<>(op1);
+        return ar.compare(op2);
     }
 
     public X[] createNumberArray (int size)

@@ -81,4 +81,10 @@ public class FloatOperations implements Operations<Float>
     {
         throw new NotImplementedException();
     }
+
+	@Override
+	public int compare (Float a, Float b)
+	{
+		return (int)(a-b);
+	}
 }

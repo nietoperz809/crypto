@@ -90,6 +90,12 @@ public class BigIntegerOperations implements Operations<BigInteger>
     {
         return (a.xor(b).negate()).or(b);
     }
+
+    @Override
+    public int compare (BigInteger a, BigInteger b)
+    {
+        return a.compareTo(b);
+    }
 }
 
 //  ((~(a ^ b)) | b);

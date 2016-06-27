@@ -80,4 +80,10 @@ public class IntegerOperations implements Operations<Integer>
     {
         return ~(a ^ b) | b;
     }
+
+	@Override
+	public int compare (Integer a, Integer b)
+	{
+		return a-b;
+	}
 }
