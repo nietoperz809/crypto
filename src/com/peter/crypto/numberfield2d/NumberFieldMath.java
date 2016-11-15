@@ -33,7 +33,8 @@ public class NumberFieldMath
     int[] _piv;
     int _pivsign;
     NumberField num;
-    private int iDF = 0;
+
+    private static int iDF = 0;
 
     /**
      * Constructs an LU decomposition for the specified matrix A.
@@ -262,7 +263,7 @@ public class NumberFieldMath
         return Math.sqrt(m);
     }
 
-    private Double[][] Transpose(Double[][] a)
+    public static Double[][] Transpose(Double[][] a)
     {
         int tms = a.length;
 
@@ -280,15 +281,19 @@ public class NumberFieldMath
     }
 
 
-    private Double[][] UpperTriangle(Double[][] m)
+    static public Double[][] UpperTriangle(Double[][] in)
     {
         double f1 = 0;
         double temp = 0;
-        int tms = m.length;  // get This Matrix Size (could be smaller than global)
+        int tms = in.length;  // get This Matrix Size (could be smaller than global)
         int v = 1;
 
-        iDF = 1;
+        Double[][] m;
+        m = new Double[in.length][];
+        for (int i=0; i<in.length; i++)
+            m[i] = in[i].clone();
 
+        iDF = 1;
 
         for (int col = 0; col < tms - 1; col++)
         {
@@ -337,7 +342,7 @@ public class NumberFieldMath
         return m;
     }
 
-    private double Determinant(Double[][] matrix)
+    static public double Determinant(Double[][] matrix)
     {
         int tms = matrix.length;
 
@@ -352,10 +357,10 @@ public class NumberFieldMath
 
         det = det * iDF;                    // adjust w/ determinant factor
 
-        return det;
+        return Math.round (det*10000.0)/10000.0;
     }
 
-    private Double[][] adjoint (Double[][] a) // throws Exception
+    public static Double[][] adjoint (Double[][] a) // throws Exception
     {
         int tms = a.length;
 
