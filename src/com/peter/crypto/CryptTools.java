@@ -1,5 +1,7 @@
 package com.peter.crypto;
 
+import com.peter.crypto.galois.GaloisField256;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.security.MessageDigest;

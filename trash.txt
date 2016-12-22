@@ -1,0 +1,25 @@
+    public static NumberField baseTable (Class<? extends Number> cl, int numBits, int base)
+    {
+        NumberField m = new NumberField (Double.class, numBits, (int) Math.pow(base, numBits));
+        Double[] arr = new Double[numBits];
+
+        for (int s = 0; s < numBits; s++)
+        {
+            arr[s] = 0d;
+        }
+
+        for (int s = 0; s < m.getHeight(); s++)
+        {
+            System.arraycopy(arr, 0, m.values[s], 0, arr.length);
+            for (int n = 0; n < numBits; n++)
+            {
+                arr[n]++;
+                if (arr[n] != base)
+                {
+                    break;
+                }
+                arr[n] = 0d;
+            }
+        }
+        return m;
+    }

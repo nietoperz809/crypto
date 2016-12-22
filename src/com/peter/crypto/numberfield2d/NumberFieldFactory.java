@@ -1,7 +1,8 @@
 package com.peter.crypto.numberfield2d;
 
 import com.peter.crypto.CryptMath;
-import com.peter.crypto.GaloisField256;
+import com.peter.crypto.galois.FiniteByteField;
+import com.peter.crypto.galois.GaloisField256;
 import com.peter.crypto.PermutationArrayList;
 import com.stefanmuenchow.arithmetic.Arithmetic;
 
@@ -50,8 +51,17 @@ public class NumberFieldFactory
         Number[] vect = (Number[]) Array.newInstance(cl, len);
         for (int s = 0; s < len; s++)
         {
-            //vect[s] = s + start;
             convert(s+start, vect, s);
+        }
+        return vect;
+    }
+
+    public static Number[] powerArray (Class<? extends Number> cl, int len, int base)
+    {
+        Number[] vect = (Number[]) Array.newInstance(cl, len);
+        for (int s = 0; s < len; s++)
+        {
+            convert((int)Math.pow(base,s), vect, s);
         }
         return vect;
     }
@@ -70,8 +80,7 @@ public class NumberFieldFactory
         NumberField m = new NumberField (cl, x, y);
         for (int y1 = 0; y1 < y; y1++)
         {
-            for (int x1=0; x1<x; x1++)
-                m.values[y1][x1] = arr[x1+y1*x];
+            System.arraycopy(arr, 0 + y1 * x, m.values[y1], 0, x);
         }
         return m;
     }
@@ -82,6 +91,24 @@ public class NumberFieldFactory
         return fromArray (cl, a, x, y);
     }
 
+    private static Number[] rotate (Number[] vect)
+    {
+        Number[] copy = vect.clone();
+        Number save = copy[0];
+        for (int s=1; s<vect.length; s++)
+        {
+            copy[s-1] = copy[s];
+        }
+        copy[vect.length-1] = save;
+        return copy;
+    }
+
+    /**
+     * Converts numbers to another datatype
+     * @param i number to convert
+     * @param vect Array for the result
+     * @param s Array position that receives converted number
+     */
     private static void convert (int i, Number[] vect, int s)
     {
         if (vect instanceof Double[])
@@ -98,7 +125,7 @@ public class NumberFieldFactory
         }
         else if (vect instanceof Integer[])
         {
-            vect[s] = (int)i;
+            vect[s] = i;
         }
         else if (vect instanceof Short[])
         {
@@ -235,7 +262,7 @@ public class NumberFieldFactory
         int y = 0;
         double val = 0;
 
-        n.values[x][y] = (Arithmetic) n.createNumberObject(val++);
+        n.values[x][y] = n.createNumberObject(val++);
 
         for (int s = 0; s < xy * xy; s++)
         {
@@ -253,7 +280,7 @@ public class NumberFieldFactory
             {
                 break;
             }
-            n.values[x][y] = (Arithmetic) n.createNumberObject(val++);
+            n.values[x][y] = n.createNumberObject(val++);
         }
 
         return n.getSubField(0, orig - 1, 0, orig - 1);
@@ -281,7 +308,7 @@ public class NumberFieldFactory
 
                 for (int s = min + 1; s < max; s++)
                 {
-                    int ch = str.charAt(idx);
+                    //int ch = str.charAt(idx);
                     n.values[s][max - 1] = n.createNumberObject((int)str.charAt(idx));
                     idx++;
                 }
@@ -327,7 +354,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < xy; b++)
             {
-                n.values[a][b] = (Arithmetic) n.createNumberObject(sub - n.values[a][b].intValue());
+                n.values[a][b] = n.createNumberObject(sub - n.values[a][b].intValue());
             }
         }
         return n;
@@ -357,22 +384,22 @@ public class NumberFieldFactory
         {
             for (int s = min; s < max; s++)
             {
-                n.values[min][s] = (Arithmetic) n.createNumberObject(val++);
+                n.values[min][s] = n.createNumberObject(val++);
             }
 
             for (int s = min + 1; s < max; s++)
             {
-                n.values[s][max - 1] = (Arithmetic) n.createNumberObject(val++);
+                n.values[s][max - 1] = n.createNumberObject(val++);
             }
 
             for (int s = max - 2; s >= min; s--)
             {
-                n.values[max - 1][s] = (Arithmetic) n.createNumberObject(val++);
+                n.values[max - 1][s] = n.createNumberObject(val++);
             }
 
             for (int s = max - 2; s >= min + 1; s--)
             {
-                n.values[s][min] = (Arithmetic) n.createNumberObject(val++);
+                n.values[s][min] = n.createNumberObject(val++);
             }
 
             min++;
@@ -381,7 +408,7 @@ public class NumberFieldFactory
         // Set center value when square is odd
         if ((xy & 1) == 1)
         {
-            n.values[loops][loops] = (Arithmetic) n.createNumberObject(val++);
+            n.values[loops][loops] = n.createNumberObject(val);
         }
         return n;
     }
@@ -418,14 +445,14 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject(a * x + b + start);
+                m.values[a][b] = m.createNumberObject(a * x + b + start);
             }
         }
         for (int a = 1; a < y; a += 2)
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject(a * x + x - b - start - 1);
+                m.values[a][b] = m.createNumberObject(a * x + x - b - start - 1);
             }
         }
         return m;
@@ -533,7 +560,7 @@ public class NumberFieldFactory
         NumberField m = new NumberField (Double.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
-            m.values[a][a] = (Arithmetic) m.createNumberObject(val);
+            m.values[a][a] = m.createNumberObject(val);
         }
         return m;
     }
@@ -550,7 +577,7 @@ public class NumberFieldFactory
         NumberField m = new NumberField (Double.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
-            m.values[a][xy - a - 1] = (Arithmetic) m.createNumberObject(val);
+            m.values[a][xy - a - 1] = m.createNumberObject(val);
         }
         return m;
     }
@@ -572,8 +599,8 @@ public class NumberFieldFactory
         NumberField m = new NumberField (Double.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
-            m.values[a][xy - a - 1] = (Arithmetic) m.createNumberObject(val);
-            m.values[a][a] = (Arithmetic) m.createNumberObject(val);
+            m.values[a][xy - a - 1] = m.createNumberObject(val);
+            m.values[a][a] = m.createNumberObject(val);
         }
         return m;
     }
@@ -606,8 +633,8 @@ public class NumberFieldFactory
         int half = xy / 2;
         for (int s = 0; s < xy; s++)
         {
-            m.values[s][half] = (Arithmetic) m.createNumberObject(val);
-            m.values[half][s] = (Arithmetic) m.createNumberObject(val);
+            m.values[s][half] = m.createNumberObject(val);
+            m.values[half][s] = m.createNumberObject(val);
         }
         return m;
     }
@@ -662,7 +689,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b <= a; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject(val);
+                m.values[a][b] = m.createNumberObject(val);
             }
         }
         return m;
@@ -801,19 +828,22 @@ public class NumberFieldFactory
         return m;
     }
 
-    public static NumberField moduloMultiplicationTable (Class<? extends Number> cl, Number[] row, Number[] col, int mod)
+    public static NumberField moduloMultiplicationTable (Class<? extends Number> cl,
+                                                         Number[] row, Number[] col, int mod)
     {
         return moduloMultiplicationTable(cl, row, col, mod, 0);
     }
 
-    public static NumberField moduloMultiplicationTable (Class<? extends Number> cl, Number[] row, Number[] col, int mod, int offset)
+    public static NumberField moduloMultiplicationTable (Class<? extends Number> cl,
+                                                         Number[] row, Number[] col,
+                                                         int mod, int offset)
     {
         NumberField m = new NumberField (cl, row.length, col.length);
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = m.createNumberObject (((col[a].intValue() * row[b].intValue()) + offset) % mod);
+                m.values[a][b] = m.createNumberObject (((col[a].intValue() * row[b].intValue()) + offset) % (mod+1));
             }
         }
         return m;
@@ -821,7 +851,7 @@ public class NumberFieldFactory
 
     public static NumberField moduloMultiplicationTable (Class<? extends Number> cl, int mod)
     {
-        return moduloMultiplicationTable (cl, mod, 0);
+        return moduloMultiplicationTable (cl, mod, 1);
     }
 
     /**
@@ -831,13 +861,15 @@ public class NumberFieldFactory
      * @param offset Offset from 0
      * @return A new field
      */
-    public static NumberField moduloMultiplicationTable (Class<? extends Number> cl, int mod, int offset)
+    public static NumberField moduloMultiplicationTable (Class<? extends Number> cl,
+                                                         int mod, int offset)
     {
-        Number[] vect = countedIntegerArray (cl, mod, 0);
-        return moduloMultiplicationTable (cl, vect, vect, mod, offset);
+        Number[] vect = countedIntegerArray (cl, mod, offset);
+        return moduloMultiplicationTable (cl, vect, vect, mod, 0);
     }
 
-    public static NumberField multiplicationTable (Class<? extends Number> cl, Number[] row, Number[] col)
+    public static NumberField multiplicationTable (Class<? extends Number> cl,
+                                                   Number[] row, Number[] col)
     {
         return multiplicationTable (cl, row, col, 0);
     }
@@ -850,7 +882,9 @@ public class NumberFieldFactory
      * @param offset Number added to each multiplication
      * @return New Numberfield that is: row[n][m] * col[n][m]
      */
-    public static NumberField multiplicationTable (Class<? extends Number> cl, Number[] row, Number[] col, int offset)
+    public static NumberField multiplicationTable (Class<? extends Number> cl,
+                                                   Number[] row, Number[] col,
+                                                   int offset)
     {
         NumberField m = new NumberField (cl, row.length, col.length);
         for (int a = 0; a < col.length; a++)
@@ -863,18 +897,34 @@ public class NumberFieldFactory
         return m;
     }
 
+    public static NumberField cyclicGroup (Class<? extends Number> cl, int order)
+    {
+        return cyclicGroup(cl, order, 2);
+    }
+
+    public static NumberField cyclicGroup (Class<? extends Number> cl, int order, int base)
+    {
+        NumberField m = new NumberField (cl, order, order);
+        Number[] vect = powerArray(cl, order, base);
+        for (int s=0; s<order; s++)
+        {
+            m = m.setRow(s, vect);
+            vect = rotate(vect);
+        }
+        return m;
+    }
+
     /**
      * Creates an addition table mod X
      * Such table contains <b>mod * (mod-1) different values</b>
      *
      * @param mod    X
-     * @param offset Offset from 0
      * @return A new field
      */
-    public static NumberField moduloAdditionTable (Class<? extends Number> cl, int mod, int offset)
+    public static NumberField moduloAdditionTable (Class<? extends Number> cl, int mod)
     {
         Number[] vect = countedIntegerArray(cl, mod, 0);
-        return moduloAdditionTable(cl, vect, vect, offset);
+        return moduloAdditionTable(cl, vect, vect, mod);
     }
 
     public static NumberField moduloAdditionTable (Class<? extends Number> cl, Number[] row, Number[] col, int mod)
@@ -894,6 +944,11 @@ public class NumberFieldFactory
         }
         return m;
     }
+
+//    public static NumberField groupTable (Class<? extends Number> cl, int xy)
+//    {
+//        Number[] vect = countedIntegerArray(cl, xy, 0);
+//    }
 
     public static NumberField gcdTable (Class<? extends Number> cl, int xy)
     {
@@ -972,7 +1027,7 @@ public class NumberFieldFactory
     public static NumberField diagsTable (int xy)
     {
         int len = 2 * xy - 1;
-        double[] arr = new double[len];
+        int[] arr = new int[len];
         int s;
         for (s = 0; s < xy; s++)
         {
@@ -986,14 +1041,14 @@ public class NumberFieldFactory
         return diagsTableFromArray(xy, arr);
     }
 
-    public static NumberField diagsTableFromArray (int xy, double[] arr)
+    public static NumberField diagsTableFromArray (int xy, int[] arr)
     {
-        NumberField m = new NumberField (Double.class, xy, xy);
+        NumberField m = new NumberField (Integer.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
             for (int b = 0; b < xy; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (arr[(a + b) % arr.length]);
+                m.values[a][b] = m.createNumberObject (arr[(a + b) % arr.length]);
             }
         }
         return m;
@@ -1015,7 +1070,7 @@ public class NumberFieldFactory
     public static NumberField diagsTableReverse (int xy)
     {
         int len = 2 * xy - 1;
-        double[] arr = new double[len];
+        int[] arr = new int[len];
         int s;
         for (s = 0; s < xy; s++)
         {
@@ -1036,7 +1091,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < arr2.length; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (arr1[a] * arr2[b]);
+                m.values[a][b] = m.createNumberObject (arr1[a] * arr2[b]);
             }
         }
         return m;
@@ -1049,7 +1104,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < arr2.length; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (arr1[a] + arr2[b]);
+                m.values[a][b] = m.createNumberObject (arr1[a] + arr2[b]);
             }
         }
         return m;
@@ -1151,7 +1206,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[b][a] = (Arithmetic) m.createNumberObject (val);
+                m.values[b][a] = m.createNumberObject (val);
             }
         }
         return m;
@@ -1177,7 +1232,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (seq[idx]);
+                m.values[a][b] = m.createNumberObject (seq[idx]);
                 idx = (idx + 1) % seq.length;
             }
         }
@@ -1202,7 +1257,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (rnd.nextInt(max));
+                m.values[a][b] = m.createNumberObject (rnd.nextInt(max));
 
             }
         }
@@ -1231,7 +1286,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (Math.max(a, b));
+                m.values[a][b] = m.createNumberObject (Math.max(a, b));
             }
         }
         return m;
@@ -1249,7 +1304,7 @@ public class NumberFieldFactory
         NumberField m = new NumberField (Double.class, xy, xy);
         for (int a = 0; a < xy; a++)
         {
-            m.values[a][a] = (Arithmetic) m.createNumberObject (a);
+            m.values[a][a] = m.createNumberObject (a);
         }
         return m;
     }
@@ -1298,7 +1353,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (i);
+                m.values[a][b] = m.createNumberObject (i);
             }
             i++;
         }
@@ -1409,7 +1464,7 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < x; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject ( Math.min(a, b));
+                m.values[a][b] = m.createNumberObject ( Math.min(a, b));
             }
         }
         return m;
@@ -1475,7 +1530,7 @@ public class NumberFieldFactory
         }
         Double[] i = new Double[arr.length];
         System.arraycopy(arr, 0, i, 0, arr.length);
-        PermutationArrayList<Double> list = new PermutationArrayList<Double>(Arrays.asList(i));
+        PermutationArrayList<Double> list = new PermutationArrayList<>(Arrays.asList(i));
         NumberField n = new NumberField (Double.class, 0, 0);
         Double[][] perm = list.getAllPermutationsArrays();
         for (Double[] aPerm : perm)
@@ -1556,32 +1611,63 @@ public class NumberFieldFactory
         return vect;
     }
 
-    public static NumberField galois256MultiplicationTable (Double[] row, Double[] col)
+    public static NumberField galois256MultiplicationTable (Class<? extends Number> cl, Number[] row, Number[] col)
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (cl, row.length, col.length);
         GaloisField256 gf = GaloisField256.getInstance();
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (gf.Product(col[a].intValue(), row[b].intValue()));
+                m.values[a][b] = m.createNumberObject (gf.Product(col[a].intValue(), row[b].intValue()));
             }
         }
         return m;
     }
 
-    public static NumberField galois256DivisionTable (Double[] row, Double[] col)
+    public static NumberField galois256MultiplicationTable2 (Class<? extends Number> cl,
+                                                             Number[] row, Number[] col)
     {
-        NumberField m = new NumberField (Double.class, row.length, col.length);
+        NumberField m = new NumberField (cl, row.length, col.length);
+        for (int a = 0; a < col.length; a++)
+        {
+            for (int b = 0; b < row.length; b++)
+            {
+                m.values[a][b] = m.createNumberObject (
+                        0xff & FiniteByteField.mul(col[a].byteValue(), row[b].byteValue()));
+            }
+        }
+        return m;
+    }
+
+    public static NumberField galois256DivisionTable (Class<? extends Number> cl,
+                                                      Number[] row, Number[] col)
+    {
+        NumberField m = new NumberField (cl, row.length, col.length);
         GaloisField256 gf = GaloisField256.getInstance();
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = (Arithmetic) m.createNumberObject (gf.Quotient(col[a].intValue(), row[b].intValue()));
+                m.values[a][b] = m.createNumberObject (gf.Quotient(col[a].intValue(), row[b].intValue()));
             }
         }
         return m;
     }
 
+    public static NumberField galois256DivisionTable2 (Class<? extends Number> cl,
+                                                       Number[] row, Number[] col)
+    {
+        NumberField m = new NumberField (cl, row.length, col.length);
+        GaloisField256 gf = GaloisField256.getInstance();
+        for (int a = 0; a < col.length; a++)
+        {
+            for (int b = 0; b < row.length; b++)
+            {
+                m.values[a][b] = m.createNumberObject (
+                        0xff & FiniteByteField.div(col[a].byteValue(), row[b].byteValue()));
+            }
+        }
+        return m;
+    }
 }

@@ -1,5 +1,6 @@
 package com.peter.crypto;
 
+import java.awt.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Random;
@@ -290,23 +291,55 @@ public class CryptMath implements BigIntValues
         return (long) Math.ceil(Math.sqrt(x));
     }
 
+    public static boolean isPrime(int n)
+    {
+        //check if n is a multiple of 2
+        if (n%2==0)
+            return false;
+        //if not, then just check the odds
+        for(int i=3;i*i<=n;i+=2)
+        {
+            if(n%i==0)
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Calculates rect where a*b <= x
+     * @param x input value
+     * @return output
+     */
+    public static Dimension nearestRectangle (int x)
+    {
+        int sqr = (int)Math.sqrt(x);
+        int t = sqr;
+        while (t*sqr < x)
+        {
+            t++;
+        }
+        return new Dimension (sqr, t);
+    }
+
     /**
      * Returns list of best two divisors
      *
      * @param x Input value
      * @return Array of two elements
      */
-    public static long[] bestTwoDivisors(long x)
+    public static Dimension bestTwoDivisors (int x)
     {
-        long[] out = new long[2];
-        long sqr = (long) Math.sqrt(x);
-        for (long s = sqr; s >= 1; s--)
+        if (isPrime(x))
+            throw new RuntimeException("Primes not allowed");
+        Dimension out = new Dimension();
+        int sqr = (int) Math.sqrt(x);
+        for (int s = sqr; s >= 1; s--)
         {
             //System.out.printf ("%d %d %d\n", s, x%s, x/s);
             if (x % s == 0)
             {
-                out[0] = s;
-                out[1] = x / s;
+                out.width = s;
+                out.height = x / s;
                 break;
             }
         }

@@ -1,5 +1,5 @@
-package com.peter.crypto.numberfield2d;
-
+import com.peter.crypto.numberfield2d.NumberField;
+import com.peter.crypto.numberfield2d.NumberFieldFactory;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -107,6 +107,51 @@ public class NumberFieldTest
     }
 
     @Test
+    public void testModuloAdd()
+    {
+        try
+        {
+            NumberField n = NumberFieldFactory.moduloAdditionTable(Byte.class, 4);
+            assertNotNull(n);
+            System.out.println(n);
+        }
+        catch (Exception e)
+        {
+            fail (e.getMessage());
+        }
+    }
+
+    @Test
+    public void testModuloMult()
+    {
+        try
+        {
+            NumberField n = NumberFieldFactory.moduloMultiplicationTable(Byte.class, 4);
+            assertNotNull(n);
+            System.out.println(n);
+        }
+        catch (Exception e)
+        {
+            fail (e.getMessage());
+        }
+    }
+
+    @Test
+    public void testCyclicGroup()
+    {
+        try
+        {
+            NumberField n = NumberFieldFactory.cyclicGroup(Integer.class, 2);
+            assertNotNull(n);
+            System.out.println(n);
+        }
+        catch (Exception e)
+        {
+            fail (e.getMessage());
+        }
+    }
+
+    @Test
     public void testCountedDown()
     {
         try
@@ -135,7 +180,6 @@ public class NumberFieldTest
         {
             fail (e.getMessage());
         }
-
     }
 
     @Test
@@ -143,9 +187,27 @@ public class NumberFieldTest
     {
         try
         {
-            NumberField a = NumberFieldFactory.baseTable(Byte.class, 4, 2);
+            NumberField a = NumberFieldFactory.baseTable(Byte.class, 8, 2);
             assertNotNull(a);
             System.out.println(a);
+        }
+        catch (Exception e)
+        {
+            fail (e.toString());
+        }
+    }
+
+    @Test
+    public void testMix()
+    {
+        try
+        {
+            NumberField n = NumberFieldFactory.diagsTable(4);
+            NumberField m = NumberFieldFactory.diagsTable(5);
+            NumberField q = n.mix(m);
+            System.out.println(n);
+            System.out.println(m);
+            System.out.println(q);
         }
         catch (Exception e)
         {

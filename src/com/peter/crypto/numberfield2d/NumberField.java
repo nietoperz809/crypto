@@ -327,12 +327,13 @@ public class NumberField <T extends Number> extends Arithmetic<T>
      * @param val Array containing new values
      * @return A new field
      */
-    public NumberField setRow(int row, double[] val)
+    public NumberField setRow(int row, Number[] val)
     {
         NumberField m = new NumberField(this);
         for (int s = 0; s < width; s++)
         {
-            m.values[row][s] = createNumberObject(val[s % val.length]);
+            //m.values[row][s] = createNumberObject(val[s % val.length]);
+            m.values[row][s] = val[s % val.length];
         }
         return m;
     }
@@ -462,6 +463,28 @@ public class NumberField <T extends Number> extends Arithmetic<T>
             }
         }
         return m;
+    }
+
+    public NumberField mix (NumberField other)
+    {
+        Number[] a = this.asFlatArray();
+        Number[] b = other.asFlatArray();
+        Dimension d = CryptMath.nearestRectangle(a.length+b.length);
+        int len = d.width*d.height;
+        Number[] n = new Number[len];
+        for (int s=0; s<(len-1); s+=2)
+        {
+            int half = s/2;
+            if (half < a.length)
+                n[s] = a[half];
+            else
+                n[s] = 0;
+            if (half < b.length)
+                n[s+1] = b[half];
+            else
+                n[s+1] = 0;
+        }
+        return NumberFieldFactory.fromArray(this.type(), n, d.width, d.height);
     }
 
     public NumberField sqrt()
