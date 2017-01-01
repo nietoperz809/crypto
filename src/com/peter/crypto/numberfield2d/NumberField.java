@@ -161,6 +161,7 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         return NumberFieldFactory.fromArray (vals[0].getClass(), vals, width, height);
     }
 
+
     public NumberField onlyPrimes()
     {
         T[] vals = asFlatArray();
@@ -416,6 +417,11 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         return ret;
     }
 
+    public Set asSet()
+    {
+        return new HashSet<>(Arrays.asList(asFlatArray()));
+    }
+
     public String asFlatString()
     {
         T[] dd = asFlatArray();
@@ -442,7 +448,11 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         Double[][] arr = createNumberArray (Double.class, width, height);
         for (int s = 0; s < arr.length; s++)
         {
-            System.arraycopy(values[s], 0, arr[s], 0, arr[s].length);
+            //System.arraycopy(values[s], 0, arr[s], 0, arr[s].length);
+            for (int t=0; t<arr[0].length; t++)
+            {
+                arr[s][t] = values[s][t].doubleValue();
+            }
         }
         return arr;
     }
@@ -465,6 +475,18 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         return m;
     }
 
+    public boolean containsAll (NumberField other)
+    {
+        Set<T> mySet = asSet();
+        Set<T> otherSet = other.asSet();
+        return mySet.containsAll(otherSet);
+    }
+
+    /**
+     * Mixes this number field witha anoher one
+     * @param other the other number field
+     * @return the result field
+     */
     public NumberField mix (NumberField other)
     {
         Number[] a = this.asFlatArray();
