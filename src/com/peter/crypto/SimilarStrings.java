@@ -11,19 +11,12 @@ package com.peter.crypto;
  */
 public class SimilarStrings
 {
-    private final double result;
-    
-    public SimilarStrings (String a, String b)
+    public static double getSimilarity (String a, String b)
     {
-        result = find3 (a, b);
+        return find3(a,b);
     }
-    
-    public double getResult()
-    {
-        return result;
-    }
-    
-    private double find2 (String s1, String s2)
+
+    private static double find2 (String s1, String s2)
     {
         double ret = 0.0;
         for (int s=0; s<s2.length(); s++)
@@ -33,7 +26,7 @@ public class SimilarStrings
         return ret;
     }
     
-    private double find3 (String s1, String s2)
+    private static double find3 (String s1, String s2)
     {
         double ret;
         ret = find2 (s1, s2);
@@ -41,7 +34,7 @@ public class SimilarStrings
         return ret/(s1.length() + s2.length());
     }
     
-    private boolean check(String s, char c, int idx)
+    private static boolean check(String s, char c, int idx)
     {
         try
         {
@@ -56,7 +49,7 @@ public class SimilarStrings
         return false;
     }
 
-    private double find1(String s1, String s2, int idx)
+    private static double find1(String s1, String s2, int idx)
     {
         char c = s1.charAt(idx);
         double start = 1.0;

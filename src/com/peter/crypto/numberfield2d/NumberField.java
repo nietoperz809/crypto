@@ -2,6 +2,7 @@ package com.peter.crypto.numberfield2d;
 
 import com.peter.crypto.CryptMath;
 import com.stefanmuenchow.arithmetic.Arithmetic;
+import com.stefanmuenchow.arithmetic.NotImplException;
 
 import java.awt.Dimension;
 import java.util.*;
@@ -575,7 +576,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = mod (m.values[a][b],n);
+                try
+                {
+                    m.values[a][b] = mod (m.values[a][b],n);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -645,7 +653,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = and(m.values[a][b],m2.values[a][b]);
+                try
+                {
+                    m.values[a][b] = and(m.values[a][b],m2.values[a][b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -665,7 +680,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = or(m.values[a][b],m2.values[a][b]);
+                try
+                {
+                    m.values[a][b] = or(m.values[a][b],m2.values[a][b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -685,7 +707,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = xor( m.values[a][b],m2.values[a][b]);
+                try
+                {
+                    m.values[a][b] = xor( m.values[a][b],m2.values[a][b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -705,7 +734,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = equ(m.values[a][b],m2.values[a][b]);
+                try
+                {
+                    m.values[a][b] = equ(m.values[a][b],m2.values[a][b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -725,7 +761,14 @@ public class NumberField <T extends Number> extends Arithmetic<T>
         {
             for (int b = 0; b < width; b++)
             {
-                m.values[a][b] = Arithmetic.imp(m.values[a][b],m2.values[a][b]);
+                try
+                {
+                    m.values[a][b] = Arithmetic.imp(m.values[a][b],m2.values[a][b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;

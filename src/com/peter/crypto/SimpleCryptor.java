@@ -76,7 +76,7 @@ public class SimpleCryptor
         }
         System.out.println("};");
 
-        String s = substituteText("abc abc abc abc abc abc", true);
+        String s = substituteText("abcdefghijklmnopqrstuvwxyz", true);
         System.out.println(s);
 
         String t = substituteText(s, false);

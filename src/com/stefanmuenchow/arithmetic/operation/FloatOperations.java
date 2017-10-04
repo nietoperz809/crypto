@@ -1,7 +1,8 @@
 package com.stefanmuenchow.arithmetic.operation;
 
+import com.stefanmuenchow.arithmetic.NotImplException;
 import com.stefanmuenchow.arithmetic.Operations;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+//import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class FloatOperations implements Operations<Float>
 {
@@ -53,33 +54,33 @@ public class FloatOperations implements Operations<Float>
     }
 
     @Override
-    public Float and (Float a, Float b)
-    {
-        throw new NotImplementedException();
+    public Float and (Float a, Float b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
     @Override
-    public Float or (Float a, Float b)
-    {
-        throw new NotImplementedException();
+    public Float or (Float a, Float b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
     @Override
-    public Float xor (Float a, Float b)
-    {
-        throw new NotImplementedException();
+    public Float xor (Float a, Float b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
     @Override
-    public Float equ (Float a, Float b)
-    {
-        throw new NotImplementedException();
+    public Float equ (Float a, Float b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
     @Override
-    public Float imp (Float a, Float b)
-    {
-        throw new NotImplementedException();
+    public Float imp (Float a, Float b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
 	@Override

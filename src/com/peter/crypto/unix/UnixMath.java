@@ -1,6 +1,5 @@
 package com.peter.crypto.unix;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 
 public class UnixMath
@@ -184,9 +183,9 @@ public class UnixMath
         {
             if (temp == 0.)
             {
-                if (sign > 0)
-                {
-                }
+//                if (sign > 0)
+//                {
+//                }
                 throw new ArithmeticException();
             }
             temp = 1. / temp;
@@ -247,9 +246,8 @@ public class UnixMath
      *
      * @param arg Input
      * @return log10 of arg
-     * @throws IOException
      */
-    public static double log10(double arg) throws IOException
+    public static double log10(double arg)
     {
         return (log(arg) / ln10);
     }
@@ -259,9 +257,8 @@ public class UnixMath
      *
      * @param arg input
      * @return log of arg
-     * @throws IOException
      */
-    public static double log(double arg) throws IOException
+    public static double log(double arg)
     {
         double x, z, zsq, temp;
         double exp;
@@ -298,9 +295,8 @@ public class UnixMath
      *
      * @param d input value
      * @return double array containing both values
-     * @throws IOException
      */
-    private static double[] frexp(double d) throws IOException
+    private static double[] frexp(double d)
     {
         long bits = Double.doubleToLongBits(d);
         long exp = ((bits >> 52) & 0x7ff) - 1022;
@@ -316,9 +312,8 @@ public class UnixMath
      *
      * @param arg input
      * @return sqrt (arg)
-     * @throws IOException
      */
-    public static double sqrt(double arg) throws IOException
+    public static double sqrt(double arg)
     {
         double x, temp;
         double exp;

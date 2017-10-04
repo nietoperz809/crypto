@@ -115,7 +115,7 @@ public class HagelinCrypt
             temp += 8 * warr3[wheel3 + 1]; //8
             temp += 4 * warr4[wheel4 + 1]; // 12
             temp += 2 * warr5[wheel5 + 1]; // 14
-            temp += 1 * warr6[wheel6 + 1]; // 15
+            temp += warr6[wheel6 + 1]; // 15
 
             wheel1 = warr1[wheel1];
             wheel2 = warr2[wheel2];

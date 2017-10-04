@@ -89,14 +89,14 @@ public interface Operations<X extends Number> {
 	 */
 	X neg (X a);
 
-    X mod (X a, X b);
+    X mod (X a, X b) throws NotImplException;
 
     // Logicals
-	X and (X a, X b);
-    X or (X a, X b);
-    X xor (X a, X b);
-    X equ (X a, X b);
-    X imp (X a, X b);
+	X and (X a, X b) throws NotImplException;
+    X or (X a, X b) throws NotImplException;
+    X xor (X a, X b) throws NotImplException;
+    X equ (X a, X b) throws NotImplException;
+    X imp (X a, X b) throws NotImplException;
 
 	int compare (X a, X b);
 }

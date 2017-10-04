@@ -280,59 +280,59 @@ public class Arithmetic<X extends Number> extends Number
         return ar;
     }
 
-    public <A extends Number> Arithmetic<X> and (A operand)
+    public <A extends Number> Arithmetic<X> and (A operand) throws NotImplException
     {
         value = getOperations().and(value, convertNumber(operand));
         return this;
     }
 
-    public static <A extends Number> Arithmetic<A> and (A op1, A op2)
+    public static <A extends Number> Arithmetic<A> and (A op1, A op2) throws NotImplException
     {
         Arithmetic<A> ar = new Arithmetic<>(op1);
         ar.and(op2);
         return ar;
     }
 
-    public <A extends Number> Arithmetic<X> or (A operand)
+    public <A extends Number> Arithmetic<X> or (A operand) throws NotImplException
     {
         value = getOperations().or(value, convertNumber(operand));
         return this;
     }
 
-    public static <A extends Number> Arithmetic<A> or (A op1, A op2)
+    public static <A extends Number> Arithmetic<A> or (A op1, A op2) throws NotImplException
     {
         Arithmetic<A> ar = new Arithmetic<>(op1);
         ar.or(op2);
         return ar;
     }
 
-    public <A extends Number> Arithmetic<X> xor (A operand)
+    public <A extends Number> Arithmetic<X> xor (A operand) throws NotImplException
     {
         value = getOperations().xor(value, convertNumber(operand));
         return this;
     }
 
-    public static <A extends Number> Arithmetic<A> xor (A op1, A op2)
+    public static <A extends Number> Arithmetic<A> xor (A op1, A op2) throws NotImplException
     {
         Arithmetic<A> ar = new Arithmetic<>(op1);
         ar.xor(op2);
         return ar;
     }
 
-    public <A extends Number> Arithmetic<X> equ (A operand)
+    public <A extends Number> Arithmetic<X> equ (A operand) throws NotImplException
     {
         value = getOperations().equ(value, convertNumber(operand));
         return this;
     }
 
-    public static <A extends Number> Arithmetic<A> equ (A op1, A op2)
+    public static <A extends Number> Arithmetic<A> equ (A op1, A op2) throws NotImplException
     {
         Arithmetic<A> ar = new Arithmetic<>(op1);
         ar.equ(op2);
         return ar;
     }
 
-    public <A extends Number> Arithmetic<X> imp (A operand)
+    public <A extends Number> Arithmetic<X> imp (A operand) throws NotImplException
     {
         value = getOperations().imp(value, convertNumber(operand));
         return this;
@@ -343,20 +343,20 @@ public class Arithmetic<X extends Number> extends Number
         return getOperations().compare(value, convertNumber(operand));
     }
 
-    public static <A extends Number> Arithmetic<A> imp (A op1, A op2)
+    public static <A extends Number> Arithmetic<A> imp (A op1, A op2) throws NotImplException
     {
         Arithmetic<A> ar = new Arithmetic<>(op1);
         ar.imp(op2);
         return ar;
     }
 
-    public <A extends Number> Arithmetic<X> mod (A operand)
+    public <A extends Number> Arithmetic<X> mod (A operand) throws NotImplException
     {
         value = getOperations().mod(value, convertNumber(operand));
         return this;
     }
 
-    public static <A extends Number> Arithmetic<A> mod (A op1, A op2)
+    public static <A extends Number> Arithmetic<A> mod (A op1, A op2) throws NotImplException
     {
         Arithmetic<A> ar = new Arithmetic<>(op1);
         ar.mod(op2);

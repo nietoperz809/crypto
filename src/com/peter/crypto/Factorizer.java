@@ -2,8 +2,6 @@ package com.peter.crypto;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -156,12 +154,6 @@ public class Factorizer implements BigIntValues
             {
                 xm = xi;
             }
-            /*
-             if (i%10000 == 0)     // peter!!!
-             {
-             xm = xm.add (CryptMath.getNextPrimeAbove(n));
-             }
-             */
         }
     }
 

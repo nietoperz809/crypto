@@ -669,6 +669,13 @@ public class MyAES256
         buf[0] ^= key[0];
     }
 
+    public static void main (String[] args) throws Exception
+    {
+        MyAES256.test();
+        MyAES256.testSpeed(10000);
+        AESEngine.testSpeed(10000);
+    }
+
     /**
      * A little test routine
      * Encrypts 1...16 and then decrypts them

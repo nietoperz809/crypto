@@ -205,9 +205,11 @@ public class NumberFieldTest
             NumberField n = NumberFieldFactory.diagsTable(4);
             NumberField m = NumberFieldFactory.diagsTable(5);
             NumberField q = n.mix(m);
-            System.out.println(n);
-            System.out.println(m);
-            System.out.println(q);
+            //System.out.println(n);
+            //System.out.println(m);
+            //System.out.println(q);
+            assertTrue(q.containsAll(n));
+            assertTrue(q.containsAll(m));
         }
         catch (Exception e)
         {

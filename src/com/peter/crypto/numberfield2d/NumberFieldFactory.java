@@ -5,6 +5,7 @@ import com.peter.crypto.galois.FiniteByteField;
 import com.peter.crypto.galois.GaloisField256;
 import com.peter.crypto.PermutationArrayList;
 import com.stefanmuenchow.arithmetic.Arithmetic;
+import com.stefanmuenchow.arithmetic.NotImplException;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -708,7 +709,14 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Arithmetic.or  (col[a], row[b]);
+                try
+                {
+                    m.values[a][b] = Arithmetic.or  (col[a], row[b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -727,7 +735,14 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Arithmetic.and(col[a], row[b]);
+                try
+                {
+                    m.values[a][b] = Arithmetic.and(col[a], row[b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -746,7 +761,14 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Arithmetic.xor(col[a], row[b]);
+                try
+                {
+                    m.values[a][b] = Arithmetic.xor(col[a], row[b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -765,7 +787,14 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Arithmetic.equ(col[a],row[b]);
+                try
+                {
+                    m.values[a][b] = Arithmetic.equ(col[a],row[b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -784,7 +813,14 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Arithmetic.imp(col[a], row[b]);
+                try
+                {
+                    m.values[a][b] = Arithmetic.imp(col[a], row[b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;
@@ -803,7 +839,14 @@ public class NumberFieldFactory
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = Arithmetic.mod (col[a], row[b]);
+                try
+                {
+                    m.values[a][b] = Arithmetic.mod (col[a], row[b]);
+                }
+                catch (NotImplException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
         return m;

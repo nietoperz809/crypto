@@ -1,7 +1,7 @@
 package com.stefanmuenchow.arithmetic.operation;
 
+import com.stefanmuenchow.arithmetic.NotImplException;
 import com.stefanmuenchow.arithmetic.Operations;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.math.BigDecimal;
 
@@ -57,39 +57,39 @@ public class BigDecimalOperations implements Operations<BigDecimal>
     }
 
     @Override
-    public BigDecimal mod (BigDecimal a, BigDecimal b)
+    public BigDecimal mod (BigDecimal a, BigDecimal b) throws NotImplException
     {
-        throw new NotImplementedException();
+        throw new NotImplException();
     }
 
     @Override
-    public BigDecimal and (BigDecimal a, BigDecimal b)
+    public BigDecimal and (BigDecimal a, BigDecimal b) throws NotImplException
     {
-        throw new NotImplementedException();
+        throw new NotImplException();
     }
 
     @Override
-    public BigDecimal or (BigDecimal a, BigDecimal b)
+    public BigDecimal or (BigDecimal a, BigDecimal b) throws NotImplException
     {
-        throw new NotImplementedException();
+        throw new NotImplException();
     }
 
     @Override
-    public BigDecimal xor (BigDecimal a, BigDecimal b)
+    public BigDecimal xor (BigDecimal a, BigDecimal b) throws NotImplException
     {
-        throw new NotImplementedException();
+        throw new NotImplException();
     }
 
     @Override
-    public BigDecimal equ (BigDecimal a, BigDecimal b)
+    public BigDecimal equ (BigDecimal a, BigDecimal b) throws NotImplException
     {
-        throw new NotImplementedException();
+        throw new NotImplException();
     }
 
     @Override
-    public BigDecimal imp (BigDecimal a, BigDecimal b)
+    public BigDecimal imp (BigDecimal a, BigDecimal b) throws NotImplException
     {
-        throw new NotImplementedException();
+        throw new NotImplException();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.stefanmuenchow.arithmetic.operation;
 
+import com.stefanmuenchow.arithmetic.NotImplException;
 import com.stefanmuenchow.arithmetic.Operations;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class DoubleOperations implements Operations<Double>
 {
@@ -53,33 +53,33 @@ public class DoubleOperations implements Operations<Double>
     }
 
     @Override
-	public Double and (Double a, Double b)
+	public Double and (Double a, Double b) throws NotImplException
 	{
-		throw new NotImplementedException();
+		throw new NotImplException();
 	}
 
     @Override
-    public Double or (Double a, Double b)
-    {
-        throw new NotImplementedException();
+    public Double or (Double a, Double b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
     @Override
-    public Double xor (Double a, Double b)
-    {
-        throw new NotImplementedException();
+    public Double xor (Double a, Double b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
     @Override
-    public Double equ (Double a, Double b)
-    {
-        throw new NotImplementedException();
+    public Double equ (Double a, Double b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
     @Override
-    public Double imp (Double a, Double b)
-    {
-        throw new NotImplementedException();
+    public Double imp (Double a, Double b) throws NotImplException
+	{
+        throw new NotImplException();
     }
 
 	@Override

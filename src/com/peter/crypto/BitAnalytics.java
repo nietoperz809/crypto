@@ -2,28 +2,28 @@ package com.peter.crypto;
 
 import java.util.BitSet;
 
-class CountedBs extends BitSet
-{
-    private final int size;
-
-    public CountedBs(int nbits)
-    {
-        super(nbits);
-        size = nbits;
-    }
-
-    @Override
-    public int length()
-    {
-        return size;
-    }
-}
-
 /**
  * To change this template use File | Settings | File Templates.
  */
 public class BitAnalytics
 {
+    static class CountedBs extends BitSet
+    {
+        private final int size;
+
+        public CountedBs(int nbits)
+        {
+            super(nbits);
+            size = nbits;
+        }
+
+        @Override
+        public int length()
+        {
+            return size;
+        }
+    }
+
     /**
      * Converts an array to a CountedBs object
      * @param arr
