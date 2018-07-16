@@ -215,7 +215,7 @@ public class FileCrypt
             {
                 throw new Exception ("fin.read returns -1");
             }
-            CryptTools.xor(buff, key);
+            buff = CryptTools.xor(buff, key);
             fout.write(buff, 0, r);
             size -= r;
         }

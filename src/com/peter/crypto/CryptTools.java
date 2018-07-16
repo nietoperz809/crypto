@@ -180,7 +180,7 @@ public class CryptTools
         res[31] = (byte) (md5bytes[0] ^ sha1bytes[15]);
 
         res = rotateArrayRight(res, res[2] & 0xff);
-        xor(res, salt);
+        res = xor(res, salt);
         return res;
     }
 
