@@ -9,21 +9,21 @@ public class GermanIDNumber
         return s1+check;
     }
 
-    public String birthDay (int jjjj, int mm, int tt) throws Exception
+    private String birthDay (int jjjj, int mm, int tt) throws Exception
     {
         if (jjjj < 1900 || jjjj > 1999)
             throw new Exception("wrong birthday");
         return dateCode (jjjj-1900, mm, tt);
     }
 
-    public String lastDay (int jjjj, int mm, int tt) throws Exception
+    private String lastDay (int jjjj, int mm, int tt) throws Exception
     {
         if (jjjj < 2000 || jjjj > 2099)
             throw new Exception("wrong birthday");
         return dateCode (jjjj-2000, mm, tt);
     }
 
-    public String toTwoChars (int in) throws Exception
+    private String toTwoChars (int in) throws Exception
     {
         String s1 = ""+in;
         if (s1.length() > 2)
@@ -33,26 +33,32 @@ public class GermanIDNumber
         return s1;
     }
 
-    public int checksum (String in) throws Exception
+    private int checksum (String in) throws Exception
     {
         int[] mult = {7,3,1};
         int idx = 0;
         int sum = 0;
         for (int s=0; s<in.length(); s++)
         {
-            int n;
             char c = in.charAt(s);
             if (Character.isDigit(c))
-                n = c-'0';
+                c -= '0';
             else if (Character.isUpperCase(c))
-                n = c-'A'+10;
+                c -= 'A'+10;
             else
                 throw new Exception ("wrong char");
-            sum = sum + n*mult[idx];
-            idx = (idx+1)%3;
+            sum = sum + c*mult[idx];
+            idx = (idx+1)%mult.length;
         }
         return sum%10;
-        // System.out.println(sum%10);
+    }
+
+    private String nameLine (String vn, String nn)
+    {
+        StringBuilder out = new StringBuilder(nn.toUpperCase()+"<<"+vn.toUpperCase());
+        while (out.length() < 30)
+            out.append('<');
+        return out.toString();
     }
 
     public static void main (String[] args) throws Exception
@@ -71,11 +77,12 @@ public class GermanIDNumber
         check = id.checksum(finalNum);
         finalNum = num1+"D"+num2+num3+check;
 
-        System.out.println(finalNum);
+        //System.out.println(finalNum);
 
-        String idd = "IDD<<"+finalNum.substring(0,10)+"<<<<<<<<<<<<<<<"
+        String idd = "IDD<<"+finalNum.substring(0,10)+"<<<<<<<<<<<<<<<\n"
                 + finalNum.substring(11, 18)+"<"+finalNum.substring(18, 25)
-                + finalNum.substring(10,11)+"<<<<<<<<<<<<<"+finalNum.substring(25, 26);
+                + finalNum.substring(10, 11)+"<<<<<<<<<<<<<"+finalNum.substring(25, 26)
+                + "\n"+id.nameLine ("ferdinand", "wellblech");
         System.out.println(idd);
     }
 }
