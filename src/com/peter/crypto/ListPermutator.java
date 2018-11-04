@@ -80,6 +80,19 @@ public class ListPermutator<E>
         return res.size();
     }
 
+    public int printStrings (PrintStream ps)
+    {
+        List<List<E>> res = getAll();
+        for (List<E> re : res)
+        {
+            String sr = re.toString().replace("[","");
+            sr = sr.replace("]","");
+            sr = sr.replace(",","");
+            ps.println(sr);
+        }
+        return res.size();
+    }
+
     /**
      * Gets next permutation
      * @return List of objects or <b>null</b> when done
@@ -127,7 +140,7 @@ public class ListPermutator<E>
         @SuppressWarnings("unchecked")
         ListPermutator<?> perm = new ListPermutator<>(Arrays.asList((List<String>[])mylist));
 
-        int num = perm.printAll(System.out);
+        int num = perm.printStrings(System.out);
         System.out.println ("Perms " + num);
     }
     
