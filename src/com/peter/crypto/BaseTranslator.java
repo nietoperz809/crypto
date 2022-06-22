@@ -7,7 +7,6 @@ class BaseTranslator
     private static boolean checkInput (int[] digits, int inputBase,
                                          int outputBase, int outputLength)
     {
-
         // If inputBase < 2, outputBase < 2, outputLength < 1, or the input digits is empty, return null
         if ((inputBase < 2) || (outputBase < 2) || (outputLength < 1) || (digits == null))
         {
@@ -134,13 +133,13 @@ class BaseTranslator
 
     public static void main (String[] args)
     {
-        String in = "333.3333333333333333";
+        String in = "1.01";
         String[] parts = in.split("\\.");
         int[] integer  = toDigits(parts[0]);
         int[] fraction = toDigits(parts[1]);
 
-        int[] la = convertInteger (integer, 10, 3);
-        int[] lb = convertFraction (fraction, 10, 3, 10);
+        int[] la = convertInteger (integer, 2, 10);
+        int[] lb = convertFraction (fraction, 2, 10, 10);
         System.out.println(Arrays.toString(la));
         System.out.println(Arrays.toString(lb));
 

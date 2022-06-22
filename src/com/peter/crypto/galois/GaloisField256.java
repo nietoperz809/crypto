@@ -6,15 +6,14 @@ package com.peter.crypto.galois;
 public class GaloisField256
 {
     // define the Size & Prime Polynomial of this Galois field (2^8)
-    private final int GF = 256;
+    private static final int GF = 256;
 
     // establish global Log and Antilog arrays
-    private final int[] Log = new int[GF];
-    private final int[] ALog = new int[GF];
+    private static final int[] Log = new int[GF];
+    private static final int[] ALog = new int[GF];
 
-    static GaloisField256 m_instance = null;
-
-    private GaloisField256()
+    // static initializer
+    static
     {
         int i;
         /*
@@ -34,31 +33,24 @@ public class GaloisField256
         }
     }
 
-    public int[] getLog()
+    public static int[] getLog()
     {
         return Log.clone();
     }
 
-    public int[] getALog()
+    public static int[] getALog()
     {
         return ALog.clone();
     }
 
-    public static GaloisField256 getInstance()
-    {
-        if (m_instance == null)
-            m_instance = new GaloisField256();
-        return m_instance;
-    }
-
-    public int Product (int A, int B)
+    public static int Product (int A, int B)
     {
         if ((A == 0) || (B == 0))
             return (0);
         return (ALog[(Log[A] + Log[B]) % (GF-1)]);
     }
 
-    public int Quotient (int A, int B)
+    public static int Quotient (int A, int B)
     {
         if (B == 0)
         {
@@ -69,13 +61,30 @@ public class GaloisField256
         return (ALog[(Log[A] - Log[B] + (GF-1)) % (GF-1)]);
     }
 
-    public int Sum (int A, int B)
+    public static int Sum (int A, int B)
     {
         return (A ^ B);
     }
 
-    public int Difference (int A, int B)
+    public static int Difference (int A, int B)
     {
         return (A ^ B);
+    }
+
+    // test
+    public static void main(String[] args)
+    {
+        for (int b=0; b<256; b++)
+        {
+            int e1 = GaloisField256.Product(b, 10);
+            System.out.print(e1+ " | ");
+        }
+        System.out.println();
+        for (int b=0; b<256; b++)
+        {
+            int e1 = FiniteByteField.mul((byte)b, (byte)10);
+            e1 = e1 & 0xff;
+            System.out.print(e1+ " | ");
+        }
     }
 }

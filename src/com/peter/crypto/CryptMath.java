@@ -503,6 +503,12 @@ public class CryptMath implements BigIntValues
         return res;
     }
 
+    public static BigInteger faculty(int x)
+    {
+        return faculty (BigInteger.valueOf(x));
+    }
+
+
     /**
      * Calculates SQRT from BigInteger the Newton way
      *
@@ -776,9 +782,21 @@ public class CryptMath implements BigIntValues
         }
     }
 
+//    public static <T, U> T[] convArray (U[] in)
+//    {
+//        T[] out = new T[in.length];
+//        for (int s=0; s<in.length; s++)
+//        {
+//            out[s] = (T) in[s];
+//        }
+//        return out;
+//    }
+
     public static void main(String[] args)
     {
-        BigInteger p = getNextPrimeAbove(BigInteger.valueOf(12345678));
-        System.out.println(p);
+//        Character[] lala = new Character[100];
+//        Integer[] out = convArray(lala);
+//        BigInteger p = getNextPrimeAbove(BigInteger.valueOf(12345678));
+//        System.out.println(p);
     }
 }

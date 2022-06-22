@@ -13,11 +13,11 @@ public class SimpleCryptor
 {
     private static String substituteWord(String in, boolean mode)
     {
-        char arr1[] =
+        char[] arr1 =
         {
             'g', 'm', 'j', 's', 'o', 'r', 'v', 'e', 'w', 'f', 'i', 'a', 'p', 'c', 'q', 'u', 't', 'z', 'l', 'b', 'd', 'x', 'y', 'n', 'h', 'k'
         };
-        char arr2[] =
+        char[] arr2 =
         {
             'l', 't', 'n', 'u', 'h', 'j', 'a', 'y', 'k', 'c', 'z', 's', 'b', 'x', 'e', 'm', 'o', 'f', 'd', 'q', 'p', 'g', 'i', 'v', 'w', 'r'
         };
@@ -25,14 +25,14 @@ public class SimpleCryptor
         char[] exchg = mode ? arr1 : arr2;
 
         in = in.toLowerCase();
-        String out = "";
+        StringBuilder out = new StringBuilder();
 
         for (int s = 0; s < in.length(); s++)
         {
-            out += exchg[in.charAt(s) - 'a'];
+            out.append(exchg[in.charAt(s) - 'a']);
         }
 
-        return out;
+        return out.toString();
     }
 
     private static String substituteWord(String in, boolean mode, int times)
@@ -47,20 +47,20 @@ public class SimpleCryptor
 
     public static String substituteText(String in, boolean mode)
     {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         String[] splitted = in.split(" ");
 
         for (int s = 0; s < splitted.length; s++)
         {
-            out += substituteWord(splitted[s], mode, s + 1) + " ";
+            out.append(substituteWord(splitted[s], mode, s + 1)).append(" ");
         }
 
-        return out;
+        return out.toString();
     }
 
     public static void main(String... args)
     {
-        Integer a[] = new Integer[19];
+        Integer[] a = new Integer[19];
         for (int s = 0; s < 19; s++)
         {
             a[s] = s;

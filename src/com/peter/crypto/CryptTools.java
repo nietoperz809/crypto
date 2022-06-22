@@ -134,7 +134,7 @@ public class CryptTools
         byte[] res = new byte[32];
         byte[] md5bytes = new byte[16];
         byte[] sha1bytes = new byte[20];
-        byte salt[] = {-48, -17, -86, -5, 67, 77, 51, -123, 69, -7, 2, 127, 80, 60, -97, -88,
+        byte[] salt = {-48, -17, -86, -5, 67, 77, 51, -123, 69, -7, 2, 127, 80, 60, -97, -88,
                 -25, -56, 55, 109, -115, -43, 78, -87, 108, 86, -12, -22, 101, 122, -82, 8,
 
         };
@@ -598,10 +598,9 @@ public class CryptTools
     public static byte[] galoisFieldMult (byte[] in, byte val)
     {
         byte[] out = new byte[in.length];
-        GaloisField256 gal = GaloisField256.getInstance();
         for (int s = 0; s < out.length; s++)
         {
-            out[s] = (byte) gal.Product((int) in[s] & 0xff, (int) val & 0xff);
+            out[s] = (byte) GaloisField256.Product((int) in[s] & 0xff, (int) val & 0xff);
         }
         return out;
     }
@@ -632,10 +631,9 @@ public class CryptTools
     public static byte[] galoisFieldDiv (byte[] in, byte val)
     {
         byte[] out = new byte[in.length];
-        GaloisField256 gal = GaloisField256.getInstance();
         for (int s = 0; s < out.length; s++)
         {
-            out[s] = (byte) gal.Quotient((int) in[s] & 0xff, (int) val & 0xff);
+            out[s] = (byte) GaloisField256.Quotient((int) in[s] & 0xff, (int) val & 0xff);
         }
         return out;
     }

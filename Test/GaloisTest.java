@@ -12,7 +12,7 @@ public class GaloisTest
     @Test
     public void TestMult()
     {
-        int p = GaloisField256.getInstance().Product(10,20);
+        int p = GaloisField256.Product(10,20);
         int q = FiniteByteField.mul((byte)10,(byte)20);
         System.out.println(p);
         System.out.println(q);

@@ -89,11 +89,11 @@ public final class CharNumbers2
     public static void main(String[] args) throws Exception
     {
         CharNumbers2 cc = new CharNumbers2(10);
-        cc.setMaterial("01"); //234567890abcdef");
+        cc.setMaterial("petr"); //234567890abcdef");
 
         for (long n=0; n<20; n++)
         {
-            System.out.println(cc.toString(n));
+            System.out.println(cc.toTrimmedString(n));
         }
     }
 }

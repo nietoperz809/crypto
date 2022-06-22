@@ -206,7 +206,7 @@ public class PermutationArrayList<E> extends ArrayList<E>
 //        PermutationArrayList<Integer> p2 = new PermutationArrayList<>(l2);
 //        p2.printAll(System.out);
 
-        char[] chars = "peter".toCharArray();
+        char[] chars = "OMICRON".toCharArray();
         List<Character> l = new ArrayList<Character>();
         for (char c : chars)
         {
@@ -214,6 +214,8 @@ public class PermutationArrayList<E> extends ArrayList<E>
         }
         PermutationArrayList<Character> p = new PermutationArrayList<>(l);
         p.printAll(System.out);
+        System.out.println("Rows: "+p.getAllPermutations().size());
+        System.out.println("should be: "+CryptMath.faculty(chars.length));
     }
 
     public static List<String> generateStringPermutations (String in)

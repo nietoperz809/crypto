@@ -80,14 +80,12 @@ public class PositionalNumberSystem
      */
     public static void main(String[] args) throws Exception
     {
-        PositionalNumberSystem cn = new PositionalNumberSystem("0123456789abcdef");
+        PositionalNumberSystem cn = new PositionalNumberSystem("01"); //("0123456789abcdef");
         
         String s = cn.toString(BigInteger.valueOf(65536));
         System.out.println(s);
 
-        String ss="243f"; //6a8885a308d31319";
-        //ss = new StringBuilder(ss).reverse().toString();
-        BigInteger i = cn.toNumber(ss);
+        BigInteger i = cn.toNumber(s);
         System.out.println(i);
     }
 }

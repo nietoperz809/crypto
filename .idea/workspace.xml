@@ -4,19 +4,34 @@
     <option name="ANALYZE_TEST_SOURCES" value="false" />
     <option name="SCOPE_TYPE" value="3" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="08d1e051-1986-4b94-8f7e-1baf8fc2ba0f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/peter/crypto/SumDiff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="08d1e051-1986-4b94-8f7e-1baf8fc2ba0f" name="Default" comment="backup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/ListPermutator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/ListPermutator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/ListPermutator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/ListPermutator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/GaloisTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/GaloisTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/BaseTranslator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/BaseTranslator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/CharNumbers2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/CharNumbers2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/CryptMath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/CryptMath.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/CryptTools.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/CryptTools.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/PermutationArrayList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/PermutationArrayList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/PositionalNumberSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/PositionalNumberSystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/StringShuffler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MyRC5/com/peter/crypto/StringShuffler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/BaseTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/BaseTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/CharNumbers2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/CharNumbers2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/CryptMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/CryptMath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/CryptTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/CryptTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/DES.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/DES.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/PermutationArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/PermutationArrayList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/PositionalNumberSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/PositionalNumberSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/SimpleCryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/SimpleCryptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/StringShuffler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/StringShuffler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/SumDiff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/SumDiff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/galois/FiniteByteField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/galois/FiniteByteField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/galois/GaloisField256.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/galois/GaloisField256.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldFactory.java" afterDir="false" />
     </list>
-    <ignored path="MyRC5.iws" />
-    <ignored path=".idea/workspace.xml" />
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path=".idea/dataSources.local.xml" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,76 +50,7 @@
   <component name="DevPartner.ProjectWorkspace">
     <option name="runtimeAnalysisType" value="-1" />
   </component>
-  <component name="ExportTestResults" outputFolder="C:/" openResultsInEditor="true" userTempatePath="" />
-  <component name="FUSProjectUsageTrigger">
-    <session id="-509360327">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.58" value="1" />
-          <entry key="project.open.time.61" value="1" />
-          <entry key="project.opened" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="java" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="JAVA" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="java" value="3027" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JAVA" value="3027" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="MyRC5" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/peter/crypto/SumDiff.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="88" column="36" selection-start-line="88" selection-start-column="36" selection-end-line="88" selection-end-column="36" />
-              <folding>
-                <element signature="e#2170#2171#0" expanded="true" />
-                <element signature="e#2206#2207#0" expanded="true" />
-                <element signature="e#2447#2448#0" expanded="true" />
-                <element signature="e#2517#2518#0" expanded="true" />
-                <element signature="e#2570#2571#0" expanded="true" />
-                <element signature="e#2643#2644#0" expanded="true" />
-                <element signature="e#2258#2259#0" expanded="true" />
-                <element signature="e#2328#2329#0" expanded="true" />
-                <element signature="e#2381#2382#0" expanded="true" />
-                <element signature="e#2454#2455#0" expanded="true" />
-                <element signature="e#2509#2510#0" expanded="true" />
-                <element signature="e#2580#2581#0" expanded="true" />
-                <element signature="e#2636#2637#0" expanded="true" />
-                <element signature="e#2710#2711#0" expanded="true" />
-                <element signature="e#2762#2763#0" expanded="true" />
-                <element signature="e#2830#2831#0" expanded="true" />
-                <element signature="e#2884#2885#0" expanded="true" />
-                <element signature="e#2955#2956#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
+  <component name="ExportTestResults" outputFolder="$PROJECT_DIR$/../../../../../" openResultsInEditor="true" userTempatePath="" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -113,79 +59,14 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>hex</find>
-      <find>int[]</find>
-      <find>char[]</find>
-      <find>Integer[]</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>char[]</replace>
-      <replace>int[]</replace>
-    </replaceStrings>
-    <dirStrings>
-      <dir>C:\Users\Administrator\Desktop\java\MyRC5</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/BaseTranslator.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/NumberField.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/NumberFieldFactory.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldDisplay.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/GenericNumber.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/OperationsRepository.java" />
-        <option value="$PROJECT_DIR$/trash.txt" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/BigIntegerOperations.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/ByteOperations.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/IntegerOperations.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/LongOperations.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/ShortOperations.java" />
-        <option value="$PROJECT_DIR$/Test/com/peter/crypto/numberfield2d/NumberFieldTest.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/Matrix.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldMath.java" />
-        <option value="$PROJECT_DIR$/Test/MatrixTest.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/galois/Galois.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/galois/FiniteByteField.java" />
-        <option value="$PROJECT_DIR$/Test/GaloisTest.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/CryptMath.java" />
-        <option value="$PROJECT_DIR$/Test/NumberFieldTest.java" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/../JForth/src/LehmerCode.java" />
-        <option value="$PROJECT_DIR$/src/Test.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/Factorizer.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/NotImplException.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/FloatOperations.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/DoubleOperations.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/Operations.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/operation/BigDecimalOperations.java" />
-        <option value="$PROJECT_DIR$/src/com/stefanmuenchow/arithmetic/Arithmetic.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberField.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldFactory.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/MyAES256.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/unix/HagelinCrypt.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/unix/UnixMath.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/BigIntValues.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/BitAnalytics.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/SimilarStrings.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/SimpleCryptor.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/JatBrains.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/keygen.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/JetBrainsKey.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/FileCrypt.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/CryptTools.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/AESEngine.java" />
-        <option value="$PROJECT_DIR$/bkz.txt" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/GermanIDNumber.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/ListPermutator.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/ReedMuller.java" />
-        <option value="$PROJECT_DIR$/src/com/peter/crypto/SumDiff.java" />
-      </list>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\Administrator\Desktop\java\MyRC5\.idea" />
+      </set>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -194,93 +75,28 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState />
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="y358uzoc" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1378" />
-    <option name="height" value="780" />
+  <component name="ProjectId" id="1VR0JheIAUcpZ6ePWFxOFMDjGGe" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <showMembers ProjectPane="true" />
-      <autoscrollFromSource PackagesPane="true" ProjectPane="true" />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MyRC5" type="58d84e3e:PackageViewProjectNode" />
-              <item name="MyRC5" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MyRC5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyRC5" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyRC5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyRC5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyRC5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyRC5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyRC5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyRC5" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="crypto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyRC5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
-    <property name="GenerateAntBuildDialog.generateSingleFile" value="true" />
-    <property name="GenerateAntBuildDialog.outputFileNameProperty" value="myrc5" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="true" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541331167400" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-    <property name="js.eslint.eslintPackage" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/peter.home/java/MyRC5",
+    "run.code.analysis.last.selected.profile": "pProject Default"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -305,19 +121,7 @@
       <recent name="C:\Users\Administrator\Dropbox\MyRC5\projectFilesBackup" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.SumDiff">
+  <component name="RunManager" selected="Application.CharNumbers2">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -373,6 +177,12 @@
         <option name="INSTRUMENTATION_ENABLED" value="true" />
       </Profilers>
       <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="">
       <option name="arquillianRunConfiguration">
@@ -503,14 +313,8 @@
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GermanIDNumber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.GermanIDNumber" />
+    <configuration name="BaseTranslator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.BaseTranslator" />
       <module name="MyRC5" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -523,8 +327,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JetBrainsKey" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.JetBrainsKey" />
+    <configuration name="CharNumbers2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.CharNumbers2" />
       <module name="MyRC5" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -537,8 +341,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ListPermutator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.ListPermutator" />
+    <configuration name="PermutationArrayList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.PermutationArrayList" />
       <module name="MyRC5" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -551,13 +355,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReedMuller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.ReedMuller" />
+    <configuration name="PiDigits" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.pigenerators.PiDigits" />
       <module name="MyRC5" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.peter.crypto.*" />
+          <option name="PATTERN" value="com.peter.crypto.pigenerators.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -565,8 +369,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SumDiff" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.SumDiff" />
+    <configuration name="PositionalNumberSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.peter.crypto.PositionalNumberSystem" />
       <module name="MyRC5" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -594,12 +398,14 @@
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <properties />
       <listeners />
@@ -609,22 +415,35 @@
     </configuration>
     <list>
       <item itemvalue="Application.Unnamed" />
-      <item itemvalue="Application.JetBrainsKey" />
-      <item itemvalue="Application.GermanIDNumber" />
-      <item itemvalue="Application.ListPermutator" />
-      <item itemvalue="Application.ReedMuller" />
-      <item itemvalue="Application.SumDiff" />
+      <item itemvalue="Application.PiDigits" />
+      <item itemvalue="Application.CharNumbers2" />
+      <item itemvalue="Application.BaseTranslator" />
+      <item itemvalue="Application.PositionalNumberSystem" />
+      <item itemvalue="Application.PermutationArrayList" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SumDiff" />
-        <item itemvalue="Application.ReedMuller" />
-        <item itemvalue="Application.ListPermutator" />
-        <item itemvalue="Application.GermanIDNumber" />
-        <item itemvalue="Application.JetBrainsKey" />
+        <item itemvalue="Application.CharNumbers2" />
+        <item itemvalue="Application.PermutationArrayList" />
+        <item itemvalue="Application.PositionalNumberSystem" />
+        <item itemvalue="Application.BaseTranslator" />
+        <item itemvalue="Application.PiDigits" />
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
   </component>
@@ -877,125 +696,18 @@
       <option name="project" value="LOCAL" />
       <updated>1532413785270</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="backup">
+      <created>1541331288971</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1541331288971</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="NumberFieldTest - 2017.10.04 at 05h 44m 22s.xml">
-      <configuration name="NumberFieldTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2016.12.22 at 06h 42m 42s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2016.12.22 at 06h 43m 17s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2016.12.22 at 06h 44m 00s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2016.12.22 at 06h 46m 52s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2016.12.22 at 06h 49m 43s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2016.12.22 at 06h 50m 09s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2016.12.22 at 07h 20m 36s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2016.12.23 at 05h 51m 56s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NumberFieldTest_testMix - 2017.01.01 at 19h 47m 22s.xml">
-      <configuration name="NumberFieldTest.testMix" configurationId="JUnit" />
-    </history-entry>
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="309900000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1384" height="786" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.78968257" visible="true" weight="0.1954612" />
-      <window_info id="Structure" order="1" sideWeight="0.21031746" side_tool="true" visible="true" weight="0.1954612" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Capture Tool" order="3" />
-      <window_info id="Nl-Palette" order="4" />
-      <window_info id="Palette&#9;" order="5" />
-      <window_info id="Favorites" order="6" show_stripe_button="false" sideWeight="0.506079" side_tool="true" weight="0.18557537" />
-      <window_info id="UI Designer" order="7" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32473445" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4984733" visible="true" weight="0.26099706" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3957382" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.39726028" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Inspection Results" order="7" weight="0.41807044" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.3240469" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5015267" side_tool="true" weight="0.27258804" />
-      <window_info anchor="bottom" id="Application Servers" order="12" />
-      <window_info anchor="bottom" id="Docker" order="13" />
-      <window_info anchor="bottom" id="Run with VisualVM" order="14" />
-      <window_info anchor="bottom" id="Database Changes" order="15" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Debug with VisualVM" order="16" />
-      <window_info anchor="right" id="Palette" order="0" />
-      <window_info anchor="right" id="Maven Projects" order="1" weight="0.3298217" />
-      <window_info anchor="right" id="Designer" order="2" />
-      <window_info anchor="right" id="Properties" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Database" order="5" show_stripe_button="false" weight="0.32954547" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Commander" order="7" weight="0.4" />
-      <window_info anchor="right" id="SciView" order="8" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="10" weight="0.24959481" />
-      <window_info anchor="right" id="Data View" order="11" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49392098" visible="true" weight="0.1852123" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.2687023" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Capture Tool" order="3" />
-      <window_info id="Nl-Palette" order="4" />
-      <window_info id="Palette&#9;" order="5" />
-      <window_info id="Favorites" order="6" show_stripe_button="false" sideWeight="0.506079" side_tool="true" weight="0.18557537" />
-      <window_info id="UI Designer" order="7" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32473445" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49926794" visible="true" weight="0.27312776" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3957382" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.39726028" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Inspection Results" order="7" weight="0.4188164" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.32473445" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="11" sideWeight="0.50073206" side_tool="true" visible="true" weight="0.27312776" />
-      <window_info anchor="bottom" id="Application Servers" order="12" />
-      <window_info anchor="bottom" id="Run with VisualVM" order="13" />
-      <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Docker" order="15" />
-      <window_info anchor="bottom" id="Debug with VisualVM" order="16" />
-      <window_info anchor="right" id="Palette" order="0" />
-      <window_info anchor="right" id="Maven Projects" order="1" weight="0.3298217" />
-      <window_info anchor="right" id="Designer" order="2" />
-      <window_info anchor="right" id="Properties" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Database" order="5" show_stripe_button="false" weight="0.32954547" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Commander" order="7" weight="0.4" />
-      <window_info anchor="right" id="SciView" order="8" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="10" weight="0.24959481" />
-      <window_info anchor="right" id="Data View" order="11" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -1007,9 +719,6 @@
     <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
       <collection />
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -1032,119 +741,40 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldFactory.java</url>
           <line>152</line>
-          <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldFactory.java</url>
           <line>38</line>
-          <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldFactory.java</url>
           <line>39</line>
-          <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldFactory.java</url>
           <line>969</line>
-          <properties />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberFieldFactory.java</url>
           <line>910</line>
-          <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/peter/crypto/numberfield2d/NumberField.java</url>
           <line>337</line>
-          <properties />
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Test/GaloisTest.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_CONFIG_DIR$/idea64.exe.vmoptions">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/jshell/jshell_console_1.snippet">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/jshell/jshell_console.snippet">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/primes.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/peter/crypto/GermanIDNumber.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="57" column="39" lean-forward="true" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/peter/crypto/ListPermutator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="124" column="26" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/peter/crypto/ReedMuller.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/com/sun/org/apache/xalan/internal/xsltc/util/IntegerArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2972">
-          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_161/src.zip!/java/lang/Integer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-19154">
-          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/peter/crypto/SumDiff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="88" column="36" selection-start-line="88" selection-start-column="36" selection-end-line="88" selection-end-column="36" />
-          <folding>
-            <element signature="e#2170#2171#0" expanded="true" />
-            <element signature="e#2206#2207#0" expanded="true" />
-            <element signature="e#2447#2448#0" expanded="true" />
-            <element signature="e#2517#2518#0" expanded="true" />
-            <element signature="e#2570#2571#0" expanded="true" />
-            <element signature="e#2643#2644#0" expanded="true" />
-            <element signature="e#2258#2259#0" expanded="true" />
-            <element signature="e#2328#2329#0" expanded="true" />
-            <element signature="e#2381#2382#0" expanded="true" />
-            <element signature="e#2454#2455#0" expanded="true" />
-            <element signature="e#2509#2510#0" expanded="true" />
-            <element signature="e#2580#2581#0" expanded="true" />
-            <element signature="e#2636#2637#0" expanded="true" />
-            <element signature="e#2710#2711#0" expanded="true" />
-            <element signature="e#2762#2763#0" expanded="true" />
-            <element signature="e#2830#2831#0" expanded="true" />
-            <element signature="e#2884#2885#0" expanded="true" />
-            <element signature="e#2955#2956#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>

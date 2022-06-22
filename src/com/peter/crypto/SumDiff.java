@@ -2,9 +2,19 @@ package com.peter.crypto;
 
 /**
  * Experimental
+ *
+ * code: calc (a+b) and (a-b)
+ *
+ * decode:
+ * (a+b)+(a-b) = 2*a
+ * (a+b)-a = b
+ *
+ * ----------------------------
+ * alternative: calc n=(a*b) and m=(a/b)
+ *
+ * then a is sqrt (n*m) and b is sqrt (n/m)
+ *
  */
-
-
 public class SumDiff
 {
     interface Swapper
@@ -15,6 +25,22 @@ public class SumDiff
     interface Algo
     {
         int[] doIt (int[] in, Swapper t);
+    }
+
+    private void mulDiv (float[] arr, int t1, int t2)
+    {
+        float sum = arr[t1]*arr[t2];
+        float diff = arr[t1]/arr[t2];
+        arr[t1] = sum;
+        arr[t2] = diff;
+    }
+
+    private void revMulDiv (float[] arr, int t1, int t2)
+    {
+        float sum = (float) Math.sqrt(arr[t1]*arr[t2]);
+        float diff = (float)Math.sqrt(arr[t1]/arr[t2]);
+        arr[t1] = sum;
+        arr[t2] = diff;
     }
 
     private void sumDiff (int[] arr, int t1, int t2)
@@ -51,6 +77,23 @@ public class SumDiff
         return ret;
     }
 
+    public float[] toFloatArray (char[] arr)
+    {
+        float[] ret = new float [arr.length];
+        for (int s=0; s<arr.length; s++)
+            ret[s] = arr[s];
+        return ret;
+    }
+
+    public char[] fromFloatArray (float[] arr)
+    {
+        char[] ret = new char [arr.length];
+        for (int s=0; s<arr.length; s++)
+            ret[s] = (char)arr[s];
+        return ret;
+    }
+
+
     public char[] toCharArray (int[] arr)
     {
         char[] ret = new char [arr.length];
@@ -62,12 +105,12 @@ public class SumDiff
     /////////////////////////////////////////////////////////////////
 
     /**
-     * Swap Two consecutive elements
+     * Swap Two consecutive elements and then the next 2
      * @param in Input array
      * @param t Swapper algorithm
      * @return Swapped array
      */
-    public int[] alternatingSwap (int[] in, Swapper t)
+    public int[] step2Swap (int[] in, Swapper t)
     {
         int[] out = copyEven(in);
         for (int s=0; s<out.length; s+=2)
@@ -126,12 +169,12 @@ public class SumDiff
 
     public int[] alternateForward (int[] in)
     {
-        return func (in, this::sumDiff, this::alternatingSwap);
+        return func (in, this::sumDiff, this::step2Swap);
     }
 
     public int[] alternateBackward (int[] in)
     {
-        return func (in, this::revSumDiff, this::alternatingSwap);
+        return func (in, this::revSumDiff, this::step2Swap);
     }
 
     public int[] outerToInnerForward (int[] in)

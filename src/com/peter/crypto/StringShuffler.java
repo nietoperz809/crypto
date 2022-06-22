@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Shuffles a String reversibly
+ * Shuffle a String reversibly
  */
 public class StringShuffler
 {
@@ -25,7 +25,7 @@ public class StringShuffler
     }
 
     /**
-     * Shuffles a string
+     * Shuffle a string
      * @param in Input string
      * @return Shuffled string
      */
@@ -50,7 +50,7 @@ public class StringShuffler
     }
 
     /**
-     * De-shuffles a string
+     * De-shuffle a string
      * @param in input string
      * @return output string
      */
@@ -80,5 +80,16 @@ public class StringShuffler
             sb.setCharAt(r2, c1);
         }
         return sb.toString();
+    }
+
+    public static void main(String[] args) throws NoSuchAlgorithmException
+    {
+        StringShuffler ss = new StringShuffler("Drachenlord");
+        String s1 = ss.shuffle("Hello World");
+        System.out.println(s1);
+        String s2 = ss.shuffle("Ein frohes neues Jahr");
+        System.out.println(s2);
+        String s3 = ss.deshuffle(s2);
+        System.out.println(s3);
     }
 }

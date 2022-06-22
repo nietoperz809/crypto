@@ -1657,12 +1657,11 @@ public class NumberFieldFactory
     public static NumberField galois256MultiplicationTable (Class<? extends Number> cl, Number[] row, Number[] col)
     {
         NumberField m = new NumberField (cl, row.length, col.length);
-        GaloisField256 gf = GaloisField256.getInstance();
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = m.createNumberObject (gf.Product(col[a].intValue(), row[b].intValue()));
+                m.values[a][b] = m.createNumberObject (GaloisField256.Product(col[a].intValue(), row[b].intValue()));
             }
         }
         return m;
@@ -1687,12 +1686,11 @@ public class NumberFieldFactory
                                                       Number[] row, Number[] col)
     {
         NumberField m = new NumberField (cl, row.length, col.length);
-        GaloisField256 gf = GaloisField256.getInstance();
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)
             {
-                m.values[a][b] = m.createNumberObject (gf.Quotient(col[a].intValue(), row[b].intValue()));
+                m.values[a][b] = m.createNumberObject (GaloisField256.Quotient(col[a].intValue(), row[b].intValue()));
             }
         }
         return m;
@@ -1702,7 +1700,6 @@ public class NumberFieldFactory
                                                        Number[] row, Number[] col)
     {
         NumberField m = new NumberField (cl, row.length, col.length);
-        GaloisField256 gf = GaloisField256.getInstance();
         for (int a = 0; a < col.length; a++)
         {
             for (int b = 0; b < row.length; b++)

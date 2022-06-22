@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 public class DES
 {
     /** The actual DES key. */
-    private long key;
+    private final long key;
 
     /** The 16 sub-keys used for each iteration. */
     private long[] subKeys;
@@ -345,8 +345,8 @@ public class DES
 	{
 		int r=0;
 		int l=bits.length;
-		for (int b=0; b<l; b++) {
-            r = (r<<1) | ((a >>> (31-bits[b])) & 1);
+        for (byte bit : bits) {
+            r = (r << 1) | ((a >>> (31 - bit)) & 1);
         }
 		return r;
 	}
@@ -362,8 +362,8 @@ public class DES
 	{
 		long r=0;
 		int l=bits.length;
-		for (int b=0; b<l; b++) {
-            r = (r<<1) | ((a >>> (63-bits[b])) & 1);
+        for (byte bit : bits) {
+            r = (r << 1) | ((a >>> (63 - bit)) & 1);
         }
 		return r;
 	}
@@ -392,7 +392,7 @@ public class DES
         des2 = new DES(k2);
         des2.encrypt(a, 0, b, 0);
         System.out.println (Arrays.toString(b));
-        if (Arrays.equals(b, expected) == true)
+        if (Arrays.equals(b, expected))
         {
         }
         else

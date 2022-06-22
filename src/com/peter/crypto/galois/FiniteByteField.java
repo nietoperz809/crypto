@@ -18,13 +18,14 @@ public class FiniteByteField
 	private static final byte[][] div = new byte[MAX_VALUE + 1][MAX_VALUE + 1];
 	private static final byte[] sqr = new byte[MAX_VALUE + 1];
 	private static final byte[] sqrt = new byte[MAX_VALUE + 1];
-	
+
+	private static final byte generator = 0x03;
+
 	static
 	{
 		byte x = (byte) 0x01;
 		exp[0] = x;
 		
-		final byte generator = 0x03;
 		for(int i = 1; i <= MAX_VALUE; i++)
 		{
 			byte y = slowMul(x, generator);
